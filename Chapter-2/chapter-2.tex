@@ -1,0 +1,225 @@
+\chapter{Theoretical Background}
+\label{cap-background}
+
+As \textcite{fowler2018refactoring} described, refactoring is the design improvement after writing a code. Refactoring opportunities may arise throughout the project's development regardless of how the project was carried out, especially in systems developed by teams.
+
+Refactoring seeks to remove code smells encountered in software development; when software becomes mature and evolves, two conflicts arise: i) The software needs to fulfill all requirements, and ii) The software's reusability. Implementing new functionality to the software without refactoring is possible, but eventually, it will take great effort \cite{Gamma2009}.
+
+Refactoring can facilitate the implementation of new requirements, modularize overloaded classes, and find methods and unnecessary classes. Different types of refactoring exist, such as techniques or methods based on design patterns. \textcite{fowler2018refactoring} is one of the most known authors. He created a catalog separating refactorings into seven (7) groups and making it available for consulting. Fowler's online catalog encompasses the refactorings described in his two books: Refactoring: Improving the Design of Existing Code \cite{fowler2018refactoring} and Refactoring: Ruby Edition \cite{fields2009refactoring}. 
+
+Refactoring by designing pattern-based methods examines the source code for insertion points to apply patterns. This refactoring aims mainly at maintainability, readability, and reusability. Several authors propose their pattern-based refactoring methods, such as \textcite{cinneide2000automated}, \textcite{Gamma2009}, and \textcite{ouni2017more}.
+
+This chapter has information about the research background. \Cref{sec-importance} discuss the importance of refactoring. \Cref{sec-methods} describes the application of refactoring. \Cref{sec-tools} exemplifies the methods of refactoring and the explanations of its functionalities and tools. \Cref{sub-rmt} talks about RMT functionality. \Cref{sub-architecture} describes the tool architecture. \Cref{subsub-internal} talks about the internal functionality of RMT. \Cref{sub-usage} shows how to use the tool. \Cref{subsub-limitation} discusses the limitations encountered using the tool. \Cref{sec-microservices} explain about microservices. \Cref{sec2-remarks} includes the final considerations.
+
+\section{Importance of Software Refactoring}
+\label{sec-importance}
+\textcite{fowler2018refactoring} describes that the first step in refactoring is to create automated tests such as unit tests. The tests help to avoid creating bugs by guaranteeing that the behavior does not change, as any code change could also change the code behavior; humans may make mistakes and cause severe problems in production. In system production, maintainability is a significant factor that influences costs, and one of the proposed solutions to reduce it is to increase software quality. 
+
+Refactoring can be applied to the development process to increase software quality, forcing the programmer to find bad smells (a characteristic of the code that indicates an issue) \cite{Wilking2007}. 
+In the study of \textcite{szHoke2017empirical}, six systems were analyzed to verify the effectiveness of software refactoring aimed at maintainability. To obtain the data before the refactorings, \textcite{szHoke2017empirical} analyzed all systems using a code analyzer called SourcerMeter tool based on the Columbus tool \cite{ferenc2002}. Refactorings were done manually, and the developers were informed about all the data and the list of problematic code fragments. 
+
+In this study, the developers analyzed 2.5 million lines and performed 732 revisions to the code, of which 315 were refactorings and 1,273 refactorings operations. After finishing the analyses, \textcite{szHoke2017empirical} found that refactoring improved maintainability, and the tool improved 5 out of 6 tested systems. In conclusion, the study shows that refactoring improves maintainability, which helps in fulfilling future software requirements.
+
+\subsection{Methods to Apply refactoring}
+\label{sub-methods}
+As mentioned, we can apply refactoring techniques and methods based on design patterns. Refactoring by techniques is common and can be found in the leading IDEs, such as Eclipse and IntelliJ, which provides automatic refactorings based on the model created by \textcite{fowler2018refactoring}. 
+
+Several authors propose software refactoring methods applying patterns, each performed differently in refactorings using pattern-based design methods. Some of these authors are \textcite{liu2014automated}, \textcite{zafeiris2017automated}, \textcite{cinneide2000automated}, and \cite{ouni2017more}. 
+These refactoring methods seek to find pattern insertion points in the source code. The technique searches source code to find where to implement design patterns to improve code maintainability, readability, and reusability. 
+
+As distinct from technical refactoring, design pattern-based refactoring looks for parts of the code where a design pattern can be applied. Using a design pattern is very important because it makes the evolution of the software more natural and does not create problems when implementing new requirements. Several project patterns have different functionality, such as factory method, proxy, observer, adapter, visitor, builder, and others \cite{Gamma2009}). 
+
+As described in the mapping performed by \textcite{beluzzo2018abordagem}, several authors propose methods for refactorings based on design patterns. For example, in the Moore method and Minipatterns and Minitransformations, there is a tool for each implementation process. If the developer wants to refactor his source code, he has to run n tools, where n is the total number of methods.
+
+The focus of refactoring by design patterns is different from refactoring by techniques. Refactoring by design patterns tries to find a way to make a system easy to "update." Software with difficulties in being "updated" can cost a lot to the company, both in terms of value and needs for new clients and competitiveness with other companies \cite{cinneide2000automated}.
+
+\subsection{Methods and Tools for Refactoring Based on Design Patterns}
+\label{sec-tools}
+
+As mentioned, \textcite{beluzzo2018abordagem} identified methods for detecting and involving design patterns as described in \Cref{tab-articles}.
+
+\input{Chapter-2/Tables/refactoring articles}
+
+For each of the papers, there are methods to recognize design pattern insertions, but not every article has a tool to apply it as described in \Cref{tab-articles}. \textcite{beluzzo2018abordagem} searched for the papers until 2018 when his work was published; a new search was made with the same search strings and libraries from 2019 to 2023, and no new work was found.
+
+Some steps ought to be taken to refactor code and apply transformations, as refactoring is not a straightforward technique and may vary by who is using it. That is why the authors have taken different approaches to refactoring listed on \Cref{tab-refactoring}.
+
+\input{Chapter-2/Tables/table refactoring type}
+
+A refactoring type will apply to the code for every work, as described in \Cref{tab-refactoring}.
+
+I) Minitransformations are he minitransformation is simple modifications to the code; by grouping those transformations in the right way, a design pattern is created \cite{cinneide2001automated}. II) Reflective Refactoring is based on code reflections, a technique that allows the code to be changed on runtime. It's good to emphasize that there are no pre-refactoring implementations with reflections; they are a method to implement the refactorings \cite{beluzzo2018abordagem}. III) Role Role-based refactoring is defined by a group of roles corresponding to the pattern participants and applying those roles to refactor obtaining design pattern \cite{mens972774}. IV) Intent Aspects are aspects in the software susceptible to pattern refactoring, formed by a group of rules for each pattern\cite{ram2004detecting}. V) Composite to Visitor and Visitor to Composite: focus only on the transition between each pattern \cite{beluzzo2018abordagem}. VI) Conditional Expression Refactorings: focus on the code's conditional expressions and conditional branches to refactor. \cite{CHRISTOPOULOU20121201}
+
+As shown on \Cref{tab-articles}, most of the articles have tools, and those were developed to apply the methods described above, working in an automatic or semi-automatic manner.
+
+\input{Chapter-2/Tables/tools tables}
+
+In \Cref{tab-tools}, the tools developed are listed by name; the row marked by an asterisk means that the tool is a prototype or an eclipse plugin; the other articles were created or updated of a specific tools\cite{beluzzo2018abordagem}.
+
+The tool creation is necessary because manual refactoring, the process some developers use, can introduce errors to the code and even change the system's functionality. This problem happens because developers are not prepared to perform refactoring \cite{ge2012reconciling}.
+
+Manual refactoring needs reviewing the entire code, and it can take time. For this reason, tools facilitate the application of refactorings, which can act in identifying bad smells or identifying and refactoring the source code, as created by \textcite{beluzzo2018abordagem}.
+
+\textcite{beluzzo2018abordagem} performed a mapping to find refactoring techniques and several tools have already been developed to perform refactorings. Such as Elbereth \cite{korman1998elbereth}, which automates some code extraction refactorings, encompassing method extraction (Extract Method), abstract superclasses, replacement of an existing class, and addition of a new subclass.
+
+Aiming at the interaction with the user for the application of refactoring, \cite{murphy2008breaking} created a tool that is fast, resistant to errors, and that is pleasant to use. To make the tool enjoyable, they implemented markings in the code produced by rectangles, arrows, and coloring parts of the code. These three markings show the user cleanly where and what the problem is so that refactorings can be applied.
+There are also tools containing a graphical interface and iteration with the user, such as \textcite{rani2014detection}, where the intent is to detect bad smells. This tool was developed in C\# and finds bad smells like long method, large class, lazy class, and comment lines. Discovering smells in code written in JAVA and .net. 
+
+Many code refactoring tools are based on the catalog of refactorings created by \cite{fowler2018refactoring}. However, other authors propose new refactorings. However, most authors agree that manually performed refactoring is time-consuming and challenging without creating new smells in the code. They were making tools for this reason.
+
+\cite{murphy2008breaking}, together with eight software developers with different work experiences, used the GostFactor tool to assist in refactoring. They observed that this process decreased errors in the refactoring application by 23.3\%.
+
+The RMT tool created by \textcite{beluzzo2018abordagem} allows for integrating design pattern insertion and detection methods in a single environment. The tool has an iteration with the user to let them know what will happen in the code after refactoring and, simultaneously, if the refactoring will improve the code. The work by \textcite{sangeetha2019empirical} does not describe how the implemented tool works but uses it to test and validate the techniques used. The RMT was created to implement the methods cited above. \textcite{beluzzo2018abordagem} implemented two methods, allowing the tool to extend to as many methods as possible.
+
+\subsection{RMT}
+\label{sub-rmt}
+
+The RMT (Refactoring and Measurement Tool) tool was created to detect design pattern insertion points using the methods selected by the author \cite{beluzzo2018abordagem}. \textcite{zafeiris2017automated} and \textcite{liu2014automated} developed the already implemented refactoring methods. The method by \textcite{zafeiris2017automated} covers refactoring for the Template Method pattern, and the method by \textcite{liu2014automated} covers two patterns: Strategy and Factory Method.
+
+\begin{figure}[ht!]
+\SetCaptionWidth{\textwidth}
+\caption{RMT use case}
+\label{fig-usecase}
+\includegraphics[width =\textwidth]{Chapter-2/Figures/usecase.png}
+\SourceOrNote{Own authorship (2023)}
+\end{figure}
+
+The use case diagram describes the tool functionality for the user in \Cref{fig-usecase}; the client starts by uploading the project and searching for candidates; if any applicable method is found, the metric is calculated. On the interface, the client can select which class he wants to refactor, if any, and then refactor.
+
+
+\subsubsection{RMT Architecture}
+\label{sub-architecture}
+
+ In addition to applying the refactorings, the tool uses the CK metrics extractor \cite{ck}, which encompasses the metrics of the depth of inheritance tree (PAH), cyclomatic complexity (CC), and program size in lines of code (TPLC). After selecting a project to be refactored, the metrics are applied to demonstrate the effects of refactorings on the user source code. The external quality attributes used were maintainability, reliability, and reusability.
+
+The user iteration within the Client App can be performed independently since it communicates with the Intermediary Service, which provides the service that communicates the user layer (Client) with the processing layer (Services). The Intermediary Service uses a REST request for each service, one for the Metrics Service and one for the Detection Methods Service.
+
+The model created by \textcite{beluzzo2018abordagem} also proposes a region's system structure with higher fault tolerance because the more Regions there are, the more members for processing will exist. Another factor \textcite{beluzzo2018abordagem} describes high availability, in which Regions should be placed on different servers, preventing overload and natural disasters. \Cref{fig-architecture} represents the regional divisions and application services.
+
+\begin{figure}[ht!]
+\SetCaptionWidth{\textwidth}
+\caption{RMT architecture diagram}
+\label{fig-architecture}
+\includegraphics[width =\textwidth]{Chapter-2/Figures/schema.png}
+\SourceOrNote{\textcite{beluzzo2018abordagem}}
+\end{figure}
+
+
+The architecture diagram in Figure 4 begins in the Client App. It continues to the Intermediary Service, which will choose the processing service depending on the user's action and may choose "Request source code evaluation" and "Request application of design patterns."
+The Intermediary Service process, when it receives a refactoring candidate from the ClientApp, sends the request to the Intermediary service, which sends the request to the Detection Methods Service, which scans the database for source code and obtains the refactoring candidates. Then, the candidates are returned to the Intermediary service, which sends them to the Metrics Service for evaluation. 
+
+After calculating the metrics, they are sent to the Intermediary service, which sends them back to the Client App to make the metrics and refactoring candidates available. If the user selects any refactoring candidates, the Client App sends the requests to the Intermediary Service with the candidates to be refactored in the Detection Methods Service. It creates a project with the refactorings performed.
+
+\textcite{beluzzo2018abordagem} was concerned with abstracting the tool so that an expansion could be performed without significant problems, but he defined no extension process.
+
+\subsubsection{Internal structure}
+\label{subsub-internal}
+
+A system's architecture is vital for working correctly, but all the heavy processing happens inside the services. A good design service will run with low memory and CPU, allowing it to work even in a small computer instance. The selection of refactoring candidates through RMT is described in \Cref{fig-candidates}.
+
+\begin{figure}[ht!]
+\SetCaptionWidth{\textwidth}
+\caption{Sequence Diagram to Find Refactoring Candidates}
+\label{fig-candidates}
+\includegraphics[width=160mm]{Chapter-2/Figures/candidates.png}
+\SourceOrNote{Own authorship (2023)}
+\end{figure}
+
+As described in the architecture, the intermediary service communicates with the other services, which is why the diagram starts there. After saving the project path and ID to the database, the intermediary service sends the ID to the DetectionService as step 1.
+
+On the detection service, the class to receive information is the DetectionBoundary, which gets the ID and passes it ahead as a simple controller in step 1.1. Step 2 sends the retrieved project to the DataExtractionFork.
+
+The id is received by the ExtractManager, an interface responsible for retrieving the project from the project repository and sending it to be parsed on the DataExtractionFork as step 1.2.
+
+The ProjectRepostiory is an interface with access to the database, which is consulted to retrieve the project information as a "Project" entity, completing step 1.3.
+
+The DataExtractionFork has direct access to the system io, which is used to retrieve the project from the file system; the project is saved as a zip file inflated to be parsed as a CompilationUnit and loaded into the memory to be sent to every implementation of the DetectionMethod as step 2.1.
+
+The DetectionMethod is an interface that abstracts the functionality of a new refactoring method; it receives an instance of the DataExtactionFork with the loaded files iterate over for every file and tries to detect if any pattern present on that method fits on the file and sends back the information via the stack finishing the step 3.1.
+
+After the candidates' selection, if the user decides to refactor, the system sends the chosen files to the intermediary service, and the process described in \Cref{fig-refactoring} starts.
+
+\begin{figure}[ht!]
+\SetCaptionWidth{\textwidth}
+\caption{Sequence Diagram for Refactoring Candidates}
+\label{fig-refactoring}
+\includegraphics[width=160mm]{Chapter-2/Figures/refactoring.png}
+\SourceOrNote{Own authorship (2023)}
+\end{figure}
+
+
+As the DetectionBoundry is the controller, it also revises the request to refactor with the user-selected classes and project ID to send to the ExtractManager as step 1.1.
+
+The ExtractManager has the same functionality as on \Cref{fig-candidates}, retrieving the project from the database by the ProjectRepository (step 1.2) and sending iterating it to the DataExtractionFork as step 2.
+
+The DataExtractionFrok in step 2.1 also has the same functionality. Still, every candidate on the project is called to return the same response every time, as it inflates the zip file and converts it to the CompilationUnit entity. For step 3, every candidate is sent to be refactored by the method defined on the candidate's face; after the process ends, the project ID is sent back via the stack.
+
+\subsubsection{RMT Usage}
+\label{sub-usage}
+
+The main focus of explaining the usage of RMT is on the Client App, which is divided into three stages. The first step is importing the project, as shown in \Cref{fig-import}.
+
+\begin{figure}[ht!]
+\SetCaptionWidth{\textwidth}
+\caption{Importing project on clientApp}
+\label{fig-import}
+\includegraphics[width =100mm]{Chapter-2/Figures/import.png}
+\SourceOrNote{Own authorship (2023)}
+\end{figure}
+
+
+The second step is the project evaluation, giving feedback to the user, which can analyze additional information about the refactoring candidates, such as class name, design pattern, and metrics, as shown in \Cref{fig-choose}.
+
+\begin{figure}[ht!]
+\SetCaptionWidth{\textwidth}
+\caption{Selecting refactoring candidates}
+\label{fig-choose}
+\includegraphics[width =\textwidth]{Chapter-2/Figures/choose.png}
+\SourceOrNote{Own authorship (2023)}
+\end{figure}
+
+In the third and last step, the user can choose the candidates to apply the refactoring after using it to a new project created and saved in a directory selected by the user, as shown in \Cref{fig-refactor}.
+
+\begin{figure}[ht!]
+\SetCaptionWidth{\textwidth}
+\caption{Applying refactoring to candidates}
+\label{fig-refactor}
+\includegraphics[width =\textwidth]{Chapter-2/Figures/refactor.png}
+\SourceOrNote{Own authorship (2023)}
+\end{figure}
+
+\subsubsection{RMT Limitations}
+\label{subsub-limitation}
+When testing, the RMT can spot some limitations, such as the time to execute and a blocking request that may cause slowness when many users try to use the tool; also related to the slowness is that for every project, analyses and refactoring the system open a zip file and parses every file to memory to check if it's a candidate, and repeating the same process when it's refactoring the files, besides the fact that accessing the disk is takes time. For the interface, there is no explicit manner of choosing between the same pattern applied by two approaches in the same class.
+
+The long time to execute is caused by the strategy of finding where the refactoring can be applied and the refactor action because it is synchronously performed on the same thread. Each file is analyzed in order, causing slowness on significant projects with many files.
+
+The lack of performance happens when accessing the hard drive to retrieve the file for refactoring; for each refactoring step, the program parses the file and makes some changes to save it on disk; this could be solved by keeping the file in memory and changing it in memory.
+The other problem implying the file system is that the architecture designed by \textcite{beluzzo2018abordagem} can be divided into regions, making it impossible to access the files with them being saved on one machine and the services being in another.
+
+The blocking request is addressed when many users use the tool simultaneously, resulting in no more space for new connections. New users will increase latency, and users may receive an error and have to wait until someone refactors stops and opens space for a new connection. This problem mainly occurs because of the synchronous architecture on RMT based on an API composer (intermediary service) used to communicate with the other services via REST, providing dependency on the services as no intercommunication is made, acting as a load balancer, service registry, and discovery. The downside of REST communication is that the latency increases over the number of concurrent clients \cite{Cebeci2020DesignOA}. 
+
+When RMT shows the patterns of refactoring candidates, it may show two refactoring for the same design pattern and class, having only the metrics to choose from which will be applied; it lacks other ways to explain the difference between the method to the user to make a better decision.
+
+The tool is also missing unit tests, which could guarantee that the logic created in the class is correct and could help with the refactoring as it should not change the functionality, and the tests would have to continue working.
+
+\section{Microservices Architecture}
+\label{sec-microservices}
+The microservices are used to create large and complex applications, as the model shown in \Cref{fig-architecture}, each application has to be simple and independent; when the services are connected and working together, they become a system. As discussed by \textcite{microservices-comuni}, the application is fault-tolerant and more controllable than a monolithic architecture.
+
+There are many architectures, such as synchronous as RMT and asynchronous ones. The synchronous services wait for the response before ending the process; they usually use a direct connection over REST, RCP protocol, etc. \cite{microservices-comuni}. To implement a retry on sync services, the client service has to implement a strategy to handle the failure.
+
+Asynchronous services do not wait for a response; the communication is non-block, so the service does not wait for the answer to end the process; it can be made with queues to handle communication. Those tools are RabbitMQ and Apache Kafka, among others \textcite{KARABEYAKSAKALLI2021111014}. Utilizing queues can bring new features related to resilience; if a service is down, the messages will be stored inside the queue and consumed when the service returns\cite{Cebeci2020DesignOA}. 
+
+To work with retry, the queue has some implementations, such as visibility timeout, which is the time window in the message that is not visible to consumers; when the timeout is done and the message is not acknowledged, it becomes visible again, bringing resilience to the system, the downside is that it can duplicate the message over failure conditions \cite{ChenScalable}.
+
+\section{Closing Remarks}
+\label{sec2-remarks}
+This chapter reported on the importance of refactoring, described the methods based on design patterns and refactoring tools, and explained some aspects of service architecture.
+
+Refactoring is essential to keep the source code free of smells and to a quality standard. The main focus of refactoring is maintainability and reusability by maintaining the code as first designed and avoiding inserting new smells.
+
+The importance of using a software refactoring tool was addressed to get the most out of refactoring without harming the work already done, emphasizing that the RMT tool is the focus of this research.
+The RMT tool integrates several methods for detecting and inserting design patterns in a single environment so that the application developer can apply them in their source code without having to use several refactoring tools that have refactoring tools for this purpose.
+
+There are many types of software architecture, but we discuss the abilities of the async and sync applications, bringing both upsides and downsides. As \textcite{beluzzo2018abordagem} did a systematic review to find papers on refactoring with design patterns and tools, another research method, such as snowballing, could be used to ensure that no other tool like RMT exists.

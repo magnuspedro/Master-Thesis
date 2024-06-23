@@ -1,0 +1,257 @@
+%%%% utfpr-thesis.tex, 2024/02/10
+%%%% Copyright (C) 2021-2024 Luiz E. M. Lima (luizeduardomlima@gmail.com)
+%%
+%% This work may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.3 of this license or (at your
+%% option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX version
+%% 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Luiz E. M. Lima.
+%%
+%% This work consists of all files listed in readme.html.
+%%
+%% A brief description of this work is in readme.txt.
+
+%% Detecção e aviso sobre comandos obsoletos
+% \RequirePackage[l2tabu, orthodox]{nag}
+
+%% Classe de documento
+\documentclass[%% Opções (^ = padrão; > = para pacotes; ¹ = somente twoside):
+  a4paper,%% Tamanho de papel: a4paper, letterpaper (^), etc.
+  12pt,%% Tamanho de fonte: 10pt (^), 11pt, 12pt, etc.
+  oneside,%% Impressão de folhas: oneside ou twoside (^)
+%   openany,%% Impressão de capítulos (¹): openany ou openright (^)
+%   fleqn,%% Alinhamento de equações à esquerda (centralizado por padrão)
+%   draft,%% Aparência de documento (>): draft ou final (^)
+  brazilian,%% Idioma secundário (penúltimo) (>)
+  english,%% Idioma primário (último) (>)
+]{memoir}
+
+%% Pacotes utilizados
+\usepackage[%% Opções (^ = padrão; ¹ = somente twoside; ² = somente openany):
+%   Font    = Times,%% Fonte principal: Arial (^), CM (padrão TeX) ou Times
+%   Link    = TextColor,%% Cor de hyperlinks: DarkBlue (^) ou TextColor
+%   Caption = Left,%% Alinhamento de legendas: Center (^) ou Left
+%   Source  = Left,%% Alinhamento de fonte (referência): Center (^) ou Left
+%   ABNTCit = NSB,%% Citação ABNT: AAY (Nome, Ano) (^), NRB (1) ou NSB [1]
+%   BibDOI  = Icon,%% Ícone de DOI em referências: Icon ou Name (^)
+%   BibURL  = Icon,%% Ícone de URL em referências: Icon ou URL (^)
+%   CoverBG = On,%% Plano de fundo (capa e contracapa): On ou Off (^)
+%   CoverId = All,%% Dados de identificação (capa): All ou Main (^)
+%   PageNum = All,%% Numeração de páginas (partes): All, Main (^) ou None
+%   TwoSide = All,%% Frente e verso (partes) (¹): All, Main (^) ou None
+%   OpenPg  = Odd,%% Paginação de elementos (²): Odd ou Any (^)
+%   Version = Defense,%% Versão de documento: Final (^) ou Defense
+]{utfpr-thesis}
+
+%% Informações do documento: descomentar para alterar
+%%%% Título: {Em Português}; {In English}
+\Title{%
+   Refatoração da Arquitetura de uma Ferramenta para Aplicação e Identificação Padrões de Projetos
+}{%
+   Architecture Refactoring of a Tool that Applies and Identifies Design Pattern%
+}
+%%%% Subtítulo (opcional): {Em Português}; {In English}
+% \SubTitle{%
+%   subtítulo de trabalho acadêmico%
+% }{%
+%   subtitle of academic work%
+% }
+%%%% Aluno(s) (de 1 a 5): {Número}; {Dados}
+\Student{1}{%
+   Gender   = {Male},%% Ou {Female}
+   Forename = {Pedro Magnus Pedroso},%% Exceto último e sufixo (e.g., {José Santos da})
+   Surname  = {Nogueira},%% Último e sufixo (e.g., {Silva Júnior})
+%   Email    = {student1@domain},%% Opcional
+%   Lattes   = {0000000000010001},%% Opcional
+%   ORCID    = {0000-0000-0001-0001},%% Opcional (CHKTEX 8)
+}
+%%%% Grau acadêmico (opção): [Número] (Obs.: (¹) automático para cada opção)
+% \AcademicDegreeOption[1]%% Doutorado
+ \AcademicDegreeOption[2]%% Mestrado
+% \AcademicDegreeOption[3]%% Especialização
+% \AcademicDegreeOption[4]%% Bacharelado
+% \AcademicDegreeOption[5]%% Licenciatura
+% \AcademicDegreeOption[6]%% Tecnologia
+%%%%%% Grau acadêmico (¹): {Em Português}; {In English}
+% \AcademicDegree{Doutorado}{Doctorate}
+%%%%%% Título acadêmico (¹): {Em Português}; {In English}
+% \AcademicTitle{Doutor\Gen{a}}{Doctor}
+%%%%%% Tipo de documento (¹): {Em Português}; {In English}
+\DocumentType{Tese}{Thesis}
+%%%% Área de concentração (Doutorado e Mestrado): {Em Português}; {In English}
+\ConcentrationArea{Sistemas de informação e computação}{Information and Computer Systems}
+%%%% Curso(s): {Em Português}; {In English}
+\Course{Ciência da Computação}{Computer Science}
+%%%% Departamento(s), coordenação(ões) ou programa: {Em Português}; {In English}
+\Department{%
+   Programa de Pós-Graduação em Ciência da Computação%
+}{%
+   Computer Science Graduate Program%
+}
+%%%% Campus: {Cidade}
+\Campus{Ponta Grossa}
+%%%% Ano(s) (atual por padrão): [De Depósito] (opcional); {De Defesa}
+\Year[2024]{2024}
+
+%% Processamento de entradas (itens) de listas, glossários e índices (makeindex)
+%% Comandos \MakeAcronyms* e \MakeSymbols*: inserem as subdivisões da lista.
+%%%% Lista de abreviaturas e siglas: [Arquivo de Entradas] (opcional)
+% \MakeAcronyms[./Pre-Textual/Optionals/acronyms-entries]
+%%%% Lista de símbolos: [Arquivo de Entradas] (opcional)
+% \MakeSymbols[./Pre-Textual/Optionals/symbols-entries]
+%%%% Glossário: [Arquivo de Entradas] (opcional)
+% \MakeGlossary[./Post-Textual/Optionals/glossary-entries]
+%%%% Índice remissivo
+% \MakeIndex%
+
+%% Permissão de inclusão de arquivos: descomentar aqueles em edição
+\includeonly{%
+  ./Chapter-1/chapter-1,%% Capítulo 1 (CHKTEX 26)
+  ./Chapter-2/chapter-2,%% Capítulo 2 (CHKTEX 26)
+  ./Chapter-3/chapter-3,%% Capítulo 3 (CHKTEX 26)
+  ./Chapter-4/chapter-4,%% Capítulo 4 (CHKTEX 26)
+  ./Chapter-5/chapter-5,%% Capítulo 5 (CHKTEX 26)
+  ./Post-Textual/appendix-a,%% Apêndice A (CHKTEX 26)
+  ./Post-Textual/appendix-b,%% Apêndice B (CHKTEX 26)
+  ./Post-Textual/annex-a,%% Anexo A (CHKTEX 26)
+  ./Post-Textual/annex-b,%% Anexo B (CHKTEX 26)
+}
+
+%% Arquivo(s) de referências
+\addbibresource{./Post-Textual/references.bib}
+
+%% Início do documento
+\begin{document}%% Não comentar ou remover
+
+%% Capa (automática)
+%% Para inserir planos de fundo na capa e em uma contracapa:
+%% a) selecionar a opção do pacote utfpr-thesis: CoverBG = On;
+%% b) atribuir nas informações do documento argumentos válidos para:
+%%    - grau acadêmico (\AcademicDegreeOption[Número]);
+%%    - campus (\Campus{Cidade}).
+
+%% Elementos pré-textuais (frontmatter)
+%% Editar o {Arquivo} para alterar: folha de rosto, errata, folha de aprovação,
+%% dedicatória, agradecimentos, epígrafe, resumo e abstract.
+\input{./Pre-Textual/pre-textual}
+
+%% Lista de algoritmos (elemento opcional)
+% \PrintFloatsList{algorithm}
+
+%% Lista de ilustrações (elemento opcional; lista geral)
+% \PrintIllustrationsList{figure, flowchart, photograph, graph, tabframed}
+%%%% Lista de figuras (usar a partir de 3 itens e remover da lista geral)
+% \PrintFloatsList{figure}
+%%%% Lista de fluxogramas (usar a partir de 3 itens e remover da lista geral)
+% \PrintFloatsList{flowchart}
+%%%% Lista de fotografias (usar a partir de 3 itens e remover da lista geral)
+% \PrintFloatsList{photograph}
+%%%% Lista de gráficos (usar a partir de 3 itens e remover da lista geral)
+% \PrintFloatsList{graph}
+%%%% Lista de quadros (usar a partir de 3 itens e remover da lista geral)
+% \PrintFloatsList{tabframed}
+
+%% Lista de tabelas (elemento opcional)
+% \PrintFloatsList{table}
+
+%% Lista de abreviaturas e siglas (elemento opcional)
+%%%% Opção 1: makeindex; conforme o [Arquivo de Entradas] em \MakeAcronyms.
+% \PrintAcronymsList%
+%%%% Opção 2: manual; editar o {Arquivo} para alterar.
+% \input{./Pre-Textual/Optionals/acronyms-list}
+
+%% Lista de símbolos (elemento opcional)
+%%%% Opção 1: makeindex; conforme o [Arquivo de Entradas] em \MakeSymbols.
+%%%% Comando \PrintSymbolsList*: insere a unidade (entre []) na margem direira.
+% \PrintSymbolsList%
+%%%% Opção 2: manual; editar o {Arquivo} para alterar.
+% \input{./Pre-Textual/Optionals/symbols-list}
+
+%% Sumário
+%% Comando \PrintSummary*: remove o espaçamento entre partes e entre capítulos.
+\PrintSummary%
+
+%% Formatação de elementos textuais (mainmatter)
+\Textual%% Não comentar ou remover
+
+%% Parte 1 (elemento opcional; grupo de capítulos)
+% \part{Introdução}%
+% \label{part:intro}
+
+%% Capítulo 1
+\include{./Chapter-1/chapter-1}
+
+%% Parte 2 (elemento opcional; grupo de capítulos)
+% \part{Desenvolvimento}%
+% \label{part:dev}
+
+%% Capítulo 2
+\include{./Chapter-2/chapter-2}
+
+%% Capítulo 3
+\include{./Chapter-3/chapter-3}
+
+%% Capítulo 4
+\include{./Chapter-4/chapter-4}
+
+%% Parte 3 (elemento opcional; grupo de capítulos)
+% \part{Conclusão}%
+% \label{part:concl}
+
+%% Capítulo 5
+\include{./Chapter-5/chapter-5}
+
+%% Marcadores de PDF para capítulos subsequentes no nível principal
+% \PhantomPart%
+
+%% Formatação de elementos pós-textuais (backmatter)
+%% Comando \PostTextual*: remove as seções de nível inferior às primárias do
+%% sumário e dos marcadores de PDF.
+\PostTextual%% Não comentar ou remover
+
+%% Referências
+\PrintReferences%
+
+%% Glossário (elemento opcional)
+%%%% Opção 1: makeindex; conforme o [Arquivo de Entradas] em \MakeGlossary.
+%%%% Comando \PrintGlossary*: remove o indicativo (páginas) dos itens.
+% \PrintGlossary%[\bfseries]%% Estilo de fonte do termo (opcional)
+%%%% Opção 2: manual; editar o {Arquivo} para alterar.
+% \input{./Post-Textual/Optionals/glossary-list}
+
+% Parte Apêndices (elemento opcional; grupo de capítulos)
+% \AppendicesPart%
+
+%% Apêndices (elemento opcional)
+\begin{Appendices}
+\include{./Post-Textual/appendix-a}
+\include{./Post-Textual/appendix-b}
+\end{Appendices}
+
+% Parte Anexos (elemento opcional; grupo de capítulos)
+% \AnnexesPart%
+
+%% Anexos (elemento opcional)
+\begin{Annexes}
+\include{./Post-Textual/annex-a}
+\include{./Post-Textual/annex-b}
+\end{Annexes}
+
+%% Índice remissivo (elemento opcional)
+%%%% Opção 1: makeindex (\index{...}, \Index{...}, etc.)
+% \PrintIndex%
+%%%% Opção 2: manual; editar o {Arquivo} para alterar.
+% \input{./Post-Textual/Optionals/index-list}
+
+%% Fim do documento
+\end{document}%% Não comentar ou remover
+
+%% Observação: o arquivo final (PDF) pode ser convertido para PDF/A usando
+%% diversas ferramentas, por exemplo:
+%%   https://www.pdfforge.org/online/en/pdf-to-pdfa

@@ -1,0 +1,101 @@
+%%%% ELEMENTOS PRÉ-TEXTUAIS
+%%
+%% Parte que antecede o texto com informações que ajudam na identificação e na
+%% utilização do trabalho.
+%%
+%% Observações:
+%% 1. {Arg} argumento obrigatório de ambiente ou comando.
+%% 2. [Arg] argumento opcional de ambiente ou comando.
+
+%% Folha de rosto
+%% Contém os elementos essenciais à identificação do trabalho, além de uma
+%% licença Creative Commons (https://creativecommons.org/choose/).
+%% Ambiente {TitlePage*}: aplica caixa alta no título em idioma secundário.
+\begin{TitlePage}%% Argumentos (2):
+[BY]%% Tipo de licença (BY, BY-SA, BY-ND, BY-NC, BY-NC-SA ou BY-NC-ND)
+% [Texto da licença]%% Substitui o texto padrão para cada tipo de licença
+%%%% Descrição do trabalho (padrão; alterar se necessário)
+\DocumentTypeName\ presented as requirement to obtain the title of \StudentsTitlesList\ in \CourseName\ from \ifbool{MakeAcr}{\intldescr{UTFPR} (\intl{UTFPR})}{\UTFPRName\ (UTFPR)}.
+%%%% Orientador(es) (de 1 a 3): {Número}; {Dados}
+\Advisor{1}{%
+   Gender   = {Female},%% Ou {Female}
+   Title    = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
+   Fullname = {Simone Nasser Matos},%% Conforme o Currículo Lattes
+%   Email    = {advisor1@domain},%% Opcional
+%   Lattes   = {0000000000020001},%% Opcional
+%   ORCID    = {0000-0000-0002-0001},%% Opcional (CHKTEX 8)
+}
+%%%% Ficha catalográfica (somente para Teses e Dissertações em catálogo físico)
+%%%% [Arg-1]: local (pasta) do PDF (./Pre-Textual/Extras/ por padrão).
+%%%% {Arg-2}: nome do PDF (modelo em ./Pre-Textual/Extras/).
+% \IndexCardPDF{doc-index-card.pdf}
+\end{TitlePage}
+
+%% Errata (elemento opcional; editar o {Arquivo} para alterar)
+% \input{./Pre-Textual/Optionals/errata}
+
+%% Folha de aprovação
+%% Contém os elementos essenciais à aprovação do trabalho (sem as assinaturas).
+%%%% Opção 1: gerada por meio do pacote utfpr-thesis.
+%%%% Ambiente {ApprovalPage*}: insere a titulação após o nome do membro.
+\begin{ApprovalPage}%% Argumentos (4):
+% [brazilian]%% Idioma original ou primário (brazilian ou english)
+{DD de mmmmmm de \YearNum}%% Data de aprovação (dia, mês por extenso e ano)
+{DD/MM/\YearNum}%% Data de aprovação (forma abreviada; mestrado e doutorado)
+{\linewidth}%% Largura de linha de assinatura (graduação e especialização)
+%%%%%% Descrição do trabalho (padrão; alterar se necessário)
+\DocumentTypeName\ apresentad\ifbool{Graduate}{a}{o} como requisito para obtenção do título de \StudentsTitlesList\ em \CourseName\ da \ifbool{MakeAcr}{\intldescr{UTFPR} (\intl{UTFPR})}{\UTFPRName\ (UTFPR)}.
+%%%%%% Membro(s) da banca (de 3 a 6): {Número}; {Dados}
+% \Member{1}{%
+%   Gender      = {Male},%% Ou {Female}
+%   Title       = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
+%   Fullname    = {Prenome{(s)} Sobrenome-C1},%% Conforme o Currículo Lattes
+%   Institution = {Instituição (Membro-C1)},%% Nome completo e por extenso
+% }
+% \Member{2}{%
+%   Gender      = {Male},%% Ou {Female}
+%   Title       = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
+%   Fullname    = {Prenome{(s)} Sobrenome-C2},%% Conforme o Currículo Lattes
+%   Institution = {Instituição (Membro-C2)},%% Nome completo e por extenso
+% }
+% \Member{3}{%
+%   Gender      = {Male},%% Ou {Female}
+%   Title       = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
+%   Fullname    = {Prenome{(s)} Sobrenome-C3},%% Conforme o Currículo Lattes
+%   Institution = {Instituição  (Membro-C3)},%% Nome completo e por extenso
+% }
+\end{ApprovalPage}
+%%%% Opção 2: gerada a partir do Sistema Acadêmico ou da secretaria.
+%%%% [Arg-1]: local (pasta) do PDF (./Pre-Textual/Extras/ por padrão).
+%%%% {Arg-2}: nome do PDF (modelos em ./Pre-Textual/Extras/).
+% \ApprovalPagePDF{doc-approval-page.pdf}
+
+%% Dedicatória (elemento opcional; editar o {Arquivo} para alterar)
+% \input{./Pre-Textual/Optionals/dedication}
+
+%% Agradecimentos (elemento opcional; editar o {Arquivo} para alterar)
+% \input{./Pre-Textual/Optionals/acknowledgments}
+
+%% Epígrafe (elemento opcional; editar o {Arquivo} para alterar)
+% \input{./Pre-Textual/Optionals/epigraph}
+
+%% Resumo
+%% Apresentação concisa dos pontos relevantes de um texto, fornecendo uma visão
+%% rápida e clara do conteúdo e das conclusões do trabalho.
+%% Ambiente {Abstract*}: insere a autorreferência do documento.
+%%%% Estilo de fonte da chamada das palavras-chave (opcional)
+% \KeywordsCallFormat{\bfseries}%% Texto normal por padrão
+%%%% Palavras-chave (de 3 a 6): {Número}; {Em Português}; {In English}
+\Keyword{1}{refatoração}{refactoring}
+\Keyword{2}{refatoração de software}{software refactoring}
+\Keyword{3}{padrões de projetos}{design patterns}
+\Keyword{4}{nuvem}{cloud}
+\Keyword{5}{microserviços}{microservices}
+%%%% Em língua vernácula (idioma primário)
+\begin{Abstract}[brazilian]%% Idioma (brazilian ou english)
+Refatoração é um meio de melhorar o código-fonte sem alterar a sua funcionalidade, removendo code smells e o tornando mais flexível e legível. Dentre as técnicas de refatoração, existe a refatoração por padrões de projetos que permite criar um código com maior qualidade em relação a atributos como reusabilidade, flexibilidade, entre outros. A ferramenta Refactoring and Measurement Tool (RMT) foi criada em sua primeira versão pelo Laboratório de Engenharia de Software e Inteligência Computacional (LESIC) e é capaz de ler um projeto escrito em linguagem java e detectar e aplicar padrões de projeto. Para isto, ela contém a implementação de três métodos da literatura capazes de detectar e aplicar padrões de projeto. A dificuldade da primeira versão da RMT está relacionada em se incorporar em sua arquitetura uma quantidade maior de métodos. Este trabalho propõe a refatoração de sua arquitetura usando microserviços assíncronos e nativos na nuvem para melhorar a performance, disponibilidade e escalabilidade, desacoplamento as responsabilidades. Esta arquitetura foca em um escalonamento horizontal para melhorar a performance sobre demanda, combinando com aplicações em nuvem.
+\end{Abstract}
+%%%% Em língua estrangeira (idioma secundário; para divulgação internacional)
+\begin{Abstract}[english]%% Idioma (brazilian ou english)
+Refactoring improves source code without altering its functionality, removes code smells, and makes it more flexible and readable. Pattern-based refactoring is one of the refactoring techniques, which allows the creation of code with higher quality concerning attributes such as reusability and flexibility, among others. The Refactoring and Measurement Tool (RMT) was created in its first version by the Software Engineering and Computational Intelligence Laboratory (LESIC), which can read a project written in Java and detect and apply design patterns. To do so, it contains the implementation of three methods from the literature capable of detecting and applying design patterns. The difficulty of the first version of RMT is related to incorporating more methods into its architecture. This work proposes the refactoring of its architecture using asynchronous and cloud-native microservices to improve performance, availability, scalability, and decoupling responsibilities. This architecture focuses on horizontal scaling to improve on-demand performance combined with cloud applications.
+\end{Abstract}
