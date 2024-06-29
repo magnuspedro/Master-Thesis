@@ -48,13 +48,14 @@
 %   OpenPg  = Odd,%% Paginação de elementos (²): Odd ou Any (^)
 %   Version = Defense,%% Versão de documento: Final (^) ou Defense
 ]{utfpr-thesis}
+\usepackage[section]{placeins}
 
 %% Informações do documento: descomentar para alterar
 %%%% Título: {Em Português}; {In English}
 \Title{%
-   Refatoração da Arquitetura de uma Ferramenta para Aplicação e Identificação Padrões de Projetos
+    RMT 2.0: Uma ferramenta para aplicar e identificar padrões de projetos fundamentada em microsserviços
 }{%
-   Architecture Refactoring of a Tool that Applies and Identifies Design Pattern%
+   RMT 2.0: A Tool for the Application and Identification of Design Patterns Based in Microservices%
 }
 %%%% Subtítulo (opcional): {Em Português}; {In English}
 % \SubTitle{%
@@ -108,7 +109,7 @@
 %%%% Glossário: [Arquivo de Entradas] (opcional)
 % \MakeGlossary[./Post-Textual/Optionals/glossary-entries]
 %%%% Índice remissivo
-% \MakeIndex%
+\MakeIndex%
 
 %% Permissão de inclusão de arquivos: descomentar aqueles em edição
 \includeonly{%
@@ -147,7 +148,7 @@
 %% Lista de ilustrações (elemento opcional; lista geral)
 % \PrintIllustrationsList{figure, flowchart, photograph, graph, tabframed}
 %%%% Lista de figuras (usar a partir de 3 itens e remover da lista geral)
-% \PrintFloatsList{figure}
+\PrintFloatsList{figure}
 %%%% Lista de fluxogramas (usar a partir de 3 itens e remover da lista geral)
 % \PrintFloatsList{flowchart}
 %%%% Lista de fotografias (usar a partir de 3 itens e remover da lista geral)
@@ -158,7 +159,7 @@
 % \PrintFloatsList{tabframed}
 
 %% Lista de tabelas (elemento opcional)
-% \PrintFloatsList{table}
+\PrintFloatsList{table}
 
 %% Lista de abreviaturas e siglas (elemento opcional)
 %%%% Opção 1: makeindex; conforme o [Arquivo de Entradas] em \MakeAcronyms.

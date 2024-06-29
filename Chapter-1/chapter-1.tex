@@ -1,23 +1,23 @@
 \chapter{Introduction}%
 \label{chpt-intro}
-The definition of refactoring is to modify a software code without changing its external behavior to improve its internal structure. It is applied carefully to minimize the possibility of introducing bugs to the already written code. The refactoring does not depend on whether the code had a good design or if the software had no plan because, with refactoring, we can transform it into an excellent structure code \cite{fowler2018refactoring}.
+The definition of refactoring is to modify a software code without changing its external behavior to improve its internal structure. It is applied carefully to minimize the possibility of introducing bugs into the already-written code. Refactoring does not depend on whether the code had a good design or if the software had no plan because, with refactoring, we can transform it into an excellent structure code \cite{fowler2018refactoring}.
 
-Different kinds of refactoring exist, such as refactoring by techniques \cite{fowler2018refactoring} and refactoring with design patterns \cite{kerievsky2005refactoring}. Methods based on refactoring change the structure of the code to make it clear to understand and improve maintenance by removing code smells. On the other hand, refactoring based on design patterns improves the code structure by inserting patterns into the code.
+Different types of refactoring exist, such as refactoring by techniques \cite{fowler2018refactoring} and refactoring with design patterns \cite{kerievsky2005refactoring}. Refactoring-based methods change the code structure to make it easier to understand and improve maintenance by removing code smells. Refactoring based on design patterns improves the code structure by inserting patterns into the code.
 
-When designing systems, multiple choices are available regarding architecture, like queues, REST and RPC requests, and so on. Microservices can combine those technologies to create large and complex architectures, as it has advantages over monolith architecture, such as fault-tolerance, organization, and development velocity \cite{microservices-comuni}.
+When designing systems, multiple choices are available regarding architecture, like queues, REST and RPC requests, and so on. Microservices can combine those technologies to create large and complex architectures, as they have advantages over monolith architecture, such as fault tolerance, organization, and development velocity \cite{microservices-comuni}.
 
-To deploy such architecture, a cloud is an excellent option for its native tools, such as serverless computing, container managers, databases, and many other tools \cite{balalaie2016}.
+To implement such architecture, a cloud is an excellent option for its native tools, such as serverless computing, container managers, databases, and many other tools \cite{balalaie2016}.
 
 The RMT is built on three services: detection service, metrics service, and intermediary service; its architecture communicates with REST requests over the intermediary service responsible for knowing all the services and making the load balance; that architecture can fit as microservices.
 
-This work proposes refactoring the RMT architecture, bringing its design to a cloud-native approach with AWS working with offered services such as Elasticache for caching and storage, Fargate for container management, SQS as queue broker, and S3 for file storage. The refactor also includes a change from the synchronous approach to asynchronous by making the services communicate by queues and removing the responsibility of managing the requests from the client to the service itself. Besides the architecture, the flaws spotted on the tool will be fixed.
+This work proposes refactoring the RMT architecture, bringing its design to a cloud-native approach with AWS working with offered services such as Elasticache for caching and storage, Fargate for container management, SQS as queue broker, and S3 for file storage. The refactor also includes a change from the synchronous approach to asynchronous by making the services communicate by queues and removing the responsibility of managing requests from the client to the service itself. In addition to architecture, the flaws detected in the tool will be fixed.
 
 \section{Justification}
-The asynchronous microservices allow services to operate independently, enabling them to scale horizontally without affecting other services; they can tolerate failures better than synchronous architectures, as they don't depend on each other's availability or response time. A failed service or request doesn't block the entire system; the different services can operate without interruption \cite{microservices-comuni}.
+The asynchronous microservices allow services to operate independently, enabling them to scale horizontally without affecting other services; they can tolerate failures better than synchronous architectures, as they do not depend on each other's availability or response time. A failed service or request does not block the entire system; the different services can operate without interruption \cite{microservices-comuni}.
 
-Asynchronous microservices can perform better than synchronous architectures by reducing latency and increasing throughput. Asynchronous processing allows the system to handle more requests concurrently and more efficiently. Microservices architecture enables greater flexibility in technology choices and enables services to be written in different programming languages, frameworks, and libraries. This architecture also allows for better integration with third-party services and APIs \cite{larrucea2018}.
+Asynchronous microservices can perform better than synchronous architectures by reducing latency and increasing throughput. Asynchronous processing allows the system to handle more requests concurrently and more efficiently. The microservice architecture enables greater flexibility in technology choices and enables services to be written in different programming languages, frameworks, and libraries. This architecture also allows for better integration with third-party services and APIs \cite{larrucea2018}.
 
-Therefore, refactoring the tool will give the end user a better experience as it will be faster and more reliable than before.
+Therefore, refactoring the tool will give the end user a better experience, as it will be faster and more reliable than before.
 
 % Porque os micro serviços vão ajudar na ferramenta para suportar que novos metodos sejam impletados.
 \section{Objective}
@@ -27,14 +27,14 @@ The specific objectives are I) build an async architecture and cloud-native; II)
 
 % Obejetivo geral e especifico
 \section{Methodology}
-This proposal aimed to refactor the architecture using a software refactoring approach involving design patterns and source code evaluation. As systematic reviews had already been conducted by \textcite{beluzzo2018abordagem} for refactoring integrating design patterns, a forward snowballing technique was utilized to search for new papers on the refactoring field not exclusively on refactoring for design patterns. Through this process, it was discovered that there were no new works on this topic, confirming the need to improve a unique tool.
+This proposal aimed to refactor the architecture using a software refactoring approach that involved design patterns and the evaluation of the source code. As systematic reviews had already been conducted by \textcite{beluzzo2018abordagem} for integrating design patterns, a forward snowball technique was used to search for new articles in the field of refactoring, not exclusively for integrating design patterns. Through this process, it was discovered that there were no new works on this topic, confirming the need to improve a unique tool.
 
-The proposed approach can be done by first creating the cloud infrastructure, refactoring the project to Java 17 to add support for the last version of the Spring boot framework, adding support to the AWS SDK, and refactoring the code to communicate with all the new technology. It has to be done starting with the intermediary service, then the detection service, and finally, the metrics service.
+The proposed approach can be achieved by first creating the cloud infrastructure, refactoring the project to Java 17 to add support for the last version of the Spring boot framework, adding support to the AWS SDK, and refactoring the code to communicate with all the new technology. It has to be done starting with the intermediary service, then the detection service, and finally, the metrics service.
 % Descrever o que foi utilizado para chegar na solução proposta
 \section{Work Organization}
 
-This work is divided into four chapters, presenting the proposal for refactoring the RMT architecture to an async tool. The \cref{cap-background} talks about refactoring, the RMT tool, and microservices.
+This work is divided into four chapters that present the proposal for refactoring the RMT architecture into an async tool. The \cref{cap-background} talks about refactoring, the RMT tool, and microservices.
 
-On \cref{chap-state} details state of the art with a forward snowballing about refactoring, tools, and methods.
+In \cref{chap-state} details the state of the art with a forward snowballing about refactoring, tools, and methods.
 
-On \cref{chapt-proposta} describes the proposal of refactoring the RMT, explaining how it will work and the advantages of its refactoring.
+In \cref{chapt-proposta} describes the proposal to refactor the RMT, explaining how it will work and the advantages of its refactoring.
