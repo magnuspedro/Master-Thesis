@@ -13,7 +13,7 @@ The intermediary service is systematically divided into four main packages, each
 \SetCaptionWidth{\textwidth}
 \caption{Intermediary Service Package Diagram}
 \label{fig-package-intermediary}
-\includegraphics[width =\textwidth, scale=0.2]{Chapter-4/Figures/intermediary-service.png}
+\includesvg{Chapter-4/Figures/intermediary-service.svg}
 \SourceOrNote{Own authorship (2024)}
 \end{figure}
 \FloatBarrier
@@ -33,7 +33,8 @@ The detection service is arranged into six main packages, the core functionaliti
 \SetCaptionWidth{\textwidth}
 \caption{Detection Service Package Diagram}
 \label{fig-package-detection}
-\includegraphics[width =\textwidth, scale=1.0]{Chapter-4/Figures/detection-service.png}
+\fontsize{7.5}{9.5}\selectfont
+\includesvg[width =\textwidth]{Chapter-4/Figures/detection-service.svg}
 \SourceOrNote{Own authorship (2024)}
 \end{figure}
 \FloatBarrier
@@ -58,7 +59,8 @@ The metrics service is divided into six main packages and two main functionaliti
 \SetCaptionWidth{\textwidth}
 \caption{Metrics Service Package Diagram}
 \label{fig-package-metrics}
-\includegraphics[width =\textwidth, scale=1.0]{Chapter-4/Figures/metrics-service.png}
+\fontsize{9}{10}\selectfont
+\includesvg[width =\textwidth]{Chapter-4/Figures/metrics-service.svg}
 \SourceOrNote{Own authorship (2024)}
 \end{figure}
 \FloatBarrier
@@ -71,7 +73,7 @@ Correspondingly to the previous service, the package \texttt{managers.pulse} enc
 
 Similarly to the detection service, the \texttt{processor.qualityAttributes} has the interfaces to implement different methods of measuring code metrics and quality attributes. The interfaces' logic and calculations are in the \texttt{domain.metrics} and \texttt{domain.qualityAttribute} packages.
 
-The classes with logic and calculations for generating metrics are in the \texttt{domain.metrics} package; for now, they are hardcoded, implementing the CK module created by \textcite{ck}; however, the interface is designed to integrate additional metrics generation methodologies. In the \texttt{domain.qualityAttributes} package is located in the calculations for quality attributes, such as maintainability, readability, etc.
+The classes with logic and calculations for generating metrics are in the \texttt{domain.metrics} package; for now, they are hardcoded, implementing the CK module created by \textcite{ck}; however, the interface is designed to integrate additional metrics generation methodologies in the \texttt{domain.qualityAttributes} package is located in the calculations for quality attributes, such as maintainability, readability, etc.
 
 Consistent with previous services, the \texttt{ws.boundaries} packages serve as the access point for service functionalities. They coordinate computations by interfacing with the database to retrieve project data and invoke methods within the \texttt{processor.qualityAttributes} packages, thereby generating metrics and quality attributes.
  
@@ -79,7 +81,7 @@ Consistent with previous services, the \texttt{ws.boundaries} packages serve as 
 
 Upon comprehending the tool's functionalities, the subsequent step involves verifying the presence of tests. This is essential to commence the refactoring process, as explained by Fowler:
 
-\Citation[english]{\cite[9]{fowler2018refactoring}}{Whenever I do refactoring, the first step is always the same. I need to ensure I have a solid set of tests for that section of code. The tests are essential because even though I will follow refactorings structured to avoid most of the opportunities for introducing bugs, I’m still human and still make mistakes}.
+\Citation[english]{\cite[9]{fowler2018refactoring}}{Whenever I do refactoring, the first step is always the same. I need to ensure I have a solid set of tests for that section of code. The tests are essential because even though I will follow refactorings structured to avoid most of the opportunities for introducing bugs, I'm still human and still make mistakes}.
 
 The RMT lacked any form of testing; therefore, according to \textcite{fowler2018refactoring} philosophy, the tool was subjected to unit tests to verify consistent behavior after refactoring. The tests focused on the business logic of the detection service and the quality attribute computations within the metrics service. Testing was bypassed for the intermediary service due to its complete redevelopment.
 
@@ -93,43 +95,85 @@ Tracing the tool's execution path, the initial classes slated for testing are wi
 \SetCaptionWidth{\textwidth}
 \caption{Detection Service Methods Package Simplified Class Diagram}
 \label{fig-class-detection-methods}
-\includegraphics[width =\textwidth, scale=1.0]{Chapter-4/Figures/detection-service-methods.png}
+\fontsize{7}{8}\selectfont
+\includesvg[width =\textwidth, scale=1.0]{Chapter-4/Figures/detection-service-methods.svg}
 \SourceOrNote{Own authorship (2024)}
 \end{figure}
 \FloatBarrier
 
-The initial phase of the RMT refactoring process, 'data extraction', involves parsing Java files into an Abstract Syntax Tree (AST), a task performed by the \texttt{AbstractSyntaxTree} class. The class testing methodology involves the accuracy of the parsing process, the generation of an AST object, or the identification of errors as the library \cite{javaparser} executes the process. Therefore, the reliability of this library is assumed, necessitating only the validation of the output. This is achieved by converting a code sample into a string and confirming the equivalence between the AST output, also as a string, and the original input. Error conditions are tested by deliberately invoking the library with incorrect Java code and asserting the results.
+The initial phase of the RMT refactoring process, 'data extraction,' involves parsing Java files into an Abstract Syntax Tree (AST), a task performed by the \texttt{AbstractSyntaxTree} class. The class testing methodology consists of the accuracy of the parsing process, the generation of an AST object, or the identification of errors as the library \cite{javaparser} executes the process. Therefore, the reliability of this library is assumed, necessitating only the validation of the output. This is achieved by converting a code sample into a string and confirming the equivalence between the AST output, also as a string, and the original input. Error conditions are tested by deliberately invoking the library with incorrect Java code and asserting the results.
 
-The \texttt{AbstractSyntaxTreeFork} class orchestrates the refactoring implemented methods that use the Abstract Syntax Tree (AST) as the parsing mechanism. The refactoring process is divided into two primary stages: invoking methods to identify candidate elements and executing methods to refactor the identified candidate classes. Additionally, the class has logic for database manipulation; this aspect was not subjected to testing due to the substitution of all database communication mechanisms and the database itself, thereby obviating the necessity to preserve any pre-existing behavior. For testing the class, the refactoring techniques had to be mocked (creating an object that simulates the original object's behavior) and assuring the behavior when the methods return an error or success.
+The \texttt{AbstractSyntaxTreeFork} class orchestrates the refactoring implemented methods that use the Abstract Syntax Tree (AST) as the parsing mechanism. The refactoring process is divided into two primary stages: invoking methods to identify candidate elements and executing methods to refactor the identified candidate classes. Additionally, the class has logic for database manipulation; this aspect was not subjected to testing due to the substitution of all database communication mechanisms and the database itself, thereby preventing the necessity to preserve any pre-existing behavior. For testing the class, the refactoring techniques had to be mocked (creating an object that simulates the original object's behavior) and assuring the behavior when the methods return an error or success.
 
 The \texttt{DetectionMethodsManagerImpl} was excluded from the testing due to the planned complete reimplementation of the class, which encapsulates the algorithms for project retrieval from the database and the execution of procedures within \texttt{AbstractSyntaxTreeFork}.
 
-
-The methods executed by \texttt{AbstractSyntaxTree} are situated within the \texttt{methods} package and hold the logic for each implemented refactoring method. The classes are split into two distinct categories: the first category contains classes designed to identify refactoring candidates by detecting specific patterns within Java code that qualify for refactoring; the second category consists of classes intended to execute the refactoring process, thereby effectuating the requisite modifications to the code. The simplified class diagram in \cref{fig-class-detection-domain} represents these classes.
+The methods executed by \texttt{AbstractSyntaxTree} are situated within the \texttt{methods} package and hold the logic for each implemented refactoring method. The classes are split into two distinct categories: the first category contains classes designed to identify refactoring candidates by detecting specific patterns within Java code that qualify for refactoring; the second category consists of classes intended to execute the refactoring process, thereby effectuating the requisite modifications to the code. The simplified class diagram is divided into two \cref{fig-class-detection-domain-wei} and \cref{fig-class-detection-domain-zafeiris} representing these classes.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
-\caption{Detection Service Domain Package Simplified Class Diagram}
-\label{fig-class-detection-domain}
-\includegraphics[width =\textwidth, scale=1.0]{Chapter-4/Figures/detection-service-domain.png}
+\caption{Detection Service Domain Package Simplified Class Diagram For Wei Related Files}
+\label{fig-class-detection-domain-wei}
+\fontsize{4}{5}\selectfont
+\includesvg[width =\textwidth]{Chapter-4/Figures/detection-service-domain-wei.svg}
 \SourceOrNote{Own authorship (2024)}
 \end{figure}
 \FloatBarrier
 
-The classes \texttt{WeiEtAl2014Candidate}, \texttt{WeiEtAl2014FactoryCandidate}, \texttt{ZafeirisEtAl2016Candidate}, and \texttt{WeiEtAl2014StrategyCandidate} were excluded from testing, as previously mentioned since Plain Old Java Objects (POJOs) devoid of any business logic were not subjected to testing.
+The \cref{fig-class-detection-domain-wei} illustrates the class diaram for \cite{liu2014automated}, whereas the \cref{fig-class-detection-domain-zafeiris} outlines the class diaram for \cite{zafeiris2017automated}.
+
+\begin{figure}[ht!]
+\SetCaptionWidth{\textwidth}
+\caption{Detection Service Domain Package Simplified Class Diagram For Zafeiris Related Files}
+\label{fig-class-detection-domain-zafeiris}
+\fontsize{5}{8}\selectfont
+\includesvg[width =\textwidth]{Chapter-4/Figures/detection-service-domain-zafeiris.svg}
+\SourceOrNote{Own authorship (2024)}
+\end{figure}
+\FloatBarrier
+
+The classes \texttt{WeiEtAl2014Candidate}, \texttt{WeiEtAl2014FactoryCandidate}, \texttt{ZafeirisEtAl2016Candidate}, and \texttt{WeiEtAl2014StrategyCandidate} were excluded from testing, as previously mentioned since Plain Old Java Objects (POJOs) devoid of any business logic were not subjected to testing. The \texttt{WeiEtAl2014} and \texttt{ZafeirisEtAl2016} classes were also excluded from testing as they had been rewritten.
 
 The initial tested class is the \texttt{AstHandler}, serving as an encapsulating wrapper that facilitates direct access to an AST branch. The test cases must ensure that the methods can access the AST objects, such as methods, variables, inner classes, etc. The class also has some methods with limited logic, like assuring that two variables are the same and finding a class's parent, among others. Those functionalities were tested to ensure that they worked as intended and would continue after the refactoring. Some opportunities for improvement were discovered during the development of test cases, which are addressed in \cref{results}. 
 
-Agrupar as classes de encotrar candidados do wei, e explicar como testar
+The tests for the following classes are categorized into two distinct groups: verifiers and preconditions and executors. The preliminary classes subjected to testing pertained to the \textcite{liu2014automated} methodology, specifically \texttt{WeiEtAl2014FactoryVerifier}, \texttt{WeiEtAl2014StrategyVerifier}, and 	\texttt{WeiEtAl2014StrategyVerifier} and \texttt{LiteralValueExtractor}. It is intrinsic to the verifier to have methods that return a boolean, so the test must ensure that the method returns true if the case has the right condition and returns false if it is wrong. Under the analogous implementation approach brought by the \textcite{zafeiris2017automated} methodology, the subsequent classes, namely, \texttt{ZafeirisEtAl2016Verifier}, \texttt{ExtractMethodPreconditions}, \texttt{SiblingPreconditions}, and \texttt{SuperInvocationPreconditions}, were subjected to identical rigorous tests.
+
+The following tests targeted executors in both refactoring methodologies, beginning again with the paper by \textcite{liu2014automated} with specific classes tested included \texttt{WeiEtAl2014FactoryExecutor} and \texttt{WeiEtAl2014StrategyExecutor}; concerning the 	\textcite{zafeiris2017automated} article, the scrutinized class was \texttt{ZafeirisEtAl2016Executor}. The testing methodology for these executors is straightforward; within each referenced publication, the authors illustrate the functionality of the refactoring approaches by providing authentic code exemplars. These examples were used to verify that the output generated by the executors corresponded precisely to the outputs delineated in the respective papers.
 
 \subsection{Designing Test Scenarios for Metrics Service}
 
-\section{Refatoracao}
+Most classes within the Metrics services require extensive rewrites to integrate the new architectural framework. Consequently, testing was limited to only three classes represented in \cref{fig-class-metrics-quality}, excluding \texttt{QualityAttributeMetric} because it is a POJO.
 
-\subsection{Refactoring And Metrics Manager Service}
+\begin{figure}[ht!]
+\SetCaptionWidth{\textwidth}
+\caption{Metrics Service Simplified Class Diagram for Tested Classes}
+\label{fig-class-metrics-quality}
+\includesvg{Chapter-4/Figures/metrics-service-quality-attributes.svg}
+\SourceOrNote{Own authorship (2024)}
+\end{figure}
+\FloatBarrier
 
-\subsection{Detection And Refactoring Service}
+The critical aspect of testing metrics and quality attributes for refactoring lies in maintaining consistent calculations for metrics and quality attributes. This ensures that the test's integrity remains intact, notwithstanding any alterations in the library that may modify the metric computation method.
 
-\subsection{Metrics Calculation Service}
+Performing an in-depth analysis for each class. The \texttt{Metric} class extracts metrics from the \textcite{ck} library, incorporating these metrics for each class within a project. The test must ensure the continuity of metric calculations for each class using the identical metrics derived from the CK library. The \texttt{Proportion} class encompasses two calculation methodologies: the 'direct' method, entailing the division of the refactored value by the original, and the 'inverted' method, which involves dividing the original value by the refactored; the testing must ascertain that these calculations yield consistent results after refactoring. The \texttt{QualityAttribute} class served as the foundational model for computing quality attributes utilized in RMT. This was achieved by integrating results from specific metrics with proportion calculations; the testing process must confirm that the identical metric values consistently yield the same quality attribute values, even after subsequent refactoring.
+
+\section{Refatoracao e algo mais (Reestruturacao)}
+
+Iniciei tentando adiconar coisas de novas versões do Java pro codigo ficar mais limpo e atualizar a dependencias.
+Adicionar o novo framework nos 2 serviços.
+Refatorei de acordo com as dicas do intellij.
+Explicar por qual modulo comecei a refatorar e porque. Durante a refatoração do modulo confrome as funcionalidades foram implementadas para aperfeiçoa-las os pacotes e classes necessarios foram sendo criados.
+
+Pegar as limitacoes e explicar como elas foram refatoradas
+\subsection{Intermediary Service}
+Mudei o nome e justicar. 
+Mudei a formal de funcionamento e porque
+
+\subsection{Detection Service}
+Erros econtrados nos testes
+
+\subsection{Metrics Service}
+Removi a CK que estava no codigo, atualizei e importer via package manager
 
 \section{Teste da ferramenta}
+
+Escrever como foi testada a ferramenta após ser refatorada

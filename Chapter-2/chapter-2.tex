@@ -194,7 +194,7 @@ In the third and last step, the user can choose the candidates to apply the refa
 
 \subsubsection{RMT Limitations}
 \label{subsub-limitation}
-When testing, the RMT can spot some limitations, such as the time to execute and a blocking request that may cause slowness when many users try to use the tool; also related to the slowness is that for every project, analyses and refactoring the system open a zip file and parses every file to memory to check if it is a candidate, and repeating the same process when it's refactoring the files, besides the fact that accessing the disk takes time. For the interface, there is no explicit method of choosing between the same pattern applied by two approaches in the same class.
+When testing, the RMT can spot some limitations, such as the time to execute and a blocking request that may cause slowness when many users try to use the tool; also related to the slowness is that for every project, analyses and refactoring the system open a zip file and parses every file to memory to check if it is a candidate, and repeating the same process when it is refactoring the files, besides the fact that accessing the disk takes time. For the interface, there is no explicit method of choosing between the same pattern applied by two approaches in the same class.
 
 The prolonged execution time is caused by the strategy of finding where the refactoring can be applied and the refactor action because it is performed synchronously on the same thread. Each file is analyzed in order, causing slowness in significant projects with many files.
 
@@ -215,7 +215,7 @@ There are many architectures, such as synchronous RMT and asynchronous ones. The
 
 Asynchronous services do not wait for a response; the communication is non-block, so the service does not wait for the answer to end the process; it can be made with queues to handle communication. Those tools are RabbitMQ and Apache Kafka, among others \textcite{KARABEYAKSAKALLI2021111014}. Using queues can bring new features related to resilience; if a service is down, messages will be stored inside the queue and consumed when the service returns\cite{Cebeci2020DesignOA}. 
 
-To work with retry, the queue has some implementations, such as visibility timeout, which is the time window in the message that is not visible to consumers; when the timeout is done and the message is not acknowledged, it becomes visible again, bringing resilience to the system; the downside is that it can duplicate the message over failure conditions \cite{ChenScalable}.
+To work with retry, the queue has some implementations, such as visibility timeout, which is the time window in the message that is not visible to consumers; when the timeout is done and the message is not acknowledged, it becomes visible again, bringing resilience to the system; the downside is that it can duplicate the message under failure conditions \cite{ChenScalable}.
 
 \section{Closing Remarks}
 \label{sec2-remarks}
