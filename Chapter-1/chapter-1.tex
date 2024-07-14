@@ -1,40 +1,47 @@
 \chapter{Introduction}%
 \label{chpt-intro}
+\textcolor{red}{Pedro, as referências no final devem estar em caixa alta. No seu caso estão sempre com a primeira em maiúscula}
+
 The definition of refactoring is to modify a software code without changing its external behavior to improve its internal structure. It is applied carefully to minimize the possibility of introducing bugs into the already-written code. Refactoring does not depend on whether the code had a good design or if the software had no plan because, with refactoring, we can transform it into an excellent structure code \cite{fowler2018refactoring}.
 
-Different types of refactoring exist, such as refactoring by techniques \cite{fowler2018refactoring} and refactoring with design patterns \cite{kerievsky2005refactoring}. Refactoring-based methods change the code structure to make it easier to understand and improve maintenance by removing code smells. Refactoring based on design patterns improves the code structure by inserting patterns into the code.
+Different types of refactoring exist, such as refactoring by techniques \cite{fowler2018refactoring} and refactoring with design patterns \cite{kerievsky2005refactoring}. Refactoring-based methods change the code structure to make it easier to understand and improve maintenance by removing code smells. Refactoring based on design patterns improves the code structure by inserting patterns.
 
-When designing systems, multiple choices are available regarding architecture, like queues, REST and RPC requests, and so on. Microservices can combine those technologies to create large and complex architectures, as they have advantages over monolith architecture, such as fault tolerance, organization, and development velocity \cite{microservices-comuni}.
+\textcolor{red}{<<deve falar que para aplicar padrões de projetos existem métodos na litetura como os de X, Y e que cada um implementa o seu método. Porém, uma forma e integrar esses métodos foi a criação da RMT. Comentar sobre a RMT e citar comentar o problema que ela tem>>}
 
-To implement such architecture, a cloud is an excellent option for its native tools, such as serverless computing, container managers, databases, and many other tools \cite{balalaie2016}.
+When designing systems, multiple choices are available regarding architecture, like queues, REST \textcolor{red}{<<colocar o que significa REST>>} and RPC \textcolor{red}{<<colocar o que significa RPC>> requests}, and so on. Microservices can combine those technologies to create large and complex architectures, as they have advantages over monolith architecture, such as fault tolerance, organization, and development velocity \cite{microservices-comuni}. To implement such architecture, a cloud is an excellent option for its native tools, such as serverless computing, container managers, databases, and many other tools \cite{balalaie2016}.
+
+\textcolor{red}{<<esta ligação dos dois parágrafos ficou confuso. Talvez falar que a RMT implements REST e depois comentar o problema que essa solucção tem>>}
 
 The RMT is built on three services: detection service, metrics service, and intermediary service; its architecture communicates with REST requests over the intermediary service responsible for knowing all the services and making the load balance; that architecture can fit as microservices.
 
-This work proposes refactoring the RMT architecture, bringing its design to a cloud-native approach with AWS working with offered services such as Elasticache for caching and storage, Fargate for container management, SQS as queue broker, and S3 for file storage. The refactor also includes a change from the synchronous approach to asynchronous by making the services communicate by queues and removing the responsibility of managing requests from the client to the service itself. In addition to architecture, the flaws detected in the tool will be fixed.
+This work refactored the RMT architecture, bringing its design to a cloud-native approach with AWS <<colocar o que significa>> working with offered services such as Elasticache for caching and storage, Fargate for container management, SQS as queue broker, and S3 for file storage. The refactor also includes a change from the synchronous approach to asynchronous by making the services communicate by queues and removing the responsibility of managing requests from the client to the service itself. In addition to architecture, the flaws detected in the tool will be fixed.
+\textcolor{red}{<<colocar aqui de uma maneira geral os resultados>>}
 
 \section{Justification}
-The asynchronous microservices allow services to operate independently, enabling them to scale horizontally without affecting other services; they can tolerate failures better than synchronous architectures, as they do not depend on each other's availability or response time. A failed service or request does not block the entire system; the different services can operate without interruption \cite{microservices-comuni}.
+The asynchronous microservices allow services to operate independently, enabling them to scale horizontally without affecting other services. They can tolerate failures better than synchronous architectures, as they do not depend on each other's availability or response time. A failed microservice or request does not block the entire system; the different services can operate without interruption \cite{microservices-comuni}.
 
 Asynchronous microservices can perform better than synchronous architectures by reducing latency and increasing throughput. Asynchronous processing allows the system to handle more requests concurrently and more efficiently. The microservice architecture enables greater flexibility in technology choices and enables services to be written in different programming languages, frameworks, and libraries. This architecture also allows for better integration with third-party services and APIs \cite{larrucea2018}.
 
-Therefore, refactoring the tool will give the end user a better experience, as it will be faster and more reliable than before.
+Therefore, refactoring the tool RMT gives the end user a better experience, as it will be faster and more reliable than before. \textcolor{red}{<<comentar o que o desenvolvedor vai ganhar>>. Como os microserviços ajudam na extensão da ferramenta para outros métodos e métricas}.
 
-% Porque os micro serviços vão ajudar na ferramenta para suportar que novos metodos sejam impletados.
 \section{Objective}
-Refactor the RMT to a cloud-native and asynchronous architecture to make the tool scalable, faster, and easy to use, resulting in a better experience for the end user and fixing the spotted errors on the tools.
+Refactor the RMT to a cloud-native and asynchronous architecture to make the tool scalable, resulting in a better experience for the end user.
 
-The specific objectives are I) build an async architecture and cloud-native; II) refactor the code to work with threads to take advantage; III) refactor the java version and framework; IV) demonstrate a comparison of the refactored tool with the existing one; V) create unit tests; VI) create integration tests.
+The specific objectives are: i) build an async architecture and cloud-native; ii) refactor the code to work with threads; iii) refactor the java version and framework; iv) compare the refactored tool with the existing one; v) create unit and integration tests.
 
 % Obejetivo geral e especifico
 \section{Methodology}
-This proposal aimed to refactor the architecture using a software refactoring approach that involved design patterns and the evaluation of the source code. As systematic reviews had already been conducted by \textcite{beluzzo2018abordagem} for integrating design patterns, a forward snowball technique was used to search for new articles in the field of refactoring, not exclusively for integrating design patterns. Through this process, it was discovered that there were no new works on this topic, confirming the need to improve a unique tool.
+As systematic reviews had already been conducted by \textcite{beluzzo2018abordagem} about detection and application design patterns, this work a forward snowball technique was used to search for new articles in the field of refactoring, not exclusively for application design patterns. Through this process, it was discovered that there were no new works on this topic, confirming the need to improve an RMT tool.
+
+\textcolor{red}{contar o que fez depois do snowballing - sempre em algo nível: 1 - estudo da ferramenta RMT para entender seu funcionamento, 2 -..... Acho que o parágrafo seguinte deve ser revisto}
 
 The proposed approach can be achieved by first creating the cloud infrastructure, refactoring the project to Java 17 to add support for the last version of the Spring boot framework, adding support to the AWS SDK, and refactoring the code to communicate with all the new technology. It has to be done starting with the intermediary service, then the detection service, and finally, the metrics service.
-% Descrever o que foi utilizado para chegar na solução proposta
+
+
 \section{Work Organization}
 
-This work is divided into four chapters that present the proposal for refactoring the RMT architecture into an async tool. The \cref{cap-background} talks about refactoring, the RMT tool, and microservices.
+This work is divided into four chapters that present the refactoring of the RMT architecture into an async tool. The \cref{cap-background} talks about refactoring, the RMT tool, and microservices.
 
 In \cref{chap-state} details the state of the art with a forward snowballing about refactoring, tools, and methods.
 
-In \cref{chapt-proposta} describes the proposal to refactor the RMT, explaining how it will work and the advantages of its refactoring.
+In \cref{methodology} describes \textcolor{red}{<<metodologia>> <<faltou o capítulo de resultados e conclusão>>}.

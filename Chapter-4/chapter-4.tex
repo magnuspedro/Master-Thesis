@@ -1,9 +1,22 @@
-\chapter{Tool Refactoring Methodology}%
+\chapter{Methodology used to refactor and improve RMT tool}%
 \label{methodology}
 
-\section{Architectural Analysis of Packages within RMT}
+This chapter explores the methodology for refactoring and improving the RMT tool. It delves into various techniques and best practices for improving and optimizing the tool's performance and maintainability. The discussion covers a range of refactoring strategies.
 
-To understand the operational dynamics of RMT, it is imperative to analyze the codebase, specifically the various packages. The initial phase of the updating process involves discerning the functionality of different code segments to determine whether to undertake a code refactoring or a comprehensive service rewrite.
+\textcolor{red}{creio que aqui deveria ter uma figura com o overview da metodologia}
+
+\textcolor{red}{faltou comentar sobre cada capítulo como fez para os outros}
+
+As all services have been renamed in \cref{tab-services-map}, the corresponding nomenclature equivalences are described. The explanations for the renaming are provided in the subsequent chapters.
+
+\input{Chapter-4/Table/services}
+
+\section{Architectural Analysis of Packages from the RMT}
+\label{sec-archtectural-analysis}
+
+To understand the operational dynamics of RMT, it was imperative to analyze the codebase, specifically the various packages. The initial phase of the updating process involves discerning the functionality of different code segments to determine whether a code refactoring or a comprehensive service rewrite is necessary.
+
+The analysis was carried out on the packages Intermediary Service, Detection Service, and Metrics Service, described below.
 
 \subsection{Intermediary Sevice Packages Analisys}
 \label{sub-intermediary-packages}
@@ -18,17 +31,18 @@ The intermediary service is systematically divided into four main packages, each
 \end{figure}
 \FloatBarrier
 
-The package \texttt{datastore} encompasses all configuration files pertinent to the database pool and the connection configuration.
+The package \texttt{datastore} includes configuration files relevant to the database pool and the connection configuration.
 
-Package \texttt{ files} contains repository files for database interactions, facilitating queries, insertions, and additional data manipulations.
+Package \texttt{files} contain repository files for database interactions, facilitating queries, insertions, and additional data manipulations.
 
 Within the manager package, the entire outbound logic refers to the refactoring process and the discovery of services, encompassing all related requests for refactoring and generating metrics in the package \texttt{managers.projects} and registering services in the package \texttt{managers.members}.
 
 For handling communication, the \texttt{ws.boundaries} package includes the controller configurations. Within this package, business logic is assigned to the persistence and querying of projects and dispatching requests to other services. Consequently, this package must access the \texttt{managers} and \texttt{files} packages.
 
 \subsection{Detection Service Package Analisys}
+\label{sub-detection-packages}
 
-The detection service is arranged into six main packages, the core functionalities of which are periodically communicated with the intermediary service to ensure registration with the service discovery mechanism. Moreover, interfaces have been developed to analyze the source code for potential refactoring candidates, and interfaces have been designed to execute refactoring on projects identified as containing such candidates. The package diagram displayed in \Cref{fig-package-detection} illustrates them.
+The detection service is arranged into six main packages, the core functionalities of which are periodically communicated with the intermediary service to ensure registration with the service discovery mechanism. In addition, interfaces have been developed to analyze the source code for potential refactoring candidates, and interfaces have been designed to perform refactoring on projects that contain such candidates. The package diagram displayed in \Cref{fig-package-detection} illustrates them.
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
 \caption{Detection Service Package Diagram}
@@ -45,13 +59,14 @@ Package \texttt{ repository.project} has logic to manipulate the database where 
 
 The package \texttt{methos.dataExtractoins} includes preconfigured interfaces for implementing various code extraction methods. The Abstract Syntax Tree is implemented as the extraction method for the refactoring processes within the RMT. Following the code transformation into an Abstract Syntax Tree (AST), the service accesses the files within the \texttt{domain.mehtos} to perform its designated function.
 
-The package \texttt{managers.pulse} includes the configuration for the service registry, sending requests every minute as proof of life to the intermediary service, and can receive requests. Information, such as the address and port sent from the service, is retrieved from the package \texttt{domain.identity}.
+The package \texttt{managers.pulse} includes the configuration for the service registry, sending requests every minute to ensure its functionality \textcolor{red}{<<realmente é proof of life?>>} to the intermediary service, and can receive requests. Information, such as the address and port sent from the service, is retrieved from the package \texttt{domain.identity}.
 
 The interfaces for candidates searching and refactoring projects are in the \texttt{domain.methdos} has interfaces to implement and extend the tool refactoring options. As the current methods implement the Abstract Syntax Tree as an extraction method, the \texttt{doamin.dataExtraction.utils} package has methods to facilitate AST manipulation.
 
 To start refactoring, the controllers must receive an HTTP request on the \texttt{ws.boundaries} that distributes the request based on its URL path among the other class functions. 
 
 \subsection{Metrics Service Package Analisys}
+\label{sub-metrics-packages}
 
 The metrics service is divided into six main packages and two main functionalities; as the detection service, the metrics service communicates with the intermediary service for the service registry; the second functionality calculates metrics and quality attributes (calculated with the metrics results). The services have interfaces to increase the available metrics and quality attributes. The \cref{fig-package-metrics} shows the diaram package.
 
@@ -77,19 +92,25 @@ The classes with logic and calculations for generating metrics are in the \textt
 
 Consistent with previous services, the \texttt{ws.boundaries} packages serve as the access point for service functionalities. They coordinate computations by interfacing with the database to retrieve project data and invoke methods within the \texttt{processor.qualityAttributes} packages, thereby generating metrics and quality attributes.
  
-\section{Improving The Tool With Unit Tests}
+\section{Creating Unit Tests}
+\label{sec-improving-tool}
 
 Upon comprehending the tool's functionalities, the subsequent step involves verifying the presence of tests. This is essential to commence the refactoring process, as explained by Fowler:
 
-\Citation[english]{\cite[9]{fowler2018refactoring}}{Whenever I do refactoring, the first step is always the same. I need to ensure I have a solid set of tests for that section of code. The tests are essential because even though I will follow refactorings structured to avoid most of the opportunities for introducing bugs, I'm still human and still make mistakes}.
+\Citation[english]{\cite[9]{fowler2018refactoring}}{Whenever I do refactoring, the first step is always the same. I need to ensure I have a solid set of tests for that section of code. The tests are essential because even though I will follow refactorings structured to avoid most of the opportunities for introducing bugs, I’m still human and still make mistakes}.
 
-The RMT lacked any form of testing; therefore, according to \textcite{fowler2018refactoring} philosophy, the tool was subjected to unit tests to verify consistent behavior after refactoring. The tests focused on the business logic of the detection service and the quality attribute computations within the metrics service. Testing was bypassed for the intermediary service due to its complete redevelopment.
+The RMT lacked any form of testing; therefore, according to \textcite{fowler2018refactoring} philosophy, the tool was subjected to unit tests to verify consistent behavior after refactoring. 
+
+The tests focused on the business logic of the detection service and the quality attribute computations within the metrics service. Testing was bypassed for the intermediary service due to its redevelopment.
 
 The tests were designed exclusively for classes with specific logic, excluding interfaces, enumerations (enums), and Plain Old Java Objects (POJOs). This exclusion is justified, as such classes only exhibit the intrinsic behavior provided by the programming language itself without incorporating any additional logic. Consequently, there is no need to test these classes.
 
 \subsection{Designing Test Scenarios for Detection Service}
+\label{detection-design-tests}
 
-Tracing the tool's execution path, the initial classes slated for testing are within the \texttt{methods} package, as they are the classes responsible for parsing the code into an Abstract Syntax Tree (AST). After refactoring, the parsing behavior must remain consistent, given that the AST is the foundational structure enabling the tool's capacity to manipulate Java classes to refactor. The \cref{fig-class-detection-methods} illustrates the simplified class diagram for the Methods package.
+Tracing the tool's execution path, the initial classes slated for testing are within the \texttt{methods} package, as they are the classes responsible for parsing the code into an Abstract Syntax Tree (AST). 
+
+After refactoring, the parsing behavior must remain consistent, given that the AST is the foundational structure enabling the tool's capacity to manipulate Java classes to refactor. The \cref{fig-class-detection-methods} illustrates the simplified class diagram for the Methods package.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -119,7 +140,7 @@ The methods executed by \texttt{AbstractSyntaxTree} are situated within the \tex
 \end{figure}
 \FloatBarrier
 
-The \cref{fig-class-detection-domain-wei} illustrates the class diaram for \cite{liu2014automated}, whereas the \cref{fig-class-detection-domain-zafeiris} outlines the class diaram for \cite{zafeiris2017automated}.
+The \cref{fig-class-detection-domain-wei} illustrates the class diagram for the \cite{liu2014automated} method, whereas the \cref{fig-class-detection-domain-zafeiris} outlines the class diagram for \cite{zafeiris2017automated} method.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -133,13 +154,14 @@ The \cref{fig-class-detection-domain-wei} illustrates the class diaram for \cite
 
 The classes \texttt{WeiEtAl2014Candidate}, \texttt{WeiEtAl2014FactoryCandidate}, \texttt{ZafeirisEtAl2016Candidate}, and \texttt{WeiEtAl2014StrategyCandidate} were excluded from testing, as previously mentioned since Plain Old Java Objects (POJOs) devoid of any business logic were not subjected to testing. The \texttt{WeiEtAl2014} and \texttt{ZafeirisEtAl2016} classes were also excluded from testing as they had been rewritten.
 
-The initial tested class is the \texttt{AstHandler}, serving as an encapsulating wrapper that facilitates direct access to an AST branch. The test cases must ensure that the methods can access the AST objects, such as methods, variables, inner classes, etc. The class also has some methods with limited logic, like assuring that two variables are the same and finding a class's parent, among others. Those functionalities were tested to ensure that they worked as intended and would continue after the refactoring. Some opportunities for improvement were discovered during the development of test cases, which are addressed in \cref{results}. 
+The initial tested class was the \texttt{AstHandler}, serving as an encapsulating wrapper that facilitates direct access to an AST branch. The test cases must ensure that the methods can access the AST objects, such as methods, variables, inner classes, etc. The class also has some methods with limited logic, like assuring that two variables are the same and finding a class's parent, among others. Those functionalities were tested to ensure that they worked as intended and would continue after the refactoring. Some opportunities for improvement were discovered during the development of test cases, which are addressed in \cref{results}. 
 
-The tests for the following classes are categorized into two distinct groups: verifiers and preconditions and executors. The preliminary classes subjected to testing pertained to the \textcite{liu2014automated} methodology, specifically \texttt{WeiEtAl2014FactoryVerifier}, \texttt{WeiEtAl2014StrategyVerifier}, and 	\texttt{WeiEtAl2014StrategyVerifier} and \texttt{LiteralValueExtractor}. It is intrinsic to the verifier to have methods that return a boolean, so the test must ensure that the method returns true if the case has the right condition and returns false if it is wrong. Under the analogous implementation approach brought by the \textcite{zafeiris2017automated} methodology, the subsequent classes, namely, \texttt{ZafeirisEtAl2016Verifier}, \texttt{ExtractMethodPreconditions}, \texttt{SiblingPreconditions}, and \texttt{SuperInvocationPreconditions}, were subjected to identical rigorous tests.
+The tests for the following classes are categorized into two distinct groups: verifiers and preconditions and executors. The preliminary classes subjected to testing were related to the \textcite{liu2014automated} methods, specifically \texttt{WeiEtAl2014FactoryVerifier}, \texttt{WeiEtAl2014StrategyVerifier}, and 	\texttt{WeiEtAl2014StrategyVerifier} and \texttt{LiteralValueExtractor}. It is intrinsic to the verifier to have methods that return a boolean, so the test must ensure that the method returns true if the case has the right condition and returns false if it is wrong. Under the analogous implementation approach brought about by the \textcite{zafeiris2017automated} method, the subsequent classes, namely, \texttt{ZafeirisEtAl2016Verifier}, \texttt{ExtractMethodPreconditions}, \texttt{SiblingPreconditions}, and \texttt{SuperInvocationPreconditions}, were subjected to identical rigorous tests.
 
-The following tests targeted executors in both refactoring methodologies, beginning again with the paper by \textcite{liu2014automated} with specific classes tested included \texttt{WeiEtAl2014FactoryExecutor} and \texttt{WeiEtAl2014StrategyExecutor}; concerning the 	\textcite{zafeiris2017automated} article, the scrutinized class was \texttt{ZafeirisEtAl2016Executor}. The testing methodology for these executors is straightforward; within each referenced publication, the authors illustrate the functionality of the refactoring approaches by providing authentic code exemplars. These examples were used to verify that the output generated by the executors corresponded precisely to the outputs delineated in the respective papers.
+The following tests targeted executors in both refactoring methods, beginning again with the paper by \textcite{liu2014automated} with specific classes tested included \texttt{WeiEtAl2014FactoryExecutor} and \texttt{WeiEtAl2014StrategyExecutor}; concerning the 	\textcite{zafeiris2017automated} article, the scrutinized class was \texttt{ZafeirisEtAl2016Executor}. The testing methodology for these executors is straightforward; within each referenced publication, the authors illustrate the functionality of the refactoring approaches by providing authentic code exemplars. These examples were used to verify that the output generated by the executors corresponded precisely to the outputs delineated in the respective papers.
 
 \subsection{Designing Test Scenarios for Metrics Service}
+\label{metrics-design-tests}
 
 Most classes within the Metrics services require extensive rewrites to integrate the new architectural framework. Consequently, testing was limited to only three classes represented in \cref{fig-class-metrics-quality}, excluding \texttt{QualityAttributeMetric} because it is a POJO.
 
@@ -154,26 +176,91 @@ Most classes within the Metrics services require extensive rewrites to integrate
 
 The critical aspect of testing metrics and quality attributes for refactoring lies in maintaining consistent calculations for metrics and quality attributes. This ensures that the test's integrity remains intact, notwithstanding any alterations in the library that may modify the metric computation method.
 
-Performing an in-depth analysis for each class. The \texttt{Metric} class extracts metrics from the \textcite{ck} library, incorporating these metrics for each class within a project. The test must ensure the continuity of metric calculations for each class using the identical metrics derived from the CK library. The \texttt{Proportion} class encompasses two calculation methodologies: the 'direct' method, entailing the division of the refactored value by the original, and the 'inverted' method, which involves dividing the original value by the refactored; the testing must ascertain that these calculations yield consistent results after refactoring. The \texttt{QualityAttribute} class served as the foundational model for computing quality attributes utilized in RMT. This was achieved by integrating results from specific metrics with proportion calculations; the testing process must confirm that the identical metric values consistently yield the same quality attribute values, even after subsequent refactoring.
+Performing an in-depth analysis for each class. The \texttt{Metric} class extracts metrics from the \textcite{ck} library, incorporating these metrics for each class within a project. The test must ensure the continuity of the metric calculations for each class using identical metrics derived from the CK library. The \texttt{Proportion} class encompasses two calculation methodologies: the \texttt{direct} method, entailing the division of the refactored value by the original, and the \texttt{inverted} method, which involves the division of the original value by the refactored; testing must ensure that these calculations yield consistent results after refactoring. The \texttt{QualityAttribute} class served as the foundational model to calculate the quality attributes used in RMT. This was achieved by integrating the results of specific metrics with proportion calculations; the testing process must confirm that identical metric values consistently yield the same quality attribute values, even after subsequent refactoring.
 
-\section{Refatoracao e algo mais (Reestruturacao)}
+\section{Enhancing Software: Refactoring and Restructuring Techniques}
 
-Iniciei tentando adiconar coisas de novas versões do Java pro codigo ficar mais limpo e atualizar a dependencias.
-Adicionar o novo framework nos 2 serviços.
-Refatorei de acordo com as dicas do intellij.
-Explicar por qual modulo comecei a refatorar e porque. Durante a refatoração do modulo confrome as funcionalidades foram implementadas para aperfeiçoa-las os pacotes e classes necessarios foram sendo criados.
+After creating tests, the tool can be refactored and restructured. The first step in refactoring the RMT was to update the Java version to 21 since the current version was 8, released in 2014; the new version brings new features to the language and is faster \cite{java21}. 
 
-Pegar as limitacoes e explicar como elas foram refatoradas
-\subsection{Intermediary Service}
-Mudei o nome e justicar. 
-Mudei a formal de funcionamento e porque
+Despite the advantages of upgrading the Java JDK, one of the fundamental tenets of the refactoring initiative was to transition the framework to Spring Boot. Consequently, since the latest version of Spring Boot is exclusively compatible with Java 17 and higher. All dependencies were also updated to the latest version.
 
-\subsection{Detection Service}
-Erros econtrados nos testes
+IntelliJ, developed by JetBrains, was the integrated development environment (IDE) for refactoring the tool \cite{intellij}. IntelliJ has an "inspection" functionality that proactively recommends refactorings of the current code, with the primary objective of enhancing it \cite{intellij-inspection}. In the RMT code, suggestions were made to make the code more readable, such as changing an expression from a negated to a regular expression, as exemplified in \cref{alg-intellij}. The IntelliJ automation subjected the metrics and detection services to a comprehensive refactoring process.
 
-\subsection{Metrics Service}
-Removi a CK que estava no codigo, atualizei e importer via package manager
+\begin{algorithm}[!htbp]
+\caption{Exemple of a code refactoring by IntelliJ}%
+\label{alg-intellij}
+\begin{algorithmic}[1]
+\STATE{var a = Optional.ofNullable(variable)}
+\STATE{if(!a.isPresent()) \{...\}} \COMMENT{Exemple of code IntelliJ highlights to refactor}
+\STATE{if(a.isEmpty()) \{...\}} \COMMENT{Code after refactoring}
+\end{algorithmic}
+\SourceOrNote{Own Authorship (2024)}
+\end{algorithm}
+\FloatBarrier
 
-\section{Teste da ferramenta}
+The Spring Framework was integrated into the detection and metrics services to initiate the early refactoring. Concurrently, all dependencies associated with the legacy database, including files specific to its utilization, were removed. The prescribed method for framework application began with the controllers (even though they would be removed afterward) and subsequently extended to the imported classes. It was not requisite for all classes to undergo modifications to align with the refactoring; however, classes exhibiting ambiguous behavior were earmarked for subsequent review during the functionality improvement phase. The tool was no longer functional, but previously implemented tests backed its functionality.
 
-Escrever como foi testada a ferramenta após ser refatorada
+The sequence for restructuring the tool begins with the complete rewrite of the intermediary service, as it is the only service that receives requests from the user following the new architecture. Refactoring progresses to the detection service as it gets the message sent by the intermediary service, processes it, and sends it to the metrics service if any candidate is found. The process is complete in the metrics service, which is the last service in the architecture.
+
+
+%Iniciei tentando adiconar coisas de novas versões do Java pro codigo ficar mais limpo e atualizar a dependencias.
+%Refatorei de acordo com as dicas do intellij.
+%Adicionar o novo framework nos 2 serviços.
+%Explicar por qual modulo comecei a refatorar e porque. Durante a refatoração do modulo confrome as funcionalidades foram implementadas para aperfeiçoa-las os pacotes e classes necessarios foram sendo criados.
+
+%Pegar as limitacoes e explicar como elas foram refatoradas
+\subsection{Restructure of Intermediary Service}
+\label{restruct-intermediary}
+
+As previously mentioned, the intermediary service underwent a comprehensive restructuring due to the obsolescence of most of its functionalities according to the new design. 
+
+The remaining essential features were also rewritten but updated to integrate current technologies. The rewrite addresses some limitations of the RMT by focusing on keeping the service simple implementation and the asynchronous management of the tool. The intermediary service is assigned to receive a project via HTTP, save the project information in the event database, the project file on an object storage tool, send the project ID to the detection service and close the requests successfully. The tool also offers an endpoint to consult the refactoring status, as the process is asynchronous.
+
+Those modifications attempt to solve the service freezing issue and remove many responsibilities from it. The freezing is avoided because the service is ready to receive a new request after sending a message to the detection service without waiting for the service process to respond. Concerning responsibilities, the service does not have a load balancer or a service registry functionality, which helps to save machine resources.
+
+As the tool is no longer an intermediary service, the name was changed to Project Sync BFF (back-end for front-end). The name implies that the service offers APIs to sync the project and, therefore, an endpoint to register the project and others to verify the project status. The service also provides an endpoint that creates a zip file with the chosen refactorings and returns a link to download them.
+
+%Mudei o nome e justicar. 
+%Mudei a formal de funcionamento e porque
+
+\subsection{Detection Service Refactoring}
+\label{restruct-detection}
+
+The detection service refactoring began with replacing and removing obsolete files, including substituting the controller with a queue consumer and replacing previously deleted database files with new ones, contemplating the new architecture technologies. Following the replacement of the controllers and the integration of the new database access files, the effort to address the service limitations began.
+
+The main limitation of the service was the disk access problems, in which a refactoring would access the disk many times to save and parse the files again. To address the problem, a new object was created to store the files to be used solely in memory. While replacing old objects, some optimizations \textcolor{red}{Quais otimizações?} were done by removing duplicated codes and only parsing the Java files once for each refactoring method.
+
+The name was changed from the detection service to the detection and refactoring service as it detects candidates and refactors.
+
+
+%Erros econtrados nos testes
+
+\subsection{Metrics Service Refactoring}
+\label{restruct-metrics}
+
+Refactoring started as in the last service, in the service metrics, by replacing the controller with a queue consumer and the database repository files with the new ones. As a known limitation, the CK library \textcite{ck} was removed from hard-coded as a Maven dependency to facilitate management and updates. 
+
+The service also had some logic for the metrics and quality attributes implemented in Enums; this logic was reimplemented in a strategy pattern and improved by calculating the metrics only once for each candidate instead of three times as in the previous code.
+
+Following the other two services, the name was also changed from metrics service to metrics calculation service as it is a more meaningful name. 
+
+\textcolor{red}{para dar um nome mais significativo}
+
+%Removi a CK que estava no codigo, atualizei e importer via package manager
+%adicionei novos padrões
+
+\section{Tests in the RMT 2.0 tool}
+\label{test-rmt}
+
+Despite the presence of unit tests following the refactoring process, the tool must undergo complete system-level tests. A Dockerfile was generated for each service to establish the integration test environment, which allows containerization. To facilitate the local execution of AWS services, Localstack enables SQS and S3 services, with Redis provisioned in a separate container. The deployment of all these containers is orchestrated using a docker-compose file.
+
+Upon configuring the experimental environment, the tests were executed using the sample files provided by each respective article of the methods implemented in RMT 2.0. 
+
+During the initial testing phase, the tool failed to refactor all files within the project. The issue was traced to the \texttt{getIfStatements} method within the AstHandle class. This method erroneously returned a single if statement rather than a comprehensive list of if statements, resulting in the refactoring being applied exclusively to the first if statement in the \cite{liu2014automated} method. Upon fixing the method, subsequent validation tests confirmed the tool's functionality as expected.
+
+\textcolor{red}{acho que não ficou muito claro, creio que deva realizar os testes e depois voltar aqui para escrever}
+
+\section{Cloasing Remarks}
+
+
+%Escrever como foi testada a ferramenta após ser refatorada

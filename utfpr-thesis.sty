@@ -225,6 +225,8 @@
 }{}
 \RequirePackage[\ifdraft{draft = true}{}]{bookmark}
 \RequirePackage[capitalise, nameinlink]{cleveref}
+\usepackage[section]{placeins}
+\usepackage{svg}
 
 %% Configurações do pacote microtype
 \@ifpackagelater{microtype}{2021/10/31}{\microtypesetup{nopatch = footnote}}{}
@@ -2498,7 +2500,8 @@
 \csletcs{PrintReferences}{printbibliography}
 \newcommand*{\refref}{\HyperLink{ref}{\refname}}
 \newcommand*{\etal}{\textit{et al.}}%% ABNT NBR 10520:2023
-\renewcommand*{\mkbibnamefamily}[1]{#1}%% ABNT NBR 10520:2023
+%% Removendo Uppercase
+% \renewcommand*{\mkbibnamefamily}[1]{#1}%% ABNT NBR 10520:2023
 
 %% Glossário
 \newcommand*{\gly@err}[2]{%

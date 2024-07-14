@@ -1,5 +1,12 @@
 \chapter{Results}
 \label{results}
+\textcolor{red}{
+1 - RMT 2.0
+
+2 - Testes com projetos
+
+3 - Comparação da RMT 1 com 2
+}
 
 While working and using the RMT toll, many limitations were found and described in \cref{subsub-limitation}. A new internal and external architecture was proposed that focuses on solving those problems; these modifications will allow the system to scale better, provide better performance, and make it easy to use by accessing the tool in the browser.
 
@@ -53,7 +60,7 @@ The initial version of RMT utilizes MongoDB GridFs for file storage, a feature d
 \FloatBarrier
 
 
-The new tool flow will work as described on the \Cref{fig-async}, starting with the user selecting the project and sending it over to the API Gateway that will connect with the Intermediary Service by the ELB; the service will have one queue one for finding refactoring candidates, and then refactor it, both will send the information to the Detection Service which will process and send the information to the Metrics Service if any candidate was found. While the Detection and Metrics service is working, the Intermediary service is pulling on the Redis to see if the process is finished to send back the information to the client, which is a long pull on the intermediary service as shown on use case diagram in \Cref{fig-usecasenew}.
+The new tool flow will work as described on the \Cref{fig-async}, starting with the user selecting the project and sending it to the API Gateway that will connect with the Intermediary Service by the ELB; the service will have one queue one to find refactoring candidates, and then refactor it, both will send the information to the Detection Service, which will process and send the information to the Metrics Service if any candidate was found. While the Detection and Metrics service is working, the Intermediary service is pulling on the Redis to see if the process is finished to send back the information to the client, which is a long pull on the intermediary service as shown on the use case diagram in \Cref{fig-usecasenew}.
 
 
 As seen before, the throttling is happening on the Detection Service as it does not work with threads and has too much file system access; an asynchronous approach with a controlled file system access approach can solve the problem. Making the tool work with thread will improve its performance as it can process many files simultaneously, as described in \Cref{fig-threading}.
