@@ -5,6 +5,18 @@ This chapter explores the methodology for refactoring and improving the RMT tool
 
 \textcolor{red}{creio que aqui deveria ter uma figura com o overview da metodologia}
 
+The methodology is sketched through the mind map described in Figure \cref{fig-mind-map-methodology}. It is partitioned into six distinct color segments to enhance the elucidation of the process.
+
+\begin{figure}[ht!]
+\SetCaptionWidth{\textwidth}
+\caption{Mind map representing the improvement methodology}
+\label{fig-mind-map-methodology}
+\fontsize{3.8}{5}\selectfont
+\includesvg[width =\textwidth]{Chapter-4/Figures/methodology-mind-map.svg}
+\SourceOrNote{Own authorship (2024)}
+\end{figure}
+\FloatBarrier
+
 \textcolor{red}{faltou comentar sobre cada capítulo como fez para os outros}
 
 As all services have been renamed in \cref{tab-services-map}, the corresponding nomenclature equivalences are described. The explanations for the renaming are provided in the subsequent chapters.
@@ -91,6 +103,17 @@ Similarly to the detection service, the \texttt{processor.qualityAttributes} has
 The classes with logic and calculations for generating metrics are in the \texttt{domain.metrics} package; for now, they are hardcoded, implementing the CK module created by \textcite{ck}; however, the interface is designed to integrate additional metrics generation methodologies in the \texttt{domain.qualityAttributes} package is located in the calculations for quality attributes, such as maintainability, readability, etc.
 
 Consistent with previous services, the \texttt{ws.boundaries} packages serve as the access point for service functionalities. They coordinate computations by interfacing with the database to retrieve project data and invoke methods within the \texttt{processor.qualityAttributes} packages, thereby generating metrics and quality attributes.
+
+\section{Archtecure \& Cloud Technologies}
+
+The technologies selected for the revised architecture were thought to take greater advantage of what the cloud offers. 
+
+Two technologies were selected for storage: the S3 Bucket from AWS and the Redis deployed as serverless with the Elasticache service. The S3 is a cheap object storage provided by AWS that is scalable and has a 99.9\% monthly uptime; it allows the tool to save zip files for each project and to be re-retrieved afterward \cite{S3}. The Redis is a widely used memory database for caching and allows us to easily save the project state \cite{Redis}.
+
+The Simple Service Queue (SQS), a fully managed serverless queue service developed by AWS, was chosen for microservice communication. The SQS offers an async queue communication, having an order message delivered first in, first out (FIFO), or without an order \cite{sqs}.
+
+Two services were selected for external communication: the Elastic Load Balancer (ELB) and the Amazon API Gateway. The ELB balances the load (requests) between services with a round-robin strategy \cite{Elb}. The API Gateway allows external communication to access the functionality for the back-end microservices \cite{Gateway}.
+
  
 \section{Creating Unit Tests}
 \label{sec-improving-tool}
@@ -228,7 +251,7 @@ As the tool is no longer an intermediary service, the name was changed to Projec
 
 The detection service refactoring began with replacing and removing obsolete files, including substituting the controller with a queue consumer and replacing previously deleted database files with new ones, contemplating the new architecture technologies. Following the replacement of the controllers and the integration of the new database access files, the effort to address the service limitations began.
 
-The main limitation of the service was the disk access problems, in which a refactoring would access the disk many times to save and parse the files again. To address the problem, a new object was created to store the files to be used solely in memory. While replacing old objects, some optimizations \textcolor{red}{Quais otimizações?} were done by removing duplicated codes and only parsing the Java files once for each refactoring method.
+The main limitation of the service was the disk access problems, in which a refactoring would access the disk many times to save and parse the files again. To address the problem, a new object was created to store the files to be used solely in memory. While replacing old objects, some optimizations in memory usage and performance \textcolor{red}{Quais otimizações?} were performed by removing duplicate codes and only parsing the Java files once for each refactoring method.
 
 The name was changed from the detection service to the detection and refactoring service as it detects candidates and refactors.
 
