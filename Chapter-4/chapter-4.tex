@@ -5,23 +5,36 @@ This chapter explores the methodology for refactoring and improving the RMT tool
 
 \textcolor{red}{creio que aqui deveria ter uma figura com o overview da metodologia}
 
-The methodology is sketched through the mind map described in Figure \cref{fig-mind-map-methodology}. It is partitioned into six distinct color segments to enhance the elucidation of the process.
+The methodology is delineated into five sequentially interconnected phases as depicted in \cref{fig-overview-methodology}. Each phase systematically leverages the insights and understanding garnered from the preceding stage to optimize its efficacy.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
-\caption{Mind map representing the improvement methodology}
-\label{fig-mind-map-methodology}
-\fontsize{3.8}{5}\selectfont
-\includesvg[width =\textwidth]{Chapter-4/Figures/methodology-mind-map.svg}
+\caption{Methodology Overview Diagram}
+\label{fig-overview-methodology}
+\includegraphics[width =\textwidth]{Chapter-4/Figures/Metodologia.png}
 \SourceOrNote{Own authorship (2024)}
 \end{figure}
 \FloatBarrier
 
 \textcolor{red}{faltou comentar sobre cada capítulo como fez para os outros}
 
-As all services have been renamed in \cref{tab-services-map}, the corresponding nomenclature equivalences are described. The explanations for the renaming are provided in the subsequent chapters.
+The \cref{sec-arch-cloud} explores the methodology through cloud technologies. The \cref{sec-archtectural-analysis}, \ref{sub-intermediary-packages}, \ref{sub-detection-packages}, and \ref{sub-metrics-packages} explain the analytic processes used to formulate strategic modifications to the codebase and delineate the functionalities of each package within the services. The \cref{sec-creating-tests}, \ref{detection-design-tests}, and \ref{metrics-design-tests} elaborate on the comprehensive testing procedures for each service, detailing the criteria for selecting tested classes. The \cref{sec-enhancing}, \ref{sub-restruct-intermediary}, \ref{sub-restruct-detection}, and \ref{sec-restruct-metrics} detail the extensive phases of refactoring and restructuring RMT services. The \cref{sec-test-rmt} outlines the systematic methodology implemented to evaluate the tool.
+
+As all services have been renamed, the corresponding nomenclature equivalences are described in \cref{tab-services-map}. The explanations for the renaming are provided in the subsequent chapters.
 
 \input{Chapter-4/Table/services}
+
+\section{Archtecure \& Cloud Technologies}
+\label{sec-arch-cloud}
+
+The technologies selected for the revised architecture were thought to take greater advantage of what the cloud offers. 
+
+Two technologies were selected for storage: the S3 Bucket from AWS and the Redis deployed as serverless with the Elasticache service. The S3 is a cheap object storage provided by AWS that is scalable and has a 99.9\% monthly uptime; it allows the tool to save zip files for each project and to be re-retrieved afterward \cite{S3}. The Redis is a widely used memory database for caching and allows us to easily save the project state \cite{Redis}.
+
+The Simple Service Queue (SQS), a fully managed serverless queue service developed by AWS, was chosen for microservice communication. The SQS offers an async queue communication, having an order message delivered first in, first out (FIFO), or without an order \cite{sqs}.
+
+Two services were selected for external communication: the Elastic Load Balancer (ELB) and the Amazon API Gateway. The ELB balances the load (requests) between services with a round-robin strategy \cite{Elb}. The API Gateway allows external communication to access the functionality for the back-end microservices \cite{Gateway}.
+
 
 \section{Architectural Analysis of Packages from the RMT}
 \label{sec-archtectural-analysis}
@@ -103,20 +116,9 @@ Similarly to the detection service, the \texttt{processor.qualityAttributes} has
 The classes with logic and calculations for generating metrics are in the \texttt{domain.metrics} package; for now, they are hardcoded, implementing the CK module created by \textcite{ck}; however, the interface is designed to integrate additional metrics generation methodologies in the \texttt{domain.qualityAttributes} package is located in the calculations for quality attributes, such as maintainability, readability, etc.
 
 Consistent with previous services, the \texttt{ws.boundaries} packages serve as the access point for service functionalities. They coordinate computations by interfacing with the database to retrieve project data and invoke methods within the \texttt{processor.qualityAttributes} packages, thereby generating metrics and quality attributes.
-
-\section{Archtecure \& Cloud Technologies}
-
-The technologies selected for the revised architecture were thought to take greater advantage of what the cloud offers. 
-
-Two technologies were selected for storage: the S3 Bucket from AWS and the Redis deployed as serverless with the Elasticache service. The S3 is a cheap object storage provided by AWS that is scalable and has a 99.9\% monthly uptime; it allows the tool to save zip files for each project and to be re-retrieved afterward \cite{S3}. The Redis is a widely used memory database for caching and allows us to easily save the project state \cite{Redis}.
-
-The Simple Service Queue (SQS), a fully managed serverless queue service developed by AWS, was chosen for microservice communication. The SQS offers an async queue communication, having an order message delivered first in, first out (FIFO), or without an order \cite{sqs}.
-
-Two services were selected for external communication: the Elastic Load Balancer (ELB) and the Amazon API Gateway. The ELB balances the load (requests) between services with a round-robin strategy \cite{Elb}. The API Gateway allows external communication to access the functionality for the back-end microservices \cite{Gateway}.
-
  
 \section{Creating Unit Tests}
-\label{sec-improving-tool}
+\label{sec-creating-tests}
 
 Upon comprehending the tool's functionalities, the subsequent step involves verifying the presence of tests. This is essential to commence the refactoring process, as explained by Fowler:
 
@@ -202,6 +204,7 @@ The critical aspect of testing metrics and quality attributes for refactoring li
 Performing an in-depth analysis for each class. The \texttt{Metric} class extracts metrics from the \textcite{ck} library, incorporating these metrics for each class within a project. The test must ensure the continuity of the metric calculations for each class using identical metrics derived from the CK library. The \texttt{Proportion} class encompasses two calculation methodologies: the \texttt{direct} method, entailing the division of the refactored value by the original, and the \texttt{inverted} method, which involves the division of the original value by the refactored; testing must ensure that these calculations yield consistent results after refactoring. The \texttt{QualityAttribute} class served as the foundational model to calculate the quality attributes used in RMT. This was achieved by integrating the results of specific metrics with proportion calculations; the testing process must confirm that identical metric values consistently yield the same quality attribute values, even after subsequent refactoring.
 
 \section{Enhancing Software: Refactoring and Restructuring Techniques}
+\label{sec-enhancing}
 
 After creating tests, the tool can be refactored and restructured. The first step in refactoring the RMT was to update the Java version to 21 since the current version was 8, released in 2014; the new version brings new features to the language and is faster \cite{java21}. 
 
@@ -233,7 +236,7 @@ The sequence for restructuring the tool begins with the complete rewrite of the 
 
 %Pegar as limitacoes e explicar como elas foram refatoradas
 \subsection{Restructure of Intermediary Service}
-\label{restruct-intermediary}
+\label{sub-restruct-intermediary}
 
 As previously mentioned, the intermediary service underwent a comprehensive restructuring due to the obsolescence of most of its functionalities according to the new design. 
 
@@ -246,8 +249,8 @@ As the tool is no longer an intermediary service, the name was changed to Projec
 %Mudei o nome e justicar. 
 %Mudei a formal de funcionamento e porque
 
-\subsection{Detection Service Refactoring}
-\label{restruct-detection}
+\subsection{Detection Service Renewing}
+\label{sub-restruct-detection}
 
 The detection service refactoring began with replacing and removing obsolete files, including substituting the controller with a queue consumer and replacing previously deleted database files with new ones, contemplating the new architecture technologies. Following the replacement of the controllers and the integration of the new database access files, the effort to address the service limitations began.
 
@@ -258,8 +261,8 @@ The name was changed from the detection service to the detection and refactoring
 
 %Erros econtrados nos testes
 
-\subsection{Metrics Service Refactoring}
-\label{restruct-metrics}
+\subsection{Metrics Service Renewing}
+\label{sec-restruct-metrics}
 
 Refactoring started as in the last service, in the service metrics, by replacing the controller with a queue consumer and the database repository files with the new ones. As a known limitation, the CK library \textcite{ck} was removed from hard-coded as a Maven dependency to facilitate management and updates. 
 
@@ -272,8 +275,8 @@ Following the other two services, the name was also changed from metrics service
 %Removi a CK que estava no codigo, atualizei e importer via package manager
 %adicionei novos padrões
 
-\section{Tests in the RMT 2.0 tool}
-\label{test-rmt}
+\section{Tests in RMT 2.0}
+\label{sec-test-rmt}
 
 Despite the presence of unit tests following the refactoring process, the tool must undergo complete system-level tests. A Dockerfile was generated for each service to establish the integration test environment, which allows containerization. To facilitate the local execution of AWS services, Localstack enables SQS and S3 services, with Redis provisioned in a separate container. The deployment of all these containers is orchestrated using a docker-compose file.
 
@@ -285,5 +288,17 @@ During the initial testing phase, the tool failed to refactor all files within t
 
 \section{Cloasing Remarks}
 
+
+The methodology outlined is sketched through the diagram described \cref{fig-summarized-methodology}. It is partitioned into six distinct color segments to enhance the elucidation of the process.
+
+\begin{figure}[ht!]
+\SetCaptionWidth{\textwidth}
+\caption{Diagram summarizing the improvement methodology}
+\label{fig-summarized-methodology}
+\fontsize{3.8}{5}\selectfont
+\includesvg[width =\textwidth]{Chapter-4/Figures/methodology-mind-map.svg}
+\SourceOrNote{Own authorship (2024)}
+\end{figure}
+\FloatBarrier
 
 %Escrever como foi testada a ferramenta após ser refatorada

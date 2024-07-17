@@ -28,10 +28,43 @@ The Simple Queue Service (SQS) operates in its default configuration, implementi
 
 The initial version of RMT utilizes MongoDB GridFs for file storage, a feature designed to facilitate the preservation of files within the database architecture. The updated version uses Amazon S3 for project storage, using a dual-bucket strategy: one designated for the original project and the other for the refactored iterations. All microservices are granted access to the designated buckets, enabling seamless file storage and retrieval. The project information and statuses are stored in the Redis in-memory document database, and all services have access.
 
+\section{RMT 2.0 Package Arrangement}
+
+\begin{figure}[ht!]
+\SetCaptionWidth{\textwidth}
+\caption{Project Sync BFF package diagram}
+\label{fig-project-sync-package}
+\fontsize{8}{10}\selectfont
+\includesvg[width =\textwidth]{Chapter-5/Figures/project-sync-bff.svg}
+\SourceOrNote{Own authorship (2024)}
+\end{figure}
+\FloatBarrier
+
+
+\begin{figure}[ht!]
+\SetCaptionWidth{\textwidth}
+\caption{Detection and Refactoring service package diagram}
+\label{fig-detection-refactoring-package}
+\includesvg[width =\textwidth]{Chapter-5/Figures/detection-and-refactoring.svg}
+\SourceOrNote{Own authorship (2024)}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[ht!]
+\SetCaptionWidth{\textwidth}
+\caption{Metrics Calculator service package diagram}
+\label{fig-metrics-calculator-package}
+\includesvg[width =\textwidth]{Chapter-5/Figures/metrics-calculator.svg}
+\SourceOrNote{Own authorship (2024)}
+\end{figure}
+\FloatBarrier
+
+
+
 \section{Services Behavior Improviments}
 \label{sub-services-behaivour}
 
-Notwithstanding recent updates to the tool, its resultant behavior remains unchanged. The tool now runs with a linear execution flow, obviating the need for interservice communication during project refactoring. Given the process's asynchronous nature, users must request the completion status to display the retrieved relevant information. The process is represented in \cref{fig-activity-diagram}.
+Notwithstanding recent updates to the tool, its resultant behavior remains unchanged. The tool now runs with a linear execution flow, obviating the need for interservice communication during project refactoring. Given the process's asynchronous nature, users must request the completion status to display the retrieved relevant information. The process is represented in \cref{fig-activity-diagram}, with the blue nodes representing the behavior inherited from the initial version of the tool.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -39,7 +72,7 @@ Notwithstanding recent updates to the tool, its resultant behavior remains uncha
 \label{fig-activity-diagram}
 \fontsize{5.8}{8}\selectfont
 \includesvg[width =\textwidth]{Chapter-5/Figures/activity-refactored-rmt.svg}
-\SourceOrNote{Own authorship (2023)}
+\SourceOrNote{Own authorship (2024)}
 \end{figure}
 \FloatBarrier
 
@@ -77,7 +110,7 @@ The \textcite{zafeiris2017automated} implements the template method using the ja
 
 \begin{figure}[ht!]
 \label{fig-template-client}
-\caption{Refactored Project For Strategy}
+\caption{Refactored Project For Template Method}
 \includegraphics[width =\textwidth]{Chapter-5/Figures/rmt-template-client.png}
 \SourceOrNote{Own authorship (2024)}
 \end{figure}
