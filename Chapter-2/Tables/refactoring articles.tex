@@ -1,28 +1,41 @@
-\begin{longtable}{cp{3cm}p{8cm}cc}
-\caption{Articles with design patterns methods}%
-\label{tab-articles} \\
+\begin{longtable}{e{}@{},{}@{}p{3cm}p{8cm}cc@{}}
+%% Cabeçalho da primeira página
+\caption{Articles with design patterns methods}
+\label{tab-articles}                                              \\[\belowcaptionskip]
+\multicolumn{5}{@{}r@{}}{\textbf{(continue)}}                 \\[\belowcaptionskip]
 \toprule%
-\multicolumn{1}{@{}c}{\textbf{Key}}       &
-\multicolumn{1}{@{}c}{\textbf{Author}}    &
-\multicolumn{1}{c}{\textbf{Title}}        &
-\multicolumn{1}{c@{}}{\textbf{Year}}      &
-\multicolumn{1}{c@{}}{\textbf{Has Tool}} \\
+\multicolumn{1}{@{}c}{\textbf{Key}}             &
+\multicolumn{1}{c}{\textbf{Author}}             &
+\multicolumn{1}{c}{\textbf{Title}}              &
+\multicolumn{1}{c}{\textbf{Year}}               &
+\multicolumn{1}{c@{}}{\textbf{Has Tool}}        \\
 \midrule%
 \endfirsthead%
-\caption[]{Articles with design patterns methods} \\%
+%% Cabeçalho das páginas (exceto primeira e última)
+\caption[]{Articles with design patterns methods}             \\[\belowcaptionskip]
+\multicolumn{5}{@{}r@{}}{\textbf{(continuation)}}             \\[\belowcaptionskip]
 \toprule%
-\multicolumn{1}{@{}c}{\textbf{Key}}       &
-\multicolumn{1}{@{}c}{\textbf{Author}}    &
-\multicolumn{1}{c}{\textbf{Title}}        &
-\multicolumn{1}{c@{}}{\textbf{Year}}      &
-\multicolumn{1}{c@{}}{\textbf{Has Tool}} \\
+\multicolumn{1}{@{}c}{\textbf{Key}}             &
+\multicolumn{1}{c}{\textbf{Author}}             &
+\multicolumn{1}{c}{\textbf{Title}}              &
+\multicolumn{1}{c}{\textbf{Year}}               &
+\multicolumn{1}{c@{}}{\textbf{Has Tool}}        \\
 \midrule%
 \endhead%
+%% Cabeçalho da última página
+\caption[]{Articles with design patterns methods}             \\[\belowcaptionskip]
+\multicolumn{5}{@{}r@{}}{\textbf{(conclusion)}}               \\[\belowcaptionskip]
+\toprule%
+\multicolumn{1}{@{}c}{\textbf{Key}}             &
+\multicolumn{1}{c}{\textbf{Author}}             &
+\multicolumn{1}{c}{\textbf{Title}}              &
+\multicolumn{1}{c}{\textbf{Year}}               &
+\multicolumn{1}{c@{}}{\textbf{Has Tool}}        \\
 \midrule%
-\multicolumn{3}{@{}r@{}}{\textbf{(continue)}} 
-\endfoot%
+\endlasthead%
+%% Rodapé da última página
 \bottomrule%
-\caption*{\SourceCall: adapted from \textcite{beluzzo2018abordagem}.}
+\LTSourceOrNote{adapted from \textcite{beluzzo2018abordagem}}           \\
 \endlastfoot% 
 A1  & \citeauthor*{GAITANI201533}            & Automated refactoring to the Null Object design pattern                                                             & 2015 & Yes      \\
 A2  & \citeauthor*{CHRISTOPOULOU20121201}    & Automated refactoring to the Strategy design pattern                                                                & 2012 & Yes      \\

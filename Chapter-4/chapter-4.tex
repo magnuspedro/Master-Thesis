@@ -3,8 +3,6 @@
 
 This chapter explores the methodology for refactoring and improving the RMT tool. It delves into various techniques and best practices for improving and optimizing the tool's performance and maintainability. The discussion covers a range of refactoring strategies.
 
-\textcolor{red}{creio que aqui deveria ter uma figura com o overview da metodologia}
-
 The methodology is delineated into five sequentially interconnected phases as depicted in \cref{fig-overview-methodology}. Each phase systematically leverages the insights and understanding garnered from the preceding stage to optimize its efficacy.
 
 \begin{figure}[ht!]
@@ -16,9 +14,8 @@ The methodology is delineated into five sequentially interconnected phases as de
 \end{figure}
 \FloatBarrier
 
-\textcolor{red}{faltou comentar sobre cada capítulo como fez para os outros}
 
-The \cref{sec-arch-cloud} explores the methodology through cloud technologies. The \cref{sec-archtectural-analysis}, \ref{sub-intermediary-packages}, \ref{sub-detection-packages}, and \ref{sub-metrics-packages} explain the analytic processes used to formulate strategic modifications to the codebase and delineate the functionalities of each package within the services. The \cref{sec-creating-tests}, \ref{detection-design-tests}, and \ref{metrics-design-tests} elaborate on the comprehensive testing procedures for each service, detailing the criteria for selecting tested classes. The \cref{sec-enhancing}, \ref{sub-restruct-intermediary}, \ref{sub-restruct-detection}, and \ref{sec-restruct-metrics} detail the extensive phases of refactoring and restructuring RMT services. The \cref{sec-test-rmt} outlines the systematic methodology implemented to evaluate the tool.
+Each phase of the methodology is described in the clauses of this chapter. The \cref{sec-arch-cloud} explores the methodology through cloud technologies. The \cref{sec-archtectural-analysis}, \ref{sub-intermediary-packages}, \ref{sub-detection-packages}, and \ref{sub-metrics-packages} explain the analytic processes used to formulate strategic modifications to the codebase and delineate the functionalities of each package within the services. The \cref{sec-creating-tests}, \ref{detection-design-tests}, and \ref{metrics-design-tests} elaborate on the comprehensive testing procedures for each service, detailing the criteria for selecting tested classes. The \cref{sec-enhancing}, \ref{sub-restruct-intermediary}, \ref{sub-restruct-detection}, and \ref{sec-restruct-metrics} detail the extensive phases of refactoring and restructuring RMT services. The \cref{sec-test-rmt} outlines the systematic methodology implemented to evaluate the tool.
 
 As all services have been renamed, the corresponding nomenclature equivalences are described in \cref{tab-services-map}. The explanations for the renaming are provided in the subsequent chapters.
 
@@ -84,7 +81,7 @@ Package \texttt{ repository.project} has logic to manipulate the database where 
 
 The package \texttt{methos.dataExtractoins} includes preconfigured interfaces for implementing various code extraction methods. The Abstract Syntax Tree is implemented as the extraction method for the refactoring processes within the RMT. Following the code transformation into an Abstract Syntax Tree (AST), the service accesses the files within the \texttt{domain.mehtos} to perform its designated function.
 
-The package \texttt{managers.pulse} includes the configuration for the service registry, sending requests every minute to ensure its functionality \textcolor{red}{<<realmente é proof of life?>>} to the intermediary service, and can receive requests. Information, such as the address and port sent from the service, is retrieved from the package \texttt{domain.identity}.
+The package \texttt{managers.pulse} includes the configuration for the service registry, sending requests every minute to ensure its functionality to the intermediary service, and can receive requests. Information, such as the address and port sent from the service, is retrieved from the package \texttt{domain.identity}.
 
 The interfaces for candidates searching and refactoring projects are in the \texttt{domain.methdos} has interfaces to implement and extend the tool refactoring options. As the current methods implement the Abstract Syntax Tree as an extraction method, the \texttt{doamin.dataExtraction.utils} package has methods to facilitate AST manipulation.
 
@@ -254,7 +251,7 @@ As the tool is no longer an intermediary service, the name was changed to Projec
 
 The detection service refactoring began with replacing and removing obsolete files, including substituting the controller with a queue consumer and replacing previously deleted database files with new ones, contemplating the new architecture technologies. Following the replacement of the controllers and the integration of the new database access files, the effort to address the service limitations began.
 
-The main limitation of the service was the disk access problems, in which a refactoring would access the disk many times to save and parse the files again. To address the problem, a new object was created to store the files to be used solely in memory. While replacing old objects, some optimizations in memory usage and performance \textcolor{red}{Quais otimizações?} were performed by removing duplicate codes and only parsing the Java files once for each refactoring method.
+The main limitation of the service was the disk access problems, in which a refactoring would access the disk many times to save and parse the files again. To address the problem, a new object was created to store the files to be used solely in memory. While replacing old objects, some optimizations in memory usage and performance were performed by removing duplicate codes and only parsing the Java files once for each refactoring method.
 
 The name was changed from the detection service to the detection and refactoring service as it detects candidates and refactors.
 
@@ -270,26 +267,26 @@ The service also had some logic for the metrics and quality attributes implement
 
 Following the other two services, the name was also changed from metrics service to metrics calculation service as it is a more meaningful name. 
 
-\textcolor{red}{para dar um nome mais significativo}
-
 %Removi a CK que estava no codigo, atualizei e importer via package manager
 %adicionei novos padrões
 
 \section{Tests in RMT 2.0}
 \label{sec-test-rmt}
 
-Despite the presence of unit tests following the refactoring process, the tool must undergo complete system-level tests. A Dockerfile was generated for each service to establish the integration test environment, which allows containerization. To facilitate the local execution of AWS services, Localstack enables SQS and S3 services, with Redis provisioned in a separate container. The deployment of all these containers is orchestrated using a docker-compose file.
+Despite the presence of unit tests following the refactoring process, the tool must undergo complete system-level tests. A Dockerfile was generated for each service to establish the integration test environment, which allows containerization. To facilitate the local execution of AWS services, Localstack \cite{localstack} enables SQS and S3 services, with Redis provisioned in a separate container. The deployment of all these containers is orchestrated using a docker-compose file.
 
 Upon configuring the experimental environment, the tests were executed using the sample files provided by each respective article of the methods implemented in RMT 2.0. 
 
 During the initial testing phase, the tool failed to refactor all files within the project. The issue was traced to the \texttt{getIfStatements} method within the AstHandle class. This method erroneously returned a single if statement rather than a comprehensive list of if statements, resulting in the refactoring being applied exclusively to the first if statement in the \cite{liu2014automated} method. Upon fixing the method, subsequent validation tests confirmed the tool's functionality as expected.
 
+The evaluation of the tools was systematically organized into three sequential phases. The initial phase involved validating the examples presented in the works of \textcite{liu2014automated} and \cite{zafeiris2017automated}. Subsequently, an analysis of the RMT by itself was performed, which included versions 1.0 and 2.0. The final phase comprised testing the tool using the equivalent, updated projects that were utilized in the evaluation of the tool's first version.
+
 \textcolor{red}{acho que não ficou muito claro, creio que deva realizar os testes e depois voltar aqui para escrever}
 
 \section{Cloasing Remarks}
 
-
-The methodology outlined is sketched through the diagram described \cref{fig-summarized-methodology}. It is partitioned into six distinct color segments to enhance the elucidation of the process.
+This chapter presented the methodology used to improve and refactor the RMT tool. 
+The methodology outlined is sketched through the diagram described \cref{fig-summarized-methodology}. It is partitioned into six distinct color segments to enhance the elucidation of the process, which starts with improving the RMT and follows a path to every step in the methodology until the tool is refactored and ready to be tested.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -301,4 +298,4 @@ The methodology outlined is sketched through the diagram described \cref{fig-sum
 \end{figure}
 \FloatBarrier
 
-%Escrever como foi testada a ferramenta após ser refatorada
+\textcolor{red}{tem que explicar em alto nível a image 17}

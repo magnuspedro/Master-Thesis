@@ -1,27 +1,40 @@
-\begin{longtable}{ccp{9cm}p{3cm}}
-\caption{Select papers from database search}%
-\label{tab-snow} \\%
+\begin{longtable}{e{}@{},{}@{}cp{9cm}p{3cm}@{}}
+%% Cabeçalho da primeira página
+\caption{Resultant Articles with design patterns methods}
+\label{tab-snow}                                              \\[\belowcaptionskip]
+\multicolumn{4}{@{}r@{}}{\textbf{(continue)}}                 \\[\belowcaptionskip]
 \toprule%
-\multicolumn{1}{@{}c}{\textbf{Key}}       &
-\multicolumn{1}{@{}c}{\textbf{Id}}    &
-\multicolumn{1}{c}{\textbf{Title}}        &
-\multicolumn{1}{c}{\textbf{Ref}}        \\
+\multicolumn{1}{@{}c}{\textbf{Key}}        &
+\multicolumn{1}{c}{\textbf{Id}}            &
+\multicolumn{1}{c}{\textbf{Title}}         &
+\multicolumn{1}{c@{}}{\textbf{Ref}}        \\
 \midrule%
 \endfirsthead%
-\caption[]{Articles with design patterns methods} \\%
+%% Cabeçalho das páginas (exceto primeira e última)
+\caption[]{Resultant Articles with design patterns methods}   \\[\belowcaptionskip]
+\multicolumn{4}{@{}r@{}}{\textbf{(continuation)}}             \\[\belowcaptionskip]
 \toprule%
-\multicolumn{1}{@{}c}{\textbf{Key}}       &
-\multicolumn{1}{@{}c}{\textbf{Id}}    &
-\multicolumn{1}{c}{\textbf{Title}}        &
-\multicolumn{1}{c}{\textbf{Ref}}            \\
+\multicolumn{1}{@{}c}{\textbf{Key}}        &
+\multicolumn{1}{c}{\textbf{Id}}            &
+\multicolumn{1}{c}{\textbf{Title}}         &
+\multicolumn{1}{c@{}}{\textbf{Ref}}        \\
 \midrule%
 \endhead%
+%% Cabeçalho da última página
+\caption[]{Resultant Articles with design patterns methods}   \\[\belowcaptionskip]
+\multicolumn{4}{@{}r@{}}{\textbf{(conclusion)}}               \\[\belowcaptionskip]
+\toprule%
+\multicolumn{1}{@{}c}{\textbf{Key}}        &
+\multicolumn{1}{c}{\textbf{Id}}            &
+\multicolumn{1}{c}{\textbf{Title}}         &
+\multicolumn{1}{c@{}}{\textbf{Ref}}        \\
 \midrule%
-\multicolumn{3}{@{}r@{}}{\textbf{{continue}}} \\%
-\endfoot%
+\endlasthead%
+%% Rodapé da última página
 \bottomrule%
-\caption*{\SourceCall: Own authorship (2023)} \\%
+\LTSourceOrNote{Own authorship (2023)}           \\
 \endlastfoot% 
+
 S1  &        &                                                                                                                                                                                                                                               &                                 \\
     & S1-C1   & Generation of refactoring algorithms by grammatical evolution                                                                                                                                                                                  & \citeauthor*{Mariani2022}     \\
     & S1-C2   & Refactorings and Technical Debt in Docker Projects: An Empirical Study                                                                                                                                                                         & \citeauthor*{Ksontini2021}    \\

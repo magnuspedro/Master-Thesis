@@ -76,7 +76,7 @@ Many code refactoring tools are based on the catalog of refactorings created by 
 
 \textcite{murphy2008breaking}, together with eight software developers with different work experiences, used the GostFactor tool to assist in refactoring. They observed that this process decreased errors in the refactoring application by 23.3\%.
 
-The RMT tool, as developed by \textcite{beluzzo2018abordagem}, facilitates the seamless integration of design pattern insertion and detection methods within a unified environment. This tool engages in an interactive process with the developer, providing foresight into the inherent changes after refactoring and concurrently evaluating the effectiveness of such refactoring in enhancing code quality. \textcite{sangeetha2019empirical} 's work, although it does not explain tool implementation, employs it for experimental verification and validation of the used techniques. The RMT is designed to support the implementation of any specified method \textcolor{red}{citar os métodos} \cite{beluzzo2018abordagem}.
+The RMT tool, as developed by \textcite{beluzzo2018abordagem}, facilitates the seamless integration of design pattern insertion and detection methods within a unified environment. This tool engages in an interactive process with the developer, providing foresight into the inherent changes after refactoring and concurrently evaluating the effectiveness of such refactoring in enhancing code quality. \textcite{sangeetha2019empirical} 's work, although it does not explain tool implementation, employs it for experimental verification and validation of the used techniques. The RMT is designed to support the implementation of any refactoring method in the literature \cite{beluzzo2018abordagem}.
 
 \subsection{RMT}
 \label{sub-rmt}
@@ -95,8 +95,6 @@ The RMT (Refactoring and Measurement Tool) was created to identify design patter
 
 The use activity diagram delineates the tool's functionality for the user. The client initiates the process by uploading the project and searching for potential candidates. Upon identification of any applicable methods, the corresponding metric is computed. Within the interface, the client can select a class for refactoring, if necessary, and subsequently execute the refactoring process. Without identified candidates, the process ends without proceeding to refactoring and metric computation.
 
-\textcolor{red}{Pedro, aqui você arrumou o diagrama de caso de uso que a professor Simone Senger soliciou}.
-
 In addition to applying the refactorings, the tool uses the CK metrics extractor \cite{ck}, which encompasses the metrics of the depth of the inheritance tree (PAH), the cyclomatic complexity (CC), and the size of the program in lines of code (TPLC). Upon selecting a project selected for refactoring, the metrics are applied to demonstrate the effects of refactoring on the user source code. The available external quality attributes are maintainability, reliability, and reusability.
 
 \subsubsection{RMT Architecture}
@@ -114,8 +112,6 @@ The architecture diagram in \cref{fig-architecture} starts with user iteration w
 \SourceOrNote{\textcite{beluzzo2018abordagem}}
 \end{figure}
 \FloatBarrier
-
-\textcolor{red}{<<achei estranho o começo dessa frase>>} 
 
 The intermediary service functions as a service registry, possessing detailed knowledge of every service across all regions and strategically selecting the optimal server for communication. At a high level, upon receiving a project from the user, the intermediary service engages with the detection service, which subsequently provides the refactoring candidates. Following this, the intermediary service requests the detection service to perform the refactoring on the identified candidates. Upon receiving the responses from the refactored candidates, the metrics service is invoked to compute the quality attributes. Ultimately, the intermediary service aggregates all pertinent information and formulates a response for the user.
 
@@ -200,6 +196,10 @@ In the third and last step, the user can choose the candidates to apply the refa
 \end{figure}
 \FloatBarrier
 
+The metrics in the tool are expressed in percentages where the positive value shows an increase in the given quality attributes and the negative value shows a decrease. The attributes are calculated by combining the following metrics: cyclomatic complexity, depth of the inheritance tree, and lines of code. The combinations of all metrics calculate maintainability; Reliability uses the cyclomatic complexity and lines of code, and reusability uses the depth of the inheritance tree and lines of code. 
+
+\textcolor{red}{Pedro acho que aqui devemos reforçar como ele chega aos valores da manutenibilidade, confiabilidade, reusabilidade. Lembro também que devemos explicar a questão do número dar negative e positivo}
+
 \subsubsection{RMT Limitations}
 \label{subsub-limitation}
 When testing the RMT, some limitations were noticed. The first limitation was the long time required to execute a project refactoring, which involved drilling down on the tool code to find the reason for the slowness. One section had strange behavior: starting a refactoring system, extracting a zip file, and parsing every file to memory to verify if it could be a refactoring candidate. The problem is that the parsing process is repeated for each file and is repeated even more when the candidate is refactored. Following the same idea, when the candidate is refactored, each refactoring step is saved on the filesystem, once again accessed, and parsed to retrieve the changes. The disk (filesystem) has expensive access and takes time; a better option is to handle all the access directly on the memory.
@@ -224,7 +224,9 @@ Asynchronous services do not wait for a response; the communication is non-block
 
 \textcolor{red}{<<a frase seguinte eu não compreendi>>}
 
-To continue improving system resilience, queue services incorporate mechanisms designed to facilitate message retry attempts. such as visibility timeout, which is the time that a message is only visible to one consumer. If the message is not processed by the end of the time, it becomes visible again, returns to the queue, and adds one to the retry count. The queue must be configured with a retry limit to avoid an infinite retry. A notable limitation is the potential for message duplication in scenarios involving operational failures \cite{ChenScalable}.
+Queue services offer mechanisms to improve system resilience by facilitating message retry attempts. One of these features is visibility timeout when a message is visible to a single consumer in the queue; if the message is not processed before the visibility timeout, it is added to the retry count and is visible to be consumed again. The queue must be configured with a retry limit to avoid an infinite retry. A notable limitation is the potential for message duplication in scenarios involving operational failures \cite{ChenScalable}.
+
+Microservices have emerged as a hot topic within the domain of software development, garnering increased attention for their ability to significantly improve the maintenance and scalability of online services. A systematic mapping article by \textcite{Alshuqayran} carefully examines various microservice architecture initiatives, highlighting their growing importance within academic discourse. This study provides an exhaustive analysis of the deployment of microservices in various projects, illustrating practical applications.
 
 \textcolor{red}{<<achei que fatou comentar sobre trabalhos que usam esse tipo de arquiterua para criar suas ferramentas>> Pouco informação para a seção}
 
