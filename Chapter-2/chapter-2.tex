@@ -198,8 +198,6 @@ In the third and last step, the user can choose the candidates to apply the refa
 
 The metrics in the tool are expressed in percentages where the positive value shows an increase in the given quality attributes and the negative value shows a decrease. The attributes are calculated by combining the following metrics: cyclomatic complexity, depth of the inheritance tree, and lines of code. The combinations of all metrics calculate maintainability; Reliability uses the cyclomatic complexity and lines of code, and reusability uses the depth of the inheritance tree and lines of code. 
 
-\textcolor{red}{Pedro acho que aqui devemos reforçar como ele chega aos valores da manutenibilidade, confiabilidade, reusabilidade. Lembro também que devemos explicar a questão do número dar negative e positivo}
-
 \subsubsection{RMT Limitations}
 \label{subsub-limitation}
 When testing the RMT, some limitations were noticed. The first limitation was the long time required to execute a project refactoring, which involved drilling down on the tool code to find the reason for the slowness. One section had strange behavior: starting a refactoring system, extracting a zip file, and parsing every file to memory to verify if it could be a refactoring candidate. The problem is that the parsing process is repeated for each file and is repeated even more when the candidate is refactored. Following the same idea, when the candidate is refactored, each refactoring step is saved on the filesystem, once again accessed, and parsed to retrieve the changes. The disk (filesystem) has expensive access and takes time; a better option is to handle all the access directly on the memory.
@@ -221,8 +219,6 @@ The microservices are used to create large and complex applications, as the mode
 There are many architectures, such as synchronous RMT and asynchronous ones. The synchronous services wait for the response before ending the process; they usually use a direct connection over Representational State Transfer (REST), Remote Procedure Call (RCP), etc. \cite{microservices-comuni}. To implement a retry on synchronous services, the caller service must handle the failure without terminating the connection.
 
 Asynchronous services do not wait for a response; the communication is non-block, so the service does not wait for the answer to end the process; it can be achieved with queues as communication means. Some queue services are RabbitMQ, Apache Kafka, and Simple Service Queue (SQS), among others \cite{KARABEYAKSAKALLI2021111014}. Queue services have resilience-oriented characteristics, including the ability to persist unconsumed messages, thus ensuring that requests are not lost even if a service experiences downtime \cite{Cebeci2020DesignOA}.
-
-\textcolor{red}{<<a frase seguinte eu não compreendi>>}
 
 Queue services offer mechanisms to improve system resilience by facilitating message retry attempts. One of these features is visibility timeout when a message is visible to a single consumer in the queue; if the message is not processed before the visibility timeout, it is added to the retry count and is visible to be consumed again. The queue must be configured with a retry limit to avoid an infinite retry. A notable limitation is the potential for message duplication in scenarios involving operational failures \cite{ChenScalable}.
 

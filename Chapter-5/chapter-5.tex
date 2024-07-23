@@ -1,23 +1,15 @@
 \chapter{Results}
 \label{results}
-The \Cref{sec-cloud} transition to a renewed cloud-based architecture enhances performance, scalability, and reliability. \Cref{sub-comunication} covers communication improvements with more efficient architecture, while \Cref{sub-storage} discusses storage and database enhancements to increase speed and reliability. The \Cref{sec-packages} explains the package architecture improvement for the tool. The \Cref{sec-services-behaivour} explains the improvements in the tool and its features. In \Cref{sec-tests-2.0} shows how the tool interface works. The \Cref{sub-testing-article} explains how the tool was tested with the projects given by the articles. The \Cref{sub-testing-real} explains how the tool was tested with real-world projects.
+This chapter presents the results achieved with the RMT 2.0 version. The \Cref{sec-cloud} transition to a renewed cloud-based architecture enhances performance, scalability, and reliability. \Cref{sub-comunication} covers communication improvements with more efficient architecture, while \Cref{sub-storage} discusses storage and database enhancements to increase speed and reliability. The \Cref{sec-packages} explains the package architecture improvement for the tool. The \Cref{sec-services-behaivour} explains the tool's improvements and features. In \Cref{sec-tests-2.0} shows how the tool interface works. The \Cref{sub-testing-article} describes how the tool was tested with the projects given by the articles. The \Cref{sub-testing-real} explains how the tool was tested with real-world projects.
 The \Cref{sec-comparing} explains the comparison between the tool versions. The \Cref{sec-closing-results} have remarks for the section.
-
-
-\textcolor{red}{lembrar de fazer o preâmbulo como fez para os outros capítulos
-1 - RMT 2.0\\
-2 - Testes com projetos\\
-3 - Comparação da RMT 1 com 2
-}
 
 \section{The Renewed Cloud Based Architecture}
 \label{sec-cloud}
 The revised architecture introduces modifications to the communication protocols between services. The initial version of the tool had three services and one Java desktop application. The revised architecture transitioned the desktop application to a web-based platform, altering each service's operational dynamics. The newly devised architecture is illustrated in \Cref{fig-async}.
 
-The system architecture contains three distinct microservices dedicated to process management, supported by two communication queues and partitioned storage solutions having two distinct buckets: one designated for original projects and the other for refactored projects. The database infrastructure leverages an ElastiCache, while a load balancer is utilized to efficiently distribute incoming requests originating from the gateway.
+The system architecture contains three distinct microservices dedicated to process management, supported by two communication queues and partitioned storage solutions having two distinct buckets: one designated for original projects and the other for refactored projects. The database infrastructure leverages an ElastiCache, while a load balancer efficiently distributes incoming requests from the gateway.
 
-
-\textcolor{red}{o numero da figura está errado. A última foi 17 e agora deveria ser 18. Deveria comentar um pouco sobre a figura em alto nível antes de entrar nas seções. Cada seção vai falar de um item que melhorou. Deve introduzir isso por meio de um texto. Para quem está lendo, isso facilita.}
+\textcolor{red}{acho que ainda faltou melhorar a explicação da Figura 18}
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -43,9 +35,9 @@ The initial version of RMT utilizes MongoDB GridFs for file storage, a feature d
 \section{RMT 2.0 Packages}
 \label{sec-packages}
 
-After the architectural improvements, the package structure was reorganized and simplified. The advanced capabilities of the Spring framework, with the optimization of the codebase and the ensuring of linear communication between services, facilitated the reduction in both the number and the size of packages.
+After the architectural improvements, the package structure was reorganized and simplified. The advanced capabilities of the Spring framework, with optimizing the codebase and ensuring linear communication between services, facilitated the reduction in both the number and the size of packages.
 
-The Project Sync BFF went through a consolidation, reducing its packages from seven to five, with none of the original packages retained. The \texttt{controller} package is tasked with exposing the endpoint and initiating communication with the \texttt{refactor} package. The \texttt{refactor} package contains the entire service logic; it accesses the \texttt{ repository} package for database interactions and the \texttt{gateway} package to send messages to the subsequent service. The \texttt{configuration} package has the capability to dynamically retrieve the queue's name. Its behavior is demonstrated by the diagram on \cref{fig-project-sync-package}.
+The Project Sync BFF went through a consolidation, reducing its packages from seven to five, with none of the original packages retained. The \texttt{controller} package exposes the endpoint and initiates communication with the \texttt{refactor} package. The \texttt{refactor} package contains the entire service logic; it accesses the \texttt{ repository} package for database interactions and the \texttt{gateway} package to send messages to the subsequent service. The \texttt{configuration} package can dynamically retrieve the queue's name. Its behavior is demonstrated by the diagram on \cref{fig-project-sync-package}.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -101,6 +93,8 @@ The flow starts with the user selecting the project and sending it to the API Ga
 \section{Testing RMT 2.0}
 \label{sec-tests-2.0}
 
+During the initial testing phase, the tool failed to refactor all files within the project. The issue was traced to the \texttt{getIfStatements} method within the AstHandle class. This method erroneously returned a single if statement rather than a comprehensive list of if statements, resulting in the refactoring being applied exclusively to the first if statement in the \cite{liu2014automated} method. Upon fixing the method, subsequent validation tests confirmed the tool's functionality as expected.
+
 In addition to architectural improvements and code refactoring, the RMT has undergone an interface transformation by migrating from a Java-based desktop application to a browser-based one. The interface now features a selection box for project updates and two buttons, 'Evaluation' for project assessment and 'Refactor' for project refactoring. These buttons remain initially disabled, pending project selection, as depicted in \Cref{fig-factory-start}.
 
 \begin{figure}[ht!]
@@ -134,8 +128,7 @@ The refactoring candidates are shown by clicking the 'Evaluate' button. They are
 \end{figure}
 \FloatBarrier
 
-The refactored project can be downloaded using a link displayed after selecting a refactoring candidate in the table and clicking the 'Refactor' button. As a piece of information to the user, the elapsed time is displayed below the 'Evaluate'
- button. This is illustrated in \Cref{fig-factory-client}.
+The refactored project can be downloaded using a link displayed after selecting a refactoring candidate in the table and clicking the 'Refactor' button. The elapsed time is shown below the 'Evaluate' button as information to the user. This is illustrated in \Cref{fig-factory-client}.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -182,19 +175,21 @@ An additional approach to test the tool and ensure its quality will undergo a se
 \subsection{Testing With Real Projects}
 \label{sub-testing-real}
 
-The new version of the tool has to be tested against real-world projects to ensure that it does not break and maintains the initial functionality. To evaluate the RMT, \textcite{beluzzo2018abordagem}, select fifty projects from Github; from those projects, the RMT found candidate refactoring in seventeen projects. All these projects are shown on \cref{tab-projects-classes}; most of the projects have been updated after \cite{beluzzo2018abordagem} testing.
+The new version of the tool has been tested against real-world projects to ensure that it maintains the initial functionality. To evaluate the RMT, \textcite{beluzzo2018abordagem}, select fifty projects from Github; from those projects, the RMT found candidate refactoring in seventeen projects. All these projects are shown on \cref{tab-projects-classes}; most of the projects have been updated after \cite{beluzzo2018abordagem} testing.
 
 \input{Chapter-5/Table/projects}
 
-The tool was tested using the same updated projects. The \cref{tab-software-project-metrics} shows the results for the refactoring, with all the classes that could be refactored; the table displays the pattern by referring to the template method by T, the strategy by S, and the resulting metrics in percentage for each refactoring candidate.
+The tool was tested using the same updated projects. The \cref{tab-software-project-metrics} shows the results for the refactoring, with all the classes that could be refactored. The table displays the pattern by referring to the template method of T, the strategy by S, and the resulting metrics in percentage for each refactoring candidate.
 
-Following a thorough analysis of the empirical results, it is immediately evident that the application of the factory method was not identified in any of the examined projects. The distribution of candidates for the template method and the strategy pattern is nearly balanced, with 14 classes favoring the strategy pattern characterizing 43.8\% of candidates and 18 classes corresponding to the template method equivalent to 56. 2\% of classes. Project two is not on the table as it had no candidates for refactoring.
+Following an analysis of the empirical results, it is immediately evident that the application of the factory method was not identified in any of the examined projects. The distribution of candidates for the template method and the strategy pattern is balanced, with 14 classes favoring the strategy pattern characterizing 43.8\% of candidates and 18 classes corresponding to the template method equivalent to 56. 2\% of classes. Project two is not on the table as it had no candidates for refactoring.
 
-Testing project two on RMT 1.0 shows a possible refactoring, but by debuting the tool and analyzing the post-refactoring files, was possible to find the same issue described in \cref{subsub-limitation}, where an Ast handler method has a bug that only returns one if statement from the method, making it accept the refactoring without evaluating the other ifs on the method.
+Testing project two on RMT 1.0 shows a possible refactoring, but by debuting the tool and analyzing the post-refactoring files, was likely to find the same issue described in \cref{subsub-limitation}, where an Ast handler method has a bug that only returns one if statement from the method, making it accept the refactoring without evaluating the other ifs on the method.
 
-Regarding the strategy method, it is plausible that specific projects may have two candidates for a single class. This occurrence is attributable to the candidate identification process, in which a class encompasses two methods suitable for refactoring. Analyzing the metrics, most projects demonstrated an improvement in maintainability and reusability, accompanied by a slight decrease in reliability. These findings suggest that strategy-based refactoring predominantly benefits developers based on the utilized metrics.
+Regarding the strategy method, specific projects may have two candidates for a single class. This occurrence is attributable to the candidate identification process, in which a class encompasses two methods for refactoring. Analyzing the metrics, most projects demonstrated improved maintainability and reusability, accompanied by decreased reliability. These findings suggest that strategy-based refactoring predominantly benefits developers based on the utilized metrics.
 
-Nevertheless, the template method has shown marginal reductions in all metrics, with deviations that do not exceed a threshold of 1\%. The displayed metrics enable developers to make knowledgeable decisions about project refactoring; despite minor degradations in these metrics, a developer might still opt to refactor the class.
+Nevertheless, the template method has shown reductions in all metrics, with deviations that do not exceed a threshold of 1\%. The displayed metrics enable developers to make knowledgeable decisions about project refactoring; despite minor degradations in these metrics, a developer might still opt to refactor the class.
+
+\textcolor{red}{acho que aqui poderia apresentar um gráfico comparando os projetos por tipo de atributo. Por exemplo, um gráfico apresentado a manutenibilidade, etc... O que acha?}
 
 \input{Chapter-5/Table/refactored_classes}
 
@@ -203,9 +198,9 @@ Nevertheless, the template method has shown marginal reductions in all metrics, 
 
 Following the evaluation of the tool, the next stage involves assessing the efficacy of the RMT's remodeling. As noted in \cref{subsub-limitation}, the initial version of the tool demonstrated issues in handling 'if' statements within the Template Method and Strategy design patterns. Consequently, it impeded a direct comparison of metrics between the tools, as the refactoring results would inherently differ, leading to variations in the calculated results.
 
-One of the hypotheses proposed through the refactoring of the tool is that RMT 2.0 exhibits superior performance compared to version 1.0. To validate this claim, both tools were subjected to a comparative analysis by executing the 16 projects of \cref{tab-projects-classes}. The experiments were carried out on a MacBook Air M1 with 8GB of RAM; all other programs were closed, and the computer was plugged in so it could deliver the most power.
+One of the hypotheses proposed through the refactoring of the tool is that RMT 2.0 exhibits superior performance compared to version 1.0. Both tools were subjected to a comparative analysis by executing the 16 projects of \cref{tab-projects-classes} to validate this claim. The experiments were carried out on a MacBook Air M1 with 8GB of RAM; all other programs were closed, and the computer was plugged in to deliver the most power.
 
-For the first version, the MongoDB 5.0.28 \cite{mongo} database was deployed using Docker, complemented by the WildFly 19 \cite{wildfly} server for the service deployment. Adjustments were necessary to allocate JVM memory from 512 MB to 2048 MB on the wildfly server to successfully analyze larger projects.
+For the first version, the MongoDB 5.0.28 \cite{mongo} database was deployed using Docker, complemented by the WildFly 19 \cite{wildfly} server for the service deployment. Adjustments were necessary to allocate JVM memory from 512 MB to 2048 MB on the wildfly server to analyze larger projects successfully.
 
 In the second version, the entire deployment was containerized using Docker \cite{docker}. The database service was managed using Redis \cite{Redis} version 7.2.4, while Localstack \cite{localstack} version 3.02 was used to provision the SQS queue and S3 storage. The Spring Framework \cite{spring} incorporates an embedded server, eliminating the need for an external application server such as WildFly and enabling the application deployment as a container.
 
@@ -223,7 +218,7 @@ Through detailed analysis of execution durations, it became apparent that the pr
 \end{figure}
 \FloatBarrier
 
-The RMT 2.0 exhibited a substantial decrease in execution time by 63.64\%. This reduction was particularly pronounced in projects p5, p6, p9, p10, p14, p15, and p16, with over 80\% reductions recorded in projects p5, p6, p9, p10, and p15. In particular, excluding p5, all these projects have more than 100 classes. The larger difference between projects is in p9 and p10, which have 458 and 1100 classes, respectively. 
+The RMT 2.0 exhibited a substantial decrease in execution time by 63.64\%. This reduction was particularly found in the projects p5, p6, p9, p10, p14, p15 and p16, with over 80\% reductions recorded in projects p5, p6, p9, p10 and p15. In particular, excluding p5, all these projects have more than 100 classes. The larger difference between projects is in p9 and p10, which have 458 and 1100 classes, respectively. 
 
 \begin{figure}[ht!]
 \caption{Execution time difference by project size between RMT version}
@@ -233,9 +228,15 @@ The RMT 2.0 exhibited a substantial decrease in execution time by 63.64\%. This 
 \end{figure}
 \FloatBarrier
 
-The projects p1, p4, p7, p13, p14, and p17 were exclusively refactored using the strategy pattern. These projects exhibit the shortest overall execution time and the smallest variance in execution duration, indicating that the strategy refactoring approach is more optimized for both tool versions. 
+The projects p1, p4, p7, p13, p14, and p17 were exclusively refactored using the strategy pattern. These projects exhibit the shortest overall execution time and the slightest variance in execution duration, indicating that the strategy refactoring approach is more optimized for both tool versions. 
+
+RMT 2.0 \footnote{Link for download \href{https://github.com/magnuspedro/spring-rmt}{RMT 2.0}} conferred numerous advantages, including improved performance, as evidenced in comprehensive analyses. The application is simple to deploy locally and, when hosted on cloud infrastructure, is universally accessible via a web browser, eliminating the need for a Java-based desktop application; this functionality extends to smartphone usage.
+
+Even before the enhancements, the tool exhibited limitations, and few still exist. For example, when two methods within the same class require refactoring, the tool fails to distinguish between the refactoring candidates for each method. The detection and refactoring process could benefit from more parallel processing, allowing a separate process to be assigned to each method, potentially improving performance. Furthermore, the tool could be expanded with additional methods and metrics.
+
+\textcolor{red}{achei que faltou uma conclusão geral sobre os benefícios e limitações da ferramenta 2.0. Em algum lugar deve ter o link para a ferramenta}
 
 \section{Closing Remarks}
 \label{sec-closing-results}
 
-Upon comprehensive analysis of the datasets from both projects, it has been concluded that the proposal for enhancing the tool has been successful, yielding a temporal efficiency improvement of 63.64\%. The tool's implementation has been streamlined, necessitating containerization solutions such as Docker or Podman for execution. An automated script has been developed to compile and execute the project, concurrently deploying all requisite infrastructure within Docker.
+Upon comprehensive analysis of the datasets from both projects, it has been concluded that the proposal to enhance the tool has been successful, resulting in a 63-year improvement in the temporal efficiency of 64\%. The tool's implementation has been streamlined, necessitating containerization solutions such as Docker or Podman for execution. An automated script has been developed to compile and execute the project, concurrently deploying all required infrastructure within Docker.

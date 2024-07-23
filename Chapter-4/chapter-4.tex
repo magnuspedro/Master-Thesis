@@ -3,7 +3,8 @@
 
 This chapter explores the methodology for refactoring and improving the RMT tool. It delves into various techniques and best practices for improving and optimizing the tool's performance and maintainability. The discussion covers a range of refactoring strategies.
 
-The methodology is delineated into five sequentially interconnected phases as depicted in \cref{fig-overview-methodology}. Each phase systematically leverages the insights and understanding garnered from the preceding stage to optimize its efficacy.
+The methodology is delineated into five sequentially interconnected phases as depicted in \cref{fig-overview-methodology}. Each phase systematically uses the insights and understanding obtained from the previous stage to optimize its efficacy. 
+\textcolor{red}{colocar na imagem e no texto seguintes os testes que fez com a RMT}.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -273,15 +274,9 @@ Following the other two services, the name was also changed from metrics service
 \section{Tests in RMT 2.0}
 \label{sec-test-rmt}
 
-Despite the presence of unit tests following the refactoring process, the tool must undergo complete system-level tests. A Dockerfile was generated for each service to establish the integration test environment, which allows containerization. To facilitate the local execution of AWS services, Localstack \cite{localstack} enables SQS and S3 services, with Redis provisioned in a separate container. The deployment of all these containers is orchestrated using a docker-compose file.
+Despite the presence of unit tests following the refactoring process, the tool has undergone system-level testing. A Dockerfile was generated for each service to establish the integration test environment, which allows containerization. To facilitate the local execution of AWS services, Localstack \cite{localstack} enables SQS and S3 services, with Redis provisioned in a separate container. The deployment of all these containers is orchestrated using a docker-compose file. 
 
-Upon configuring the experimental environment, the tests were executed using the sample files provided by each respective article of the methods implemented in RMT 2.0. 
-
-During the initial testing phase, the tool failed to refactor all files within the project. The issue was traced to the \texttt{getIfStatements} method within the AstHandle class. This method erroneously returned a single if statement rather than a comprehensive list of if statements, resulting in the refactoring being applied exclusively to the first if statement in the \cite{liu2014automated} method. Upon fixing the method, subsequent validation tests confirmed the tool's functionality as expected.
-
-The evaluation of the tools was systematically organized into three sequential phases. The initial phase involved validating the examples presented in the works of \textcite{liu2014automated} and \cite{zafeiris2017automated}. Subsequently, an analysis of the RMT by itself was performed, which included versions 1.0 and 2.0. The final phase comprised testing the tool using the equivalent, updated projects that were utilized in the evaluation of the tool's first version.
-
-\textcolor{red}{acho que não ficou muito claro, creio que deva realizar os testes e depois voltar aqui para escrever}
+The evaluation of the tools was systematically organized into three sequential phases. The initial phase involved validating the examples presented in the works of \textcite{liu2014automated} and \cite{zafeiris2017automated}. Subsequently, an analysis of the RMT by itself was performed, which included versions 1.0 and 2.0. The final phase comprised testing the tool using the equivalent, updated projects that were utilized in the evaluation of the tool's first version. The results of the three testing phases are presented in the next chapter.
 
 \section{Cloasing Remarks}
 
@@ -297,5 +292,7 @@ The methodology outlined is sketched through the diagram described \cref{fig-sum
 \SourceOrNote{Own authorship (2024)}
 \end{figure}
 \FloatBarrier
+
+The green nodes represent the analyzed service process. The pink nodes indicate the processes associated with the restructuring of the architecture and the creation of tests. The yellow nodes are for the service refactoring process. The purple nodes designate the testing phase of the implemented changes, while the orange nodes correspond to the correction of identified issues.
 
 \textcolor{red}{tem que explicar em alto nível a image 17}

@@ -1,0 +1,25 @@
+\chapter{Conclusion}%
+\label{conclusion}
+
+RMT 2.0 guarantees superior performance, scalability, and reliability through its modern cloud-based architecture. This evolution accommodates more extensive and intricate projects, ensuring a more efficient and resilient development environment. The transition from conventional HTTP requests to asynchronous communication via message queues refines interactions, ensuring more robust communication. Furthermore, storage migration to Amazon S3 and Redis provides a more scalable and reliable solution, facilitating refactored project distributions.
+
+Using the Spring framework, the restructured package architecture simplifies the codebase, making it more manageable and maintainable. This architectural refinement reduces complexity and speeds up development, allowing developers to focus on coding rather than intricate configurations. A new browser-based interface enhances the user experience, making project evaluation and refactoring easier to access.
+
+The initial testing of RMT 2.0 addressed and solved issues along the services. In contrast, further testing with redesigned and real-world projects confirmed the tool's effectiveness in identifying refactoring candidates and measuring the resultant with software metrics. Comparative analyses demonstrated that RMT 2.0 significantly outperforms the first version. These improvements resulted in a notable 63.64\% increase in overall execution time, making the tool more practical and efficient for developers.
+
+Despite these advancements, the deployment of RMT 2.0 has been greatly simplified with Docker containerization, accompanied by automated scripts that simplify the setup process. These enhancements to the tool translate into substantial benefits for developers, including easier deployment, improved performance, and greater accessibility.
+
+\section{Future Work}
+
+As the approach created has various extension points, the following suggestions for future work are proposed:
+\begin{itemize}
+  \item Enhance the Detection and Refactoring Service by integrating additional refactoring methodologies that emphasize the implementation of design patterns; 
+    \item Conduct comprehensive evaluations for new quality attributes.
+\end{itemize}
+
+Despite the advancements rendered within the tools, certain constraints remain evident:
+\begin{itemize}
+  \item Further optimization of the Template Method refactoring to enhance computational efficiency. 
+  \item Segregation of method detection and refactoring processes into individual threads to enable parallel execution.
+  \item Develop an enhanced visualization methodology for refactoring candidates within the same class and an improved mechanism for integrating various refactorings in one class to mitigate potential conflicts.
+\end{itemize}

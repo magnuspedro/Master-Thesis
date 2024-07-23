@@ -3,11 +3,11 @@
 
 Systematic literature review (SRL) studies are traditionally in software engineering, and software refactoring brings an excellent background for study analysis and classifications. As time passes, studies become obsolete as new articles are published monthly. A forward snowballing was proposed to update the systematic literature reviews on software refactoring.
 
-This chapter presents the results of snowballing carried out to ensure that there is no other tool like RMT. This chapter is structured as \Cref{sec-background} describing the research methodology; \Cref{sec-methods} explaining the methods chosen to apply to the research; \Cref{sec-results} showing the results obtained in the study; \cref{sec-trends} explaining the trends in the research; \Cref{sec-cloasing-remarks} are the closing remarks.
+This chapter presents the results of snowballing to ensure that there is no other tool like RMT. This chapter is structured as \Cref{sec-background} describing the research methodology; \Cref{sec-methods} explaining the methods chosen to apply to the research; \Cref{sec-results} showing the results obtained in the study; \cref{sec-trends} explaining the trends in the research; \Cref{sec-cloasing-remarks} are the closing remarks.
 
 \section{Background}
 \label{sec-background}
-According to \cite{bernard2006}, the snowballing technique is a non-probabilistic sampling technique that allows the reach of hard-to-reach or little-known populations. It occurs due to its mechanism of establishing a network of relationships among the elements, creating a chain of references.
+According to \cite{bernard2006}, the snowballing technique is a nonprobabilistic sampling technique that allows the reach of hard-to-reach or little-known populations. It occurs due to its mechanism of establishing a network of relationships among the elements, creating a chain of references.
 
 The technique has three objectives: to improve the understanding of a theme, verify the possibility of conducting a more extensive study, and develop methods to be employed in subsequent studies and phases \cite{vinuto2014}. Snowballing is used mainly for experimental purposes.
 
@@ -21,7 +21,7 @@ The title and abstract are the elements to consider when selecting suitable cand
 
 After establishing the initial set, the iteration step is performed by performing Backward Snowballing and Forward Snowballing, including and excluding new jobs in the collection \cite{Wohlin2014}.
 
-Backward snowballing consists of using the list of references to identify new articles to be analyzed later on. The first step is to review the references and discard the papers that do not meet the essential research criteria. The second step is to remove the reports that have already been examined from the list. The first two steps are about extracting information from the article, and a new article should not be studied if there is not enough information in the analyzed document \cite{Wohlin2014}.
+Backward snowballing consists of using the list of references to identify new articles to be analyzed later on. The first step is to review the references and discard the papers that do not meet the essential research criteria. The second step is to remove the reports that have already been examined from the list. The first two steps are to extract information from the article, and a new article should not be studied if there is not enough information in the analyzed document \cite{Wohlin2014}.
 
 Conversely, forward snowballing consists of using the list of citations to identify new articles to be analyzed later. The first step is to review the citations in an online database and discard papers that do not meet the essential criteria. The following steps follow the same concept as forward-backward snowballing \cite{Felizardo2016}.
 
@@ -31,7 +31,7 @@ Database searches were used to start a systematic literature review update. For 
 
 It is challenging to assemble a suitable string, as the terminology used in software engineering is not standardized. Using a specific keyword may find a few relevant articles and even miss some suitable works; otherwise, using generic keywords may result in irrelevant articles, creating unnecessary labor \cite{Wohlin2014}.
 
-To find the starter set of SLR to apply the forward snowballing, a database search with a specific set of keywords was determined, and the found collection of papers will be updated as a result of the process. The search string to initiate the snowballing approach is (("systematic literature review") OR ("systematic review") OR ("systematic mapping review") OR ("systematic mapping") ) AND "software refactoring" and includes all the main desired topics to search. An inclusion and exclusion criteria list was defined to select the papers returned by the search string. The inclusion criteria are as follows:
+To find the starter set of SLR to apply the forward snowballing, a database search with a specific set of keywords was determined, and the collected papers found will be updated as a result of the process. The search string to initiate the snowballing approach is (("systematic literature review") OR ("systematic review") OR ("systematic mapping review") OR ("systematic mapping") ) AND "software refactoring" and includes all the main desired topics to search. An inclusion and exclusion criteria list was defined to select the papers returned by the search string. The inclusion criteria are as follows:
 
 \begin{itemize}
     \item The publishing year of the articles must be between 1992 and 2022, as \textcite{Opdyke1992} was the first person to publish with the refactoring term;
@@ -49,7 +49,7 @@ The criteria for exclusions are as follows.
 The standards must be followed by reading the article's title to filter the studies using the above criteria. If it already has the information to be accepted, no more reading is necessary for inclusion; if only the title is insufficient, the abstract is thoroughly read to understand more about the paper's objectives. The whole article is read if there is still doubt about the exclusion or inclusion. \textcite{Wohlin2014} does not recommend reading the report from the beginning; instead, he argues that it is best to read the most relevant parts to make a decision.
 The search engines were Google Scholar, Springer, Science Direct, ResearchGate, IEEE Xplore, and ACM. From these bases, 804 articles were divided per database: 689 from Google Scholar, 43 from Springer, 32 from Science Direct, 25 from ResearchGate, 12 from ACM, and three from IEEE Xplore, as shown in \Cref{tab-reviews}.
 
-To apply forward snowballing, Google Scholar was chosen to look for citations, as it is an excellent way to avoid bias \cite{Wohlin2014}. All articles were subjected to one interaction with the original SRL as sed \textcolor{red}{o que seria sed?} set, evidenced by \textcite{Wohlin2020} as the most cost-effective approach to update the studies. The diagram in \Cref{fig-snow} exemplifies the whole search method. 
+To apply forward snowballing, Google Scholar was chosen to look for citations, as it is an excellent way to avoid bias \cite{Wohlin2014}. All articles were subjected to one interaction with the original SRL as sed set, evidenced by \textcite{Wohlin2020} as the most cost-effective approach to update the studies. The diagram in \Cref{fig-snow} exemplifies the whole search method. 
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -69,7 +69,9 @@ As in the database search, snowballing inclusion and exclusion criteria must be 
 
 \input{Chapter-3/Tables/review table}
 
-The most crucial part of updating the SRLs in the acceptance criteria is that their interpretation will decide if a cited paper has the qualities to be included in its update. Most studies have an explicit acceptance criterion besides S3, S7, S10, and S12. Although S12 has no detailed parameters, the questions are well-defined enough to use as a selection method for snowballing; unfortunately, the paper has no citations. For S10, the criteria to include in the update were the classification made from the SLR-selected articles. However, finding an alternative to filter the citations became less secure in fitting the original article because the author did not have a particular sentiment. \textcolor{red}{não compreendi a frase final}
+Updating SRLs in acceptance criteria is crucial for determining whether a cited article qualifies for inclusion. Most studies have clear acceptance criteria except for S3, S7, S10, and S12. Although S12 lacks detailed parameters, its well-defined questions are adequate for snowballing, but the paper does not have citations. For S10, updates are based on the classification of SLR-selected articles. However, finding alternative citation filters was challenging due to the author's neutral sentiment.
+
+\textcolor{red}{não compreendi a frase final}
 
 Multiple articles did not include some styles of publications, such as abstracts, posters, and keynotes for S8, S9, and S13, gray literature for S1, S8, and S9, doctoral symposiums, books, and theses for S8 and S9. In the gray literature, it may not be the most reasonable guideline to follow because, as shown in articles S1 and S11, the first time worked with the term refactoring was in 1992 by \textcite{Opdyke1992}, which was a Ph.D. thesis. According to \textcite{Buriakovskyi2018}, only after the published book \textcite{fowler2018refactoring} did the active research on the practical use of refactoring begin. This would exclude both studies from S8 and S9.
 
