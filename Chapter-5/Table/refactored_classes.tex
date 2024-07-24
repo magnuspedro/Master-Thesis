@@ -1,8 +1,8 @@
-\begin{longtable}{ccp{5.1cm}ccc@{}}
+\begin{table}
 %% Cabeçalho da primeira página
 \caption{Refactored Projects Metrics and Classes}
-\label{tab-software-project-metrics}                          \\[\belowcaptionskip]
-\multicolumn{6}{@{}r@{}}{\textbf{(continue)}}                 \\[\belowcaptionskip]
+\label{tab-software-project-metrics}                        
+\begin{tabularx}{\textwidth}{ccp{5.1cm}ccc@{}}
 \toprule%
 \multicolumn{1}{@{}c}{\textbf{Project}}            &
 \multicolumn{1}{c}{\textbf{Pattern}}               &
@@ -11,35 +11,6 @@
 \multicolumn{1}{c}{\textbf{Reusability}}           &
 \multicolumn{1}{c@{}}{\textbf{Reliability}}        \\
 \midrule%
-\endfirsthead%
-%% Cabeçalho das páginas (exceto primeira e última)
-\caption[]{Refactored Projects Metrics and Classes}           \\[\belowcaptionskip]
-\multicolumn{6}{@{}r@{}}{\textbf{(continuation)}}             \\[\belowcaptionskip]
-\toprule%
-\multicolumn{1}{@{}c}{\textbf{Project}}            &
-\multicolumn{1}{c}{\textbf{Pattern}}               &
-\multicolumn{1}{c}{\textbf{Class}}                 &
-\multicolumn{1}{c}{\textbf{Maintainability}}       &
-\multicolumn{1}{c}{\textbf{Reusability}}           &
-\multicolumn{1}{c@{}}{\textbf{Reliability}}        \\
-\midrule%
-\endhead%
-%% Cabeçalho da última página
-\caption[]{Refactored Projects Metrics and Classes}           \\[\belowcaptionskip]
-\multicolumn{6}{@{}r@{}}{\textbf{(conclusion)}}               \\[\belowcaptionskip]
-\toprule%
-\multicolumn{1}{@{}c}{\textbf{Project}}            &
-\multicolumn{1}{c}{\textbf{Pattern}}               &
-\multicolumn{1}{c}{\textbf{Class}}                 &
-\multicolumn{1}{c}{\textbf{Maintainability}}       &
-\multicolumn{1}{c}{\textbf{Reusability}}           &
-\multicolumn{1}{c@{}}{\textbf{Reliability}}        \\
-\midrule%
-\endlasthead%
-%% Rodapé da última página
-\bottomrule%
-\LTSourceOrNote{Own authorship (2024)}           \\
-\endlastfoot% 
   p1 & S & Feature.java & 3.25 & 5.45 & -0.90 \\
   p1 & S & Lib.java & 3.25 & 5.45 & -0.90 \\
   p3 & S & JetlangEventDispatcher.java & 0.24 & 0.38 & -0.06 \\
@@ -72,6 +43,8 @@
   p16 & T & TrackInfo.java & -0.12 & -0.09 & -0.18 \\
   p16 & T & Track.java & -0.18 & -0.13 & -0.26 \\
   p17 & S & FibonacciWithDP.java & 0.89 & 1.37 & -0.10 \\
-  \bottomrule
-\end{longtable}
+  \bottomrule 
+\end{tabularx}
+\SourceOrNote{Own authorship (2024)}
+\end{table}
 \FloatBarrier

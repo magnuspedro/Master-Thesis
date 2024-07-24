@@ -25,6 +25,14 @@
 %   Lattes   = {0000000000020001},%% Opcional
 %   ORCID    = {0000-0000-0002-0001},%% Opcional (CHKTEX 8)
 }
+\Advisor{2}{
+   Gender   = {Female},%% Ou {Female}
+   Title    = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
+   Fullname = {Helyane Bronoski Borges},%% Conforme o Currículo Lattes
+%   Email    = {advisor1@domain},%% Opcional
+%   Lattes   = {0000000000020001},%% Opcional
+%   ORCID    = {0000-0000-0002-0001},%% Opcional (CHKTEX 8)
+}
 %%%% Ficha catalográfica (somente para Teses e Dissertações em catálogo físico)
 %%%% [Arg-1]: local (pasta) do PDF (./Pre-Textual/Extras/ por padrão).
 %%%% {Arg-2}: nome do PDF (modelo em ./Pre-Textual/Extras/).
@@ -40,30 +48,30 @@
 %%%% Ambiente {ApprovalPage*}: insere a titulação após o nome do membro.
 \begin{ApprovalPage}%% Argumentos (4):
 % [brazilian]%% Idioma original ou primário (brazilian ou english)
-{DD de mmmmmm de \YearNum}%% Data de aprovação (dia, mês por extenso e ano)
+{August 14, \YearNum}%% Data de aprovação (dia, mês por extenso e ano)
 {DD/MM/\YearNum}%% Data de aprovação (forma abreviada; mestrado e doutorado)
 {\linewidth}%% Largura de linha de assinatura (graduação e especialização)
 %%%%%% Descrição do trabalho (padrão; alterar se necessário)
 \DocumentTypeName\ apresentad\ifbool{Graduate}{a}{o} como requisito para obtenção do título de \StudentsTitlesList\ em \CourseName\ da \ifbool{MakeAcr}{\intldescr{UTFPR} (\intl{UTFPR})}{\UTFPRName\ (UTFPR)}.
 %%%%%% Membro(s) da banca (de 3 a 6): {Número}; {Dados}
-% \Member{1}{%
-%   Gender      = {Male},%% Ou {Female}
-%   Title       = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
-%   Fullname    = {Prenome{(s)} Sobrenome-C1},%% Conforme o Currículo Lattes
-%   Institution = {Instituição (Membro-C1)},%% Nome completo e por extenso
-% }
-% \Member{2}{%
-%   Gender      = {Male},%% Ou {Female}
-%   Title       = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
-%   Fullname    = {Prenome{(s)} Sobrenome-C2},%% Conforme o Currículo Lattes
-%   Institution = {Instituição (Membro-C2)},%% Nome completo e por extenso
-% }
-% \Member{3}{%
-%   Gender      = {Male},%% Ou {Female}
-%   Title       = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
-%   Fullname    = {Prenome{(s)} Sobrenome-C3},%% Conforme o Currículo Lattes
-%   Institution = {Instituição  (Membro-C3)},%% Nome completo e por extenso
-% }
+\Member{3}{%
+  Gender      = {Female},%% Ou {Female}
+  Title       = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
+  Fullname    = {Simone Nasser Matos},%% Conforme o Currículo Lattes
+  Institution = {\UTFPRName},%% Nome completo e por extenso
+}
+\Member{2}{%
+  Gender      = {Female},%% Ou {Male}
+  Title       = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
+  Fullname    = {Leticia Mara Peres},%% Conforme o Currículo Lattes
+  Institution = {Federal University of Paraná},%% Nome completo e por extenso
+}
+\Member{3}{%
+  Gender      = {Female},%% Ou {Male}
+  Title       = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
+  Fullname    = {Simone do Rocio Senger de Souza},%% Conforme o Currículo Lattes
+  Institution = {University of São Paulo},%% Nome completo e por extenso
+}
 \end{ApprovalPage}
 %%%% Opção 2: gerada a partir do Sistema Acadêmico ou da secretaria.
 %%%% [Arg-1]: local (pasta) do PDF (./Pre-Textual/Extras/ por padrão).
@@ -74,7 +82,7 @@
 % \input{./Pre-Textual/Optionals/dedication}
 
 %% Agradecimentos (elemento opcional; editar o {Arquivo} para alterar)
-% \input{./Pre-Textual/Optionals/acknowledgments}
+\input{./Pre-Textual/Optionals/acknowledgments}
 
 %% Epígrafe (elemento opcional; editar o {Arquivo} para alterar)
 % \input{./Pre-Textual/Optionals/epigraph}
@@ -86,16 +94,15 @@
 %%%% Estilo de fonte da chamada das palavras-chave (opcional)
 % \KeywordsCallFormat{\bfseries}%% Texto normal por padrão
 %%%% Palavras-chave (de 3 a 6): {Número}; {Em Português}; {In English}
-\Keyword{1}{refatoração}{refactoring}
-\Keyword{2}{refatoração de software}{software refactoring}
-\Keyword{3}{padrões de projetos}{design patterns}
-\Keyword{4}{nuvem}{cloud}
-\Keyword{5}{microserviços}{microservices}
-\Keyword{6}{ferramentas}{tools}
-\Keyword{7}{ferramenta}{tool}
+\Keyword{1}{refatoração de software}{software refactoring}
+\Keyword{2}{padrões de projetos}{design patterns}
+\Keyword{4}{microserviços}{microservices}
+\Keyword{5}{processo semiautomatizado}{semi-automated process}
 %%%% Em língua vernácula (idioma primário)
 \begin{Abstract}[brazilian]%% Idioma (brazilian ou english)
-Refatoração é um meio de melhorar o código-fonte sem alterar a sua funcionalidade, removendo code smells e tornando-o mais flexível e legível. Dentre as técnicas de refatoração, existe a refatoração por padrões de projetos que permite criar um código com maior qualidade em relação a atributos como reusabilidade, flexibilidade, entre outros. A ferramenta Refactoring and Measurement Tool (RMT) foi criada em sua primeira versão pelo Laboratório de Engenharia de Software e Inteligência Computacional (LESIC) e é capaz de ler um projeto escrito em linguagem java e detectar e aplicar padrões de projeto em linguagem Java. Para isso, ela contém a implementação de três métodos da literatura capazes de detectar e aplicar padrões de projeto \textcolor{red}{<<citar aqui os métodos>>}. A dificuldade da primeira versão da RMT está relacionada em se incorporar em sua arquitetura uma quantidade maior de métodos. Este trabalho realizou a refatoração de sua arquitetura usando microserviços assíncronos e nativos na nuvem para melhorar a performance, disponibilidade e escalabilidade, desacoplando as responsabilidades. Esta arquitetura foca em um escalonamento horizontal para melhorar a performance sobre demanda, combinando com aplicações em nuvem. \textcolor{red}{<<comentar os resultados depois que escrever>> lembrar que aqui e na introdução deve falar que refatorou e realizou melhorias}
+Refatoração é um meio de melhorar o código-fonte sem alterar a sua funcionalidade, removendo code smells e tornando-o mais flexível e legível. Dentre as técnicas de refatoração, existe a refatoração por padrões de projetos que permite criar um código com maior qualidade em relação a atributos como reusabilidade, flexibilidade, entre outros. A ferramenta Refactoring and Measurement Tool (RMT) foi criada em sua primeira versão pelo Laboratório de Engenharia de Software e Inteligência Computacional (LESIC) e é capaz de ler um projeto escrito em linguagem java e detectar e aplicar padrões de projeto em linguagem Java. Para isso, ela contém a implementação de três métodos da literatura capazes de detectar e aplicar padrões de projeto. A dificuldade da primeira versão da RMT está relacionada em se incorporar em sua arquitetura uma quantidade maior de métodos. Este trabalho realizou a refatoração de sua arquitetura usando microserviços assíncronos e nativos na nuvem para melhorar a performance, disponibilidade e escalabilidade, desacoplando as responsabilidades. Esta arquitetura foca em um escalonamento horizontal para melhorar a performance sobre demanda, combinando com aplicações em nuvem. Com o processo de criação de testes, refatoração e reestruturação da ferramenta, facilita aos desenvolvedores realizarem modificações para estender a ferramenta. O código-fonte foi simplificado para trazer melhor performance a ferramenta e melhorar a experiência do desenvolvedor que deseja contribuir com a ferramenta. O processo de execução local da ferramenta foi alterado, trazendo o foco para melhora na facilidade do mecanismo de execução, podendo ser executada com containers. A análise dos resultados evidencia uma redução de 63.64\% de tempo de execução na refatoração dos projetos testados em relação a ferramenta original.
+
+\textcolor{red}{<<comentar os resultados depois que escrever>> lembrar que aqui e na introdução deve falar que refatorou e realizou melhorias}
 \end{Abstract}
 %%%% Em língua estrangeira (idioma secundário; para divulgação internacional)
 \begin{Abstract}[english]%% Idioma (brazilian ou english)

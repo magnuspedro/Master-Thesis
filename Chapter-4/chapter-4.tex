@@ -4,7 +4,6 @@
 This chapter explores the methodology for refactoring and improving the RMT tool. It delves into various techniques and best practices for improving and optimizing the tool's performance and maintainability. The discussion covers a range of refactoring strategies.
 
 The methodology is delineated into five sequentially interconnected phases as depicted in \cref{fig-overview-methodology}. Each phase systematically uses the insights and understanding obtained from the previous stage to optimize its efficacy. 
-\textcolor{red}{colocar na imagem e no texto seguintes os testes que fez com a RMT}.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -293,6 +292,14 @@ The methodology outlined is sketched through the diagram described \cref{fig-sum
 \end{figure}
 \FloatBarrier
 
-The green nodes represent the analyzed service process. The pink nodes indicate the processes associated with the restructuring of the architecture and the creation of tests. The yellow nodes are for the service refactoring process. The purple nodes designate the testing phase of the implemented changes, while the orange nodes correspond to the correction of identified issues.
+The diagram presents a comprehensive methodology for improving the RMT, with each node color representing distinct phases and processes within the improvement strategy. The structured approach ensures a systematic enhancement of the tool's architecture and functionality.
 
-\textcolor{red}{tem que explicar em alto nível a image 17}
+The green nodes represent the initial analysis phase, which focuses on examining the code and structure of the Intermediary, Detection, and Metrics services. This phase is crucial to understanding the existing architecture and identifying areas that need improvement. The analysis forms the foundation for subsequent restructuring and refactoring efforts.
+
+The pink nodes are associated with the restructuring of the architecture, the design of the test scenarios, and the implementation. This phase involves significant modifications to the intermediary service architecture to align with modern design principles and best practices. 
+
+Representing the service refactoring processes, the yellow nodes cover updating code dependencies, applying automated refactoring tools within the Integrated Development Environments (IDEs), and optimizing the application code. This phase aims to improve the maintainability, readability, and performance of the code. 
+
+The purple nodes designate the testing phase for the implemented changes. This phase is vital to validating the correctness and effectiveness of the restructured and refactored code. Using the test cases in each article ensures that the changes did not modify the initial behavior. 
+
+Focusing on correcting identified issues, the orange nodes highlight the processes involved in addressing any problems discovered during testing. This phase involves iterative debugging, refining code, and retesting to confirm that all identified issues have been resolved satisfactorily.

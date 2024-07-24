@@ -7,7 +7,7 @@ The \Cref{sec-comparing} explains the comparison between the tool versions. The 
 \label{sec-cloud}
 The revised architecture introduces modifications to the communication protocols between services. The initial version of the tool had three services and one Java desktop application. The revised architecture transitioned the desktop application to a web-based platform, altering each service's operational dynamics. The newly devised architecture is illustrated in \Cref{fig-async}.
 
-The system architecture contains three distinct microservices dedicated to process management, supported by two communication queues and partitioned storage solutions having two distinct buckets: one designated for original projects and the other for refactored projects. The database infrastructure leverages an ElastiCache, while a load balancer efficiently distributes incoming requests from the gateway.
+The system architecture contains three distinct microservices dedicated to process management, supported by two communication queues and partitioned storage solutions having two distinct buckets: one designated for original projects and the other for refactored projects. The database infrastructure leverages an ElastiCache while a load balancer efficiently distributes incoming requests from the gateway.
 
 \textcolor{red}{acho que ainda faltou melhorar a explicação da Figura 18}
 
@@ -139,10 +139,6 @@ The refactored project can be downloaded using a link displayed after selecting 
 \end{figure}
 \FloatBarrier
 
-
-\textcolor{red}{Pedro aqui devemos color um texto e uma image explicando o que acontece quando a pessoa aceite realizar a refatoração. Assim, fica claro o processo. O que acha?}
-
-
 \subsection{Testing Through Refactored Article Application Exemplars}
 \label{sub-testing-article}
 
@@ -189,8 +185,6 @@ Regarding the strategy method, specific projects may have two candidates for a s
 
 Nevertheless, the template method has shown reductions in all metrics, with deviations that do not exceed a threshold of 1\%. The displayed metrics enable developers to make knowledgeable decisions about project refactoring; despite minor degradations in these metrics, a developer might still opt to refactor the class.
 
-\textcolor{red}{acho que aqui poderia apresentar um gráfico comparando os projetos por tipo de atributo. Por exemplo, um gráfico apresentado a manutenibilidade, etc... O que acha?}
-
 \input{Chapter-5/Table/refactored_classes}
 
 \section{Comparing RMT versions}
@@ -208,7 +202,7 @@ The \Cref{fig-time-chart} shows the execution times for the fifteen projects. In
 
 \input{Chapter-5/Table/time_to_execute}
 
-Through detailed analysis of execution durations, it became apparent that the projects exhibiting extended execution times comprised more classes as in \Cref{fig-time-by-size} and were refactored for the template method. Specifically, projects p3, p5, p6, p9, p10, p12, p14, p15, and p16, which incorporated the Template Method refactoring, demonstrated a significant discrepancy in execution time when contrasting both tool versions. This discrepancy arises due to performance-focused optimizations implemented within the method code and the overall tool.
+Through an analysis of execution durations, it became apparent that the projects exhibiting extended execution times comprised more classes as in \Cref{fig-time-by-size} and were refactored for the template method. Specifically, projects p3, p5, p6, p9, p10, p12, p14, p15, and p16, which incorporated the Template Method refactoring, demonstrated a significant discrepancy in execution time when contrasting both tool versions. This discrepancy arises due to performance-focused optimizations implemented within the method code and the overall tool.
 
 \begin{figure}[ht!]
 \caption{Execution time difference between RMT version}
@@ -230,13 +224,13 @@ The RMT 2.0 exhibited a substantial decrease in execution time by 63.64\%. This 
 
 The projects p1, p4, p7, p13, p14, and p17 were exclusively refactored using the strategy pattern. These projects exhibit the shortest overall execution time and the slightest variance in execution duration, indicating that the strategy refactoring approach is more optimized for both tool versions. 
 
-RMT 2.0 \footnote{Link for download \href{https://github.com/magnuspedro/spring-rmt}{RMT 2.0}} conferred numerous advantages, including improved performance, as evidenced in comprehensive analyses. The application is simple to deploy locally and, when hosted on cloud infrastructure, is universally accessible via a web browser, eliminating the need for a Java-based desktop application; this functionality extends to smartphone usage.
+RMT 2.0\footnote{Link for download \href{https://github.com/magnuspedro/spring-rmt}{RMT 2.0}} conferred advantages, including improved performance, as evidenced in the analyses. The application is simple to deploy locally and, when hosted on cloud infrastructure, is universally accessible via a web browser, eliminating the need for a Java-based desktop application; this functionality extends to smartphone usage.
 
-Even before the enhancements, the tool exhibited limitations, and few still exist. For example, when two methods within the same class require refactoring, the tool fails to distinguish between the refactoring candidates for each method. The detection and refactoring process could benefit from more parallel processing, allowing a separate process to be assigned to each method, potentially improving performance. Furthermore, the tool could be expanded with additional methods and metrics.
-
-\textcolor{red}{achei que faltou uma conclusão geral sobre os benefícios e limitações da ferramenta 2.0. Em algum lugar deve ter o link para a ferramenta}
+Even before the enhancements, the tool exhibited limitations, and few still exist. For example, when two methods within the same class require refactoring, the tool fails to distinguish between the refactoring candidates for each method. The detection and refactoring process could benefit from more parallel processing, assigning a separate process to each method, potentially improving performance. Furthermore, the tool could be expanded with additional methods and metrics.
 
 \section{Closing Remarks}
 \label{sec-closing-results}
 
-Upon comprehensive analysis of the datasets from both projects, it has been concluded that the proposal to enhance the tool has been successful, resulting in a 63-year improvement in the temporal efficiency of 64\%. The tool's implementation has been streamlined, necessitating containerization solutions such as Docker or Podman for execution. An automated script has been developed to compile and execute the project, concurrently deploying all required infrastructure within Docker.
+This chapter presents the results of the RMT 2.0 version. Upon analysis of the datasets from both projects, it has been concluded that the proposal to enhance the tool has been successful, resulting in a 63-year improvement in the temporal efficiency of 64\%. 
+
+The tool's implementation has been streamlined, necessitating containerization solutions such as Docker or Podman for execution. An automated script has been developed to compile and execute the project, concurrently deploying all required infrastructure within Docker.
