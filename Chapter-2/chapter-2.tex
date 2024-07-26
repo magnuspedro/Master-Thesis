@@ -24,7 +24,7 @@ In the study \textcite{szHoke2017empirical}, developers analyzed 2.5 million lin
 \label{sub-methods}
 As mentioned, we can apply refactoring techniques and methods based on design patterns. Refactoring by techniques is common and can be found in leading IDEs, such as Eclipse and IntelliJ, which provide automatic refactorings based on the model created by \textcite{fowler2018refactoring}. 
 
-Several authors propose software refactoring methods applying patterns, each performed differently in refactorings using pattern-based design methods. Some of these authors are \textcite{liu2014automated}, \textcite{zafeiris2017automated}, \textcite{cinneide2000automated}, and \cite{ouni2017more}. 
+Several authors propose software refactoring methods applying patterns, each performed differently in refactorings using pattern-based design methods. Some of these authors are \textcite{Liu2014}, \textcite{zafeiris2017automated}, \textcite{cinneide2000automated}, and \cite{ouni2017more}. 
 
 These refactoring methods seek to find the point of insertion of the pattern in the source code. The technique searches for source code to find where to implement design patterns to improve code maintainability, readability, and reusability. 
 
@@ -72,7 +72,7 @@ Manual refactoring requires reviewing the entire code and can take time. For thi
 To improve the interaction with the user for the application of refactoring, \cite{murphy2008breaking} created a tool that is fast, resistant to errors, and pleasant to use. To make the tool enjoyable, they implemented markings in the code produced by rectangles, arrows, and coloring parts of the code. These three markings show the user cleanly where and what the problem is so that refactorings can be applied.
 Some tools contain a graphical interface and iteration with the user, such as \textcite{rani2014detection}, where the intent is to detect bad smells. This tool was developed in C\# and finds terrible smells such as the long method, large class, lazy class, and comment lines. Discovering smells in code written in Java and .net. 
 
-Many code refactoring tools are based on the catalog of refactorings created by \textcite{fowler2018refactoring}, as in the integrated development environment (IDE) (e.g., Eclipse, Netbeans, and IntelliJ). However, some authors utilize design pattern-based refactoring as in \cref{tab-tools}. Authors, such as \textcite{cinneide2000automated} and \textcite{CHRISTOPOULOU20121201} agree that automated refactoring reduces application time and can be more beneficial, as it allows less experienced developers to apply refactorings. They were making tools for this reason.
+Many code refactoring tools are based on the catalog of refactorings created by \textcite{fowler2018refactoring}, as in the integrated development environment (IDE) (e.g., Eclipse, Netbeans, and IntelliJ). However, some authors utilize design pattern-based refactoring as in \Cref{tab-tools}. Authors, such as \textcite{cinneide2000automated} and \textcite{CHRISTOPOULOU20121201} agree that automated refactoring reduces application time and can be more beneficial, as it allows less experienced developers to apply refactorings. They were making tools for this reason.
 
 \textcite{murphy2008breaking}, together with eight software developers with different work experiences, used the GostFactor tool to assist in refactoring. They observed that this process decreased errors in the refactoring application by 23.3\%.
 
@@ -81,7 +81,7 @@ The RMT tool, as developed by \textcite{beluzzo2018abordagem}, facilitates the s
 \subsection{RMT}
 \label{sub-rmt}
 
-The RMT (Refactoring and Measurement Tool) was created to identify design pattern insertion points utilizing the methodologies implemented by \textcite{beluzzo2018abordagem}. \textcite{zafeiris2017automated} and \textcite{liu2014automated} are responsible for developing the implemented refactoring techniques. The developed approaches are, respectively, the refactoring of the Template Method pattern and the refactoring of the Strategy and Factory Method patterns. The \cref{fig-activity-rmt} illustrates the flow of the RMT tool without discriminating between implementations. The figure is divided into two distinct colors, each representing a unique request (thread) on hold by the client user and, consequently, by the intermediary service.
+The RMT (Refactoring and Measurement Tool) was created to identify design pattern insertion points utilizing the methodologies implemented by \textcite{beluzzo2018abordagem}. \textcite{zafeiris2017automated} and \textcite{Liu2014} are responsible for developing the implemented refactoring techniques. The developed approaches are, respectively, the refactoring of the Template Method pattern and the refactoring of the Strategy and Factory Method patterns. The \Cref{fig-activity-rmt} illustrates the flow of the RMT tool without discriminating between implementations. The figure is divided into two distinct colors, each representing a unique request (thread) on hold by the client user and, consequently, by the intermediary service.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -100,7 +100,7 @@ In addition to applying the refactorings, the tool uses the CK metrics extractor
 \subsubsection{RMT Architecture}
 \label{sub-architecture}
 
-The architecture diagram in \cref{fig-architecture} starts with user iteration within the Client App, as it is isolated and runs independently since it is a Java desktop application; the communication can be only made with the Intermediary Service, which provides the communication between the user layer (Client) and the processing layer (Services). The Intermediary Service uses Hypertext Transfer Protocol (HTTP) requests to communicate to the subsequent Metrics and the Detection Service.
+The architecture diagram in \Cref{fig-architecture} starts with user iteration within the Client App, as it is isolated and runs independently since it is a Java desktop application; the communication can be only made with the Intermediary Service, which provides the communication between the user layer (Client) and the processing layer (Services). The Intermediary Service uses Hypertext Transfer Protocol (HTTP) requests to communicate to the subsequent Metrics and the Detection Service.
 
 \textcite{beluzzo2018abordagem} model also proposes separating the services by region, which may offer better availability. This mitigation is accomplished by distributing services across multiple geographic regions (including distinct cities, states, and countries), thereby ensuring continuity of service and preventing total system failure in the event of a regional outage. The database is a global service that can be accessed from any region. \Cref{fig-architecture} represents the regional divisions of application services.
 
@@ -158,7 +158,7 @@ If any candidate was detected, the intermediary service automatically calls the 
 
 The \texttt{ExtractManager} class has the same functionality as in \Cref{fig-candidates}, retrieving the project from the database by the \texttt{ProjectRepository} (Step 1.2); and then calling the \texttt{DataExtractionFork} class over a loop as Step 2.
 
- In Step 2.1, \texttt{DataExtractionFrok} has the same functionality as in \cref{fig-candidates}. However, every candidate in the project inflates the zip file and converts it to a \texttt{CompilationUnit} class to be refactored in Step 3. After refactoring has ended, the project ID is returned from 3.1 to 3.4.
+ In Step 2.1, \texttt{DataExtractionFrok} has the same functionality as in \Cref{fig-candidates}. However, every candidate in the project inflates the zip file and converts it to a \texttt{CompilationUnit} class to be refactored in Step 3. After refactoring has ended, the project ID is returned from 3.1 to 3.4.
 
 \subsubsection{RMT Usage}
 \label{sub-usage}

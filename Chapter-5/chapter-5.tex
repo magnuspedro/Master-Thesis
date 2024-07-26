@@ -9,7 +9,6 @@ The revised architecture introduces modifications to the communication protocols
 
 The system architecture contains three distinct microservices dedicated to process management, supported by two communication queues and partitioned storage solutions having two distinct buckets: one designated for original projects and the other for refactored projects. The database infrastructure leverages an ElastiCache while a load balancer efficiently distributes incoming requests from the gateway.
 
-\textcolor{red}{acho que ainda faltou melhorar a explicação da Figura 18}
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -37,7 +36,7 @@ The initial version of RMT utilizes MongoDB GridFs for file storage, a feature d
 
 After the architectural improvements, the package structure was reorganized and simplified. The advanced capabilities of the Spring framework, with optimizing the codebase and ensuring linear communication between services, facilitated the reduction in both the number and the size of packages.
 
-The Project Sync BFF went through a consolidation, reducing its packages from seven to five, with none of the original packages retained. The \texttt{controller} package exposes the endpoint and initiates communication with the \texttt{refactor} package. The \texttt{refactor} package contains the entire service logic; it accesses the \texttt{ repository} package for database interactions and the \texttt{gateway} package to send messages to the subsequent service. The \texttt{configuration} package can dynamically retrieve the queue's name. Its behavior is demonstrated by the diagram on \cref{fig-project-sync-package}.
+The Project Sync BFF went through a consolidation, reducing its packages from seven to five, with none of the original packages retained. The \texttt{controller} package exposes the endpoint and initiates communication with the \texttt{refactor} package. The \texttt{refactor} package contains the entire service logic; it accesses the \texttt{ repository} package for database interactions and the \texttt{gateway} package to send messages to the subsequent service. The \texttt{configuration} package can dynamically retrieve the queue's name. Its behavior is demonstrated by the diagram on \Cref{fig-project-sync-package}.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -49,7 +48,7 @@ The Project Sync BFF went through a consolidation, reducing its packages from se
 \end{figure}
 \FloatBarrier
 
-Progressing to the Detection and Refactoring service, a reduction in the number of packages from fourteen to seven was accomplished. The service initiates the processing via the \texttt{consumer} package, which consumes messages from a queue and retrieves a project from the database using the \texttt{repository} package as it has the database communication interface. The logic for executing refactorings is located within the \texttt{refactor} package, implementing the refactoring methods in the \texttt{methods} package, and data extraction strategies located in the \texttt{dataExtraction} package. The \texttt{gateway} package has the functionality to send messages to the queue and imports the \texttt{configuration} package to dynamically retrieve the queue name. As illustrated in \cref{fig-detection-refactoring-package}, the diagram employs two colors: yellow to signify the new packages and white to indicate the packages retained from the previous version.
+Progressing to the Detection and Refactoring service, a reduction in the number of packages from fourteen to seven was accomplished. The service initiates the processing via the \texttt{consumer} package, which consumes messages from a queue and retrieves a project from the database using the \texttt{repository} package as it has the database communication interface. The logic for executing refactorings is located within the \texttt{refactor} package, implementing the refactoring methods in the \texttt{methods} package, and data extraction strategies located in the \texttt{dataExtraction} package. The \texttt{gateway} package has the functionality to send messages to the queue and imports the \texttt{configuration} package to dynamically retrieve the queue name. As illustrated in \Cref{fig-detection-refactoring-package}, the diagram employs two colors: yellow to signify the new packages and white to indicate the packages retained from the previous version.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -93,7 +92,7 @@ The flow starts with the user selecting the project and sending it to the API Ga
 \section{Testing RMT 2.0}
 \label{sec-tests-2.0}
 
-During the initial testing phase, the tool failed to refactor all files within the project. The issue was traced to the \texttt{getIfStatements} method within the AstHandle class. This method erroneously returned a single if statement rather than a comprehensive list of if statements, resulting in the refactoring being applied exclusively to the first if statement in the \cite{liu2014automated} method. Upon fixing the method, subsequent validation tests confirmed the tool's functionality as expected.
+During the initial testing phase, the tool failed to refactor all files within the project. The issue was traced to the \texttt{getIfStatements} method within the AstHandle class. This method erroneously returned a single if statement rather than a comprehensive list of if statements, resulting in the refactoring being applied exclusively to the first if statement in the \cite{Liu2014} method. Upon fixing the method, subsequent validation tests confirmed the tool's functionality as expected.
 
 In addition to architectural improvements and code refactoring, the RMT has undergone an interface transformation by migrating from a Java-based desktop application to a browser-based one. The interface now features a selection box for project updates and two buttons, 'Evaluation' for project assessment and 'Refactor' for project refactoring. These buttons remain initially disabled, pending project selection, as depicted in \Cref{fig-factory-start}.
 
@@ -142,11 +141,11 @@ The refactored project can be downloaded using a link displayed after selecting 
 \subsection{Testing Through Refactored Article Application Exemplars}
 \label{sub-testing-article}
 
-The implementations exemplified by \textcite{liu2014automated} and \textcite{zafeiris2017automated} were used for the preliminary evaluation.
+The implementations exemplified by \textcite{Liu2014} and \textcite{zafeiris2017automated} were used for the preliminary evaluation.
 
-To refactor using the factory method design pattern, \textcite{liu2014automated} introduces four distinct classes: a \texttt{Logger} interface, 	\texttt{FileLogger} and \texttt{DatabaseLogger} which implement the interface, and the \texttt{LoggerFactory} serving as a factory to select among the implementations. The \Cref{fig-factory-client} displays the refactored \texttt{LoggerFactory} that was changed to abstract; the implementation was moved to the \texttt{FileLoggerFactory} and \texttt{DatabaseLoggerFactory}. The metrics displayed are positive, indicating an improvement in maintainability and reusability without changing reliability.
+To refactor using the factory method design pattern, \textcite{Liu2014} introduces four distinct classes: a \texttt{Logger} interface, 	\texttt{FileLogger} and \texttt{DatabaseLogger} which implement the interface, and the \texttt{LoggerFactory} serving as a factory to select among the implementations. The \Cref{fig-factory-client} displays the refactored \texttt{LoggerFactory} that was changed to abstract; the implementation was moved to the \texttt{FileLoggerFactory} and \texttt{DatabaseLoggerFactory}. The metrics displayed are positive, indicating an improvement in maintainability and reusability without changing reliability.
 
-To exemplify the strategy pattern \textcite{liu2014automated}, create the \texttt{MovieTicket} class, which has an if statement for each ticket type. The method creates an abstract \texttt{Strategy} class with the calculate method, the code extracted from the \texttt{MovieTicket} is implemented on the \texttt{ConcreteStrategyS}, \texttt{ConcreateStrategyM} and \texttt{ConcreateStrategyC}. The maintenance and reusability metrics improved, although reliability decreased, as shown in \Cref{fig-strategy-client}.
+To exemplify the strategy pattern \textcite{Liu2014}, create the \texttt{MovieTicket} class, which has an if statement for each ticket type. The method creates an abstract \texttt{Strategy} class with the calculate method, the code extracted from the \texttt{MovieTicket} is implemented on the \texttt{ConcreteStrategyS}, \texttt{ConcreateStrategyM} and \texttt{ConcreateStrategyC}. The maintenance and reusability metrics improved, although reliability decreased, as shown in \Cref{fig-strategy-client}.
 
 \begin{figure}[ht!]
 \caption{Refactored Project For Strategy}
@@ -171,15 +170,15 @@ An additional approach to test the tool and ensure its quality will undergo a se
 \subsection{Testing With Real Projects}
 \label{sub-testing-real}
 
-The new version of the tool has been tested against real-world projects to ensure that it maintains the initial functionality. To evaluate the RMT, \textcite{beluzzo2018abordagem}, select fifty projects from Github; from those projects, the RMT found candidate refactoring in seventeen projects. All these projects are shown on \cref{tab-projects-classes}; most of the projects have been updated after \cite{beluzzo2018abordagem} testing.
+The new version of the tool has been tested against real-world projects to ensure that it maintains the initial functionality. To evaluate the RMT, \textcite{beluzzo2018abordagem}, select fifty projects from Github; from those projects, the RMT found candidate refactoring in seventeen projects. All these projects are shown on \Cref{tab-projects-classes}; most of the projects have been updated after \cite{beluzzo2018abordagem} testing.
 
 \input{Chapter-5/Table/projects}
 
-The tool was tested using the same updated projects. The \cref{tab-software-project-metrics} shows the results for the refactoring, with all the classes that could be refactored. The table displays the pattern by referring to the template method of T, the strategy by S, and the resulting metrics in percentage for each refactoring candidate.
+The tool was tested using the same updated projects. The \Cref{tab-software-project-metrics} shows the results for the refactoring, with all the classes that could be refactored. The table displays the pattern by referring to the template method of T, the strategy by S, and the resulting metrics in percentage for each refactoring candidate.
 
-Following an analysis of the empirical results, it is immediately evident that the application of the factory method was not identified in any of the examined projects. The distribution of candidates for the template method and the strategy pattern is balanced, with 14 classes favoring the strategy pattern characterizing 43.8\% of candidates and 18 classes corresponding to the template method equivalent to 56. 2\% of classes. Project two is not on the table as it had no candidates for refactoring.
+Following an analysis of the empirical results, it is immediately evident that the application of the factory method was not identified in any of the examined projects. The distribution of candidates for the template method and the strategy pattern is balanced, with 14 classes favoring the strategy pattern characterizing 43.8\% of candidates and 18 classes corresponding to the template method equivalent to 56.2\% of classes. Project two is not on the table as it had no candidates for refactoring.
 
-Testing project two on RMT 1.0 shows a possible refactoring, but by debuting the tool and analyzing the post-refactoring files, was likely to find the same issue described in \cref{subsub-limitation}, where an Ast handler method has a bug that only returns one if statement from the method, making it accept the refactoring without evaluating the other ifs on the method.
+Testing project two on RMT 1.0 shows a possible refactoring, but by debuting the tool and analyzing the post-refactoring files, was likely to find the same issue described in \Cref{subsub-limitation}, where an Ast handler method has a bug that only returns one if statement from the method, making it accept the refactoring without evaluating the other ifs on the method.
 
 Regarding the strategy method, specific projects may have two candidates for a single class. This occurrence is attributable to the candidate identification process, in which a class encompasses two methods for refactoring. Analyzing the metrics, most projects demonstrated improved maintainability and reusability, accompanied by decreased reliability. These findings suggest that strategy-based refactoring predominantly benefits developers based on the utilized metrics.
 
@@ -190,9 +189,9 @@ Nevertheless, the template method has shown reductions in all metrics, with devi
 \section{Comparing RMT versions}
 \label{sec-comparing}
 
-Following the evaluation of the tool, the next stage involves assessing the efficacy of the RMT's remodeling. As noted in \cref{subsub-limitation}, the initial version of the tool demonstrated issues in handling 'if' statements within the Template Method and Strategy design patterns. Consequently, it impeded a direct comparison of metrics between the tools, as the refactoring results would inherently differ, leading to variations in the calculated results.
+Following the evaluation of the tool, the next stage involves assessing the efficacy of the RMT's remodeling. As noted in \Cref{subsub-limitation}, the initial version of the tool demonstrated issues in handling 'if' statements within the Template Method and Strategy design patterns. Consequently, it impeded a direct comparison of metrics between the tools, as the refactoring results would inherently differ, leading to variations in the calculated results.
 
-One of the hypotheses proposed through the refactoring of the tool is that RMT 2.0 exhibits superior performance compared to version 1.0. Both tools were subjected to a comparative analysis by executing the 16 projects of \cref{tab-projects-classes} to validate this claim. The experiments were carried out on a MacBook Air M1 with 8GB of RAM; all other programs were closed, and the computer was plugged in to deliver the most power.
+One of the hypotheses proposed through the refactoring of the tool is that RMT 2.0 exhibits superior performance compared to version 1.0. Both tools were subjected to a comparative analysis by executing the 16 projects of \Cref{tab-projects-classes} to validate this claim. The experiments were carried out on a MacBook Air M1 with 8GB of RAM; all other programs were closed, and the computer was plugged in to deliver the most power.
 
 For the first version, the MongoDB 5.0.28 \cite{mongo} database was deployed using Docker, complemented by the WildFly 19 \cite{wildfly} server for the service deployment. Adjustments were necessary to allocate JVM memory from 512 MB to 2048 MB on the wildfly server to analyze larger projects successfully.
 
