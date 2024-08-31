@@ -12,7 +12,7 @@ The system architecture contains three distinct microservices dedicated to proce
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
-\caption{RMT revised architecture diagram}
+\caption{RMT 2.0 revised architecture diagram}
 \label{fig-async}
 \includegraphics[width =\textwidth, scale=0.2]{Chapter-5/Figures/Async.png}
 \SourceOrNote{Own authorship (2024)}
@@ -29,7 +29,7 @@ The Simple Queue Service (SQS) operates in its default configuration, implementi
 \subsection{Storage \& Database Improvements}
 \label{sub-storage}
 
-The initial version of RMT utilizes MongoDB GridFs for file storage, a feature designed to facilitate the preservation of files within the database architecture. The updated version uses Amazon S3 for project storage, using a dual-bucket strategy: one designated for the original project and the other for the refactored iterations. All microservices are granted access to the designated buckets, enabling seamless file storage and retrieval. The project information and statuses are stored in the Redis in-memory document database, and all services have access.
+The RMT 1.0 utilizes MongoDB GridFs for file storage, a feature designed to facilitate the preservation of files within the database architecture. The updated version uses Amazon S3 for project storage, using a dual-bucket strategy: one designated for the original project and the other for the refactored iterations. All microservices are granted access to the designated buckets, enabling seamless file storage and retrieval. The project information and statuses are stored in the Redis in-memory document database, and all services have access.
 
 \section{RMT 2.0 Packages}
 \label{sec-packages}
@@ -94,7 +94,7 @@ The flow starts with the user selecting the project and sending it to the API Ga
 
 During the initial testing phase, the tool failed to refactor all files within the project. The issue was traced to the \texttt{getIfStatements} method within the AstHandle class. This method erroneously returned a single if statement rather than a comprehensive list of if statements, resulting in the refactoring being applied exclusively to the first if statement in the \cite{Liu2014} method. Upon fixing the method, subsequent validation tests confirmed the tool's functionality as expected.
 
-In addition to architectural improvements and code refactoring, the RMT has undergone an interface transformation by migrating from a Java-based desktop application to a browser-based one. The interface now features a selection box for project updates and two buttons, 'Evaluation' for project assessment and 'Refactor' for project refactoring. These buttons remain initially disabled, pending project selection, as depicted in \Cref{fig-factory-start}.
+In addition to architectural improvements and code refactoring, the RMT 2.0 has undergone an interface transformation by migrating from a Java-based desktop application to a browser-based one. The interface now features a selection box for project updates and two buttons, 'Evaluation' for project assessment and 'Refactor' for project refactoring. These buttons remain initially disabled, pending project selection, as depicted in \Cref{fig-factory-start}.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -105,7 +105,7 @@ In addition to architectural improvements and code refactoring, the RMT has unde
 \end{figure}
 \FloatBarrier
 
-Upon selecting the project, the 'Evaluate' button becomes active, indicated by a blue background, signifying that the project has been uploaded and the RMT backend is currently analyzing the project. This behavior is illustrated in \Cref{fig-factory-selected}.
+Upon selecting the project, the 'Evaluate' button becomes active, indicated by a blue background, signifying that the project has been uploaded and the RMT 2.0 backend is currently analyzing the project. This behavior is illustrated in \Cref{fig-factory-selected}.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -138,7 +138,7 @@ The refactored project can be downloaded using a link displayed after selecting 
 \end{figure}
 \FloatBarrier
 
-\subsection{Testing Through Refactored Article Application Exemplars}
+\subsection{Testing Through Refactored Application Code}
 \label{sub-testing-article}
 
 The implementations exemplified by \textcite{Liu2014} and \textcite{zafeiris2017automated} were used for the preliminary evaluation.
@@ -165,16 +165,16 @@ The \textcite{zafeiris2017automated} implements the template method using the ja
 \end{figure}
 \FloatBarrier
 
-An additional approach to test the tool and ensure its quality will undergo a self-scanning procedure. The analysis was performed to test the effectiveness of the tool, with a focus on evaluating RMT and its next version, RMT 2.0. Examining both RMT versions showed that there were no elements that needed refactoring. 
+An additional approach to test the tool and ensure its quality will undergo a self-scanning procedure. The analysis was performed to test the effectiveness of the tool, with a focus on evaluating RMT 1.0 and its next version, RMT 2.0. Examining both RMT versions showed that there were no elements that needed refactoring. 
 
-\subsection{Testing With Real Projects}
+\subsection{Experimental Evaluation Of RMT Version}
 \label{sub-testing-real}
 
-The new version of the tool has been tested against real-world projects to ensure that it maintains the initial functionality. To evaluate the RMT, \textcite{beluzzo2018abordagem}, select fifty projects from Github; from those projects, the RMT found candidate refactoring in seventeen projects. All these projects are shown on \Cref{tab-projects-classes}; most of the projects have been updated after \cite{beluzzo2018abordagem} testing.
+The new version of the tool has been evaluated against real-world projects to ensure that it maintains the initial functionality by comparing with the RMT 1.0, \textcite{beluzzo2018abordagem}, select fifty projects from Github; from those projects, the RMT 1.0 found candidate refactoring in seventeen projects. All these projects are shown on \Cref{tab-projects-classes}; most of the projects have been updated after \cite{beluzzo2018abordagem} testing. The evaluation encompasses whether the refactoring from the RMT 2.0 is done right and compares the result metrics of both projects
 
 \input{Chapter-5/Table/projects}
 
-The tool was tested using the same updated projects. The \Cref{tab-software-project-metrics} shows the results for the refactoring, with all the classes that could be refactored. The table displays the pattern by referring to the template method of T, the strategy by S, and the resulting metrics in percentage for each refactoring candidate.
+The tool was evaluated using the same updated projects. The \Cref{tab-software-project-metrics} shows the results for the refactoring, with all the classes that could be refactored. The table displays the pattern by referring to the template method of T, the strategy by S, and the resulting metrics in percentage for each refactoring candidate.
 
 Following an analysis of the empirical results, it is immediately evident that the application of the factory method was not identified in any of the examined projects. The distribution of candidates for the template method and the strategy pattern is balanced, with 14 classes favoring the strategy pattern characterizing 43.8\% of candidates and 18 classes corresponding to the template method equivalent to 56.2\% of classes. Project two is not on the table as it had no candidates for refactoring.
 

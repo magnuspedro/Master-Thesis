@@ -9,11 +9,11 @@ Refactoring can facilitate the implementation of new requirements, modularize ov
 
 Refactoring by designing pattern-based methods examines the source code for insertion points to apply patterns. This refactoring aims mainly at maintainability, readability, and reusability. Several authors propose their pattern-based refactoring methods, such as \textcite{cinneide2000automated}, \textcite{Gamma2009}, and \textcite{ouni2017more}.
 
-This chapter has information about the research background. \Cref{sec-importance} discuss the importance of refactoring. \Cref{sec-methods} describes the application of refactoring. \Cref{sec-tools} exemplifies the refactoring methods and the explanations of its functionalities and tools. \Cref{sub-rmt} talks about the RMT functionality. \Cref{sub-architecture} describes the architecture of the tool. \Cref{subsub-internal} talks about the internal functionality of RMT. \Cref{sub-usage} shows how to use the tool. \Cref{subsub-limitation} discusses the limitations encountered using the tool. \Cref{sec-microservices} explain about microservices. \Cref{sec2-remarks} includes the final considerations.
+This chapter has information about the research background. \Cref{sec-importance} discuss the importance of refactoring. \Cref{sec-methods} describes the application of refactoring. \Cref{sec-tools} exemplifies the refactoring methods and the explanations of its functionalities and tools. \Cref{sub-rmt} talks about the RMT 1.0 functionality. \Cref{sub-architecture} describes the architecture of the tool. \Cref{subsub-internal} talks about the internal functionality of RMT 1.0. \Cref{sub-usage} shows how to use the tool. \Cref{subsub-limitation} discusses the limitations encountered using the tool. \Cref{sec-microservices} explain about microservices. \Cref{sec2-remarks} includes the final considerations.
 
 \section{Importance of Software Refactoring}
 \label{sec-importance}
-\textcite{fowler2018refactoring} describes that the first step in refactoring is to create automated tests, such as unit tests. The tests help to avoid creating bugs by guaranteeing that the behavior does not change, as any code change could also change the code behavior. Humans may make mistakes and cause serious problems in production. In system production, maintainability is a significant factor that influences costs, and one of the proposed solutions to reduce it is to increase software quality. 
+\textcite{fowler2018refactoring} describes that the first step in refactoring is to create automated tests, such as unit tests. The tests help to avoid creating bugs by guaranteeing that the behavior does not change, as any code change could also change the code behavior. Humans may make mistakes and cause serious problems in production. In system production, maintainability is a significant factor that influences costs, and one of the proposed solutions to reduce it is to increase software quality \cite{mens2004}. 
 
 Refactoring can be applied to the development process to increase software quality, forcing the programmer to find bad smells (a characteristic of the code that indicates an issue) \cite{Wilking2007}. 
 In the study of \textcite{szHoke2017empirical}, six systems were analyzed to verify the effectiveness of software refactoring aimed at maintainability. To obtain data before refactoring, \textcite{szHoke2017empirical} analyzed all systems using a code analyzer called the SourcerMeter tool based on the Columbus tool \cite{ferenc2002}. Refactorings were performed manually, and developers were informed of all the data and the list of problematic code fragments. 
@@ -76,16 +76,16 @@ Many code refactoring tools are based on the catalog of refactorings created by 
 
 \textcite{murphy2008breaking}, together with eight software developers with different work experiences, used the GostFactor tool to assist in refactoring. They observed that this process decreased errors in the refactoring application by 23.3\%.
 
-The RMT tool, as developed by \textcite{beluzzo2018abordagem}, facilitates the seamless integration of design pattern insertion and detection methods within a unified environment. This tool engages in an interactive process with the developer, providing foresight into the inherent changes after refactoring and concurrently evaluating the effectiveness of such refactoring in enhancing code quality. \textcite{sangeetha2019empirical} 's work, although it does not explain tool implementation, employs it for experimental verification and validation of the used techniques. The RMT is designed to support the implementation of any refactoring method in the literature \cite{beluzzo2018abordagem}.
+The RMT 1.0 tool, as developed by \textcite{beluzzo2018abordagem}, facilitates the seamless integration of design pattern insertion and detection methods within a unified environment. This tool engages in an interactive process with the developer, providing foresight into the inherent changes after refactoring and concurrently evaluating the effectiveness of such refactoring in enhancing code quality. \textcite{sangeetha2019empirical} 's work, although it does not explain tool implementation, employs it for experimental verification and validation of the used techniques. The RMT 1.0 is designed to support the implementation of any refactoring method in the literature \cite{beluzzo2018abordagem}.
 
-\subsection{RMT}
+\subsection{RMT 1.0}
 \label{sub-rmt}
 
-The RMT (Refactoring and Measurement Tool) was created to identify design pattern insertion points utilizing the methodologies implemented by \textcite{beluzzo2018abordagem}. \textcite{zafeiris2017automated} and \textcite{Liu2014} are responsible for developing the implemented refactoring techniques. The developed approaches are, respectively, the refactoring of the Template Method pattern and the refactoring of the Strategy and Factory Method patterns. The \Cref{fig-activity-rmt} illustrates the flow of the RMT tool without discriminating between implementations. The figure is divided into two distinct colors, each representing a unique request (thread) on hold by the client user and, consequently, by the intermediary service.
+The RMT 1.0 (Refactoring and Measurement Tool) was created to identify design pattern insertion points utilizing the methodologies implemented by \textcite{beluzzo2018abordagem}. \textcite{zafeiris2017automated} and \textcite{Liu2014} are responsible for developing the implemented refactoring techniques. The developed approaches are, respectively, the refactoring of the Template Method pattern and the refactoring of the Strategy and Factory Method patterns. The \Cref{fig-activity-rmt} illustrates the flow of the RMT 1.0 tool without discriminating between implementations. The figure is divided into two distinct colors, each representing a unique request (thread) on hold by the client user and, consequently, by the intermediary service.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
-\caption{Activity diagram for RMT}
+\caption{Activity diagram for RMT 1.0}
 \label{fig-activity-rmt}
 \fontsize{3.8}{5}\selectfont
 \includesvg[width =\textwidth]{Chapter-2/Figures/activity-rmt.svg}
@@ -97,7 +97,7 @@ The use activity diagram delineates the tool's functionality for the user. The c
 
 In addition to applying the refactorings, the tool uses the CK metrics extractor \cite{ck}, which encompasses the metrics of the depth of the inheritance tree (PAH), the cyclomatic complexity (CC), and the size of the program in lines of code (TPLC). Upon selecting a project selected for refactoring, the metrics are applied to demonstrate the effects of refactoring on the user source code. The available external quality attributes are maintainability, reliability, and reusability.
 
-\subsubsection{RMT Architecture}
+\subsubsection{RMT 1.0 Architecture}
 \label{sub-architecture}
 
 The architecture diagram in \Cref{fig-architecture} starts with user iteration within the Client App, as it is isolated and runs independently since it is a Java desktop application; the communication can be only made with the Intermediary Service, which provides the communication between the user layer (Client) and the processing layer (Services). The Intermediary Service uses Hypertext Transfer Protocol (HTTP) requests to communicate to the subsequent Metrics and the Detection Service.
@@ -106,7 +106,7 @@ The architecture diagram in \Cref{fig-architecture} starts with user iteration w
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
-\caption{RMT architecture diagram}
+\caption{RMT 1.0 architecture diagram}
 \label{fig-architecture}
 \includegraphics[width =\textwidth]{Chapter-2/Figures/schema.png}
 \SourceOrNote{\textcite{beluzzo2018abordagem}}
@@ -117,10 +117,45 @@ The intermediary service functions as a service registry, possessing detailed kn
 
 \textcite{beluzzo2018abordagem} attempted to conceptualize an extensible tool, facilitating new implementations without experiencing substantial obstacles. However, he did not delineate a concrete process for extension.
 
+\subsubsection{Quality Attributes and Metrics}
+
+Calculations for the quality attributes are done using the metrics service; they are done by extracting a set of metrics from the original project called OPM (original project metrics) and the refactored project called RPM (refactored project metrics). The metrics used in the project are depth of inheritance tree (DIT), cyclomatic complexity (CC), and program size in lines of code (LOC), all proposed by \textcite{sommerville2004software}. The association of the metrics creates the quality attribute as shown on \Cref{fig-quality-attributes}.
+
+\begin{figure}[ht!]
+\SetCaptionWidth{\textwidth}
+\caption{Quality Attributes and Metrics Used On RMT 1.0}
+\label{fig-quality-attributes}
+\includegraphics[width=\textwidth]{Chapter-2/Figures/QualittyAttributes.png}
+\SourceOrNote{\textcite{beluzzo2018abordagem}, adapted}
+\end{figure}
+\FloatBarrier
+
+The evaluation of quality attribute (EQA) is given by the arithmetic mean of the percentage change of each metric that it is composed of. For example, reusability is associated with the depth of inheritance tree (PAH) and project size in lines of code (TPLC), which is necessary to determine the percentage of change in these two metrics. The calculation is given using the \Cref{eq-first-formula}.
+
+\begin{equation}%
+\label{eq-first-formula}
+    EQA=(CP^0+ CP^1…CP^n)/n
+\end{equation}
+
+The percent of change (CP) metric represents how much it has changed (in percentage) from the evaluation between the original source code and the refactored source code.
+The original project metrics (OPM) and refactored project metrics (RPM) are inputted on the \Cref{eq-secund-formula} to generate the CP.
+
+\begin{equation}
+\label{eq-secund-formula}
+    CP= ((PRM*100)/OPM)-100
+\end{equation}
+
+It is possible for a given metric to have its value inversely proportional to the quality attribute being calculated, such as the Cyclomatic Complexity metric. As the value of this metric increases, Maintainability decreases \textcite{beluzzo2018abordagem}. 
+
+The inverse CP is calculated when the metrics are inversely proportional to their correlated quality attributes. The value of OPM will replace the PRM and vice versa on \Cref{eq-secund-formula}. The \Cref{tab-quality} has all definitions for the metrics.
+
+\input{Chapter-2/Tables/quality attributes}
+
 \subsubsection{Internal structure}
 \label{subsub-internal}
 
-The architecture of a computational system is critical for its proper functionality; however, most intensive processing operations are executed within the services. An optimally designed service will operate efficiently with minimal memory and CPU resources, ensuring compatibility with small-scale computer instances. The methodology for selecting candidates for refactoring using RMT is illustrated in \Cref{fig-candidates}.
+The architecture of a computational system is critical for its proper functionality; however, most intensive processing operations are executed within the services. An optimally designed service will operate efficiently with minimal memory and CPU resources, ensuring compatibility with small-scale computer instances. The methodology for selecting candidates for refactoring using RMT 1.0 is illustrated in \Cref{fig-candidates}. 
+
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -133,7 +168,7 @@ The architecture of a computational system is critical for its proper functional
 
 As described, the intermediary service communicates with the detection service after saving the project to the database and sends the project ID, as in Step 1.
 
-The detection service receives an HTTP request on the \texttt{DetectionBoundary} class and, with the project ID, calls the \texttt{extractCandiates} method. The controller process occurs in Step 1.1.
+The detection service receives an HTTP request on the \texttt{DetectionBoundary} class and, with the project ID, calls the \texttt{ExtractManager} method. The controller process occurs in Step 1.1.
 
 The id is received by the \texttt{ExtractManager} class, which is the interface responsible for calling the \texttt{getProject} method to retrieve the project from the repository; the actions are represented by Step 1.2.
 
@@ -154,16 +189,16 @@ If any candidate was detected, the intermediary service automatically calls the 
 \end{figure}
 \FloatBarrier
 
-\texttt{DetectionBoundry} class is the application controller, it recives the request to start the refactoring, within the request are the classes choose by the user to be refactored and the project ID, the information is send to the \texttt{ExtractManager} as Step 1.1.
+\texttt{DetectionBoundry} class is the application controller; it receives the request to start the refactoring; within the request are the classes chosen by the user to be refactored and the project ID; the information is sent to the \texttt{ExtractManager} as Step 1.1.
 
 The \texttt{ExtractManager} class has the same functionality as in \Cref{fig-candidates}, retrieving the project from the database by the \texttt{ProjectRepository} (Step 1.2); and then calling the \texttt{DataExtractionFork} class over a loop as Step 2.
 
  In Step 2.1, \texttt{DataExtractionFrok} has the same functionality as in \Cref{fig-candidates}. However, every candidate in the project inflates the zip file and converts it to a \texttt{CompilationUnit} class to be refactored in Step 3. After refactoring has ended, the project ID is returned from 3.1 to 3.4.
 
-\subsubsection{RMT Usage}
+\subsubsection{RMT 1.0 Usage}
 \label{sub-usage}
 
-The main focus of explaining the usage of RMT is on the Client App, which is divided into three stages. The first step is to import the project, as shown in \Cref{fig-import}.
+The main focus of explaining the usage of RMT 1.0 is on the Client App, which is divided into three stages. The first step is to import the project, as shown in \Cref{fig-import}.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -198,17 +233,17 @@ In the third and last step, the user can choose the candidates to apply the refa
 
 The metrics in the tool are expressed in percentages where the positive value shows an increase in the given quality attributes and the negative value shows a decrease. The attributes are calculated by combining the following metrics: cyclomatic complexity, depth of the inheritance tree, and lines of code. The combinations of all metrics calculate maintainability; Reliability uses the cyclomatic complexity and lines of code, and reusability uses the depth of the inheritance tree and lines of code. 
 
-\subsubsection{RMT Limitations}
+\subsubsection{RMT 1.0 Limitations}
 \label{subsub-limitation}
-When testing the RMT, some limitations were noticed. The first limitation was the long time required to execute a project refactoring, which involved drilling down on the tool code to find the reason for the slowness. One section had strange behavior: starting a refactoring system, extracting a zip file, and parsing every file to memory to verify if it could be a refactoring candidate. The problem is that the parsing process is repeated for each file and is repeated even more when the candidate is refactored. Following the same idea, when the candidate is refactored, each refactoring step is saved on the filesystem, once again accessed, and parsed to retrieve the changes. The disk (filesystem) has expensive access and takes time; a better option is to handle all the access directly on the memory.
+When using the RMT 1.0, some limitations were noticed. The first limitation was the long time required to execute a project refactoring, which involved drilling down on the tool code to find the reason for the slowness. One section had strange behavior (but expected by the author): starting a refactoring system, extracting a zip file, and parsing every file to memory to verify if it could be a refactoring candidate. The problem is that the parsing process is repeated for each file and is repeated even more when the candidate is refactored. Following the same idea, when the candidate is refactored, each refactoring step is saved on the filesystem, once again accessed, and parsed to retrieve the changes. The disk (filesystem) has expensive access and takes time; a better option is to handle all the access directly on the memory.
 
-The blocking request issue manifests when many users concurrently access the tool, thereby saturating the available connections. Any new users will increase latency and may induce users to receive an error from the server as they have to wait until other processes are over to open space for a new connection. This problem mainly occurs because of the synchronous architecture on RMT based on an API manager (intermediary service) communicating with the other services via HTTP requests, holding the service thread until the call ends. This behavior could cause problems in other functionalities, such as the load balancer, service registry, and service discovery, which occurs because the service has no more threads to execute any code. It may crash or freeze. Since Java 8 is limited by the system threads, scaling vertically (upgrading the CPU) is the only way to support more clients. The downside of HTTP communication is that latency increases with the number of concurrent clients \cite{Cebeci2020DesignOA}. 
+The blocking request issue manifests when many users concurrently access the tool, thereby saturating the available connections. Any new users will increase latency and may induce users to receive an error from the server as they have to wait until other processes are over to open space for a new connection. This problem mainly occurs because of the synchronous architecture on RMT 1.0 based on an API manager (intermediary service) communicating with the other services via HTTP requests, holding the service thread until the call ends. This behavior could cause problems in other functionalities, such as the load balancer, service registry, and service discovery, which occurs because the service has no more threads to execute any code. It may crash or freeze. Since Java 8 is limited by the system threads, scaling vertically (upgrading the CPU) is the only way to support more clients. The downside of HTTP communication is that latency increases with the number of concurrent clients \cite{Cebeci2020DesignOA}. 
 
 In the detection service, the Java Parser library \textcite{javaparser} is in versions that support only features up to Java 9 (the last release is Java 22). That was not a limitation when the tool was built but became a limitation as it ages. This limitation can be addressed by constantly updating the library.
 
 Another limitation is related to the CK \textcite{ck} library used to calculate the metrics; the library code was copied to the tool code, making it difficult to update for new versions and take advantage of new metrics and features. 
 
-The RMT shows two refactorings for the same design pattern and class. Therefore, the user has only the metrics to choose from, which will be applied; there are no other ways to explain the difference between the method to the user to make a better decision.
+The RMT 1.0 shows two refactorings for the same design pattern and class. Therefore, the user has only the metrics to choose from, which will be applied; there are no other ways to explain the difference between the method to the user to make a better decision.
 
 The tool currently lacks unit tests to ensure the logic implemented within the class is accurate. Such tests are instrumental in facilitating refactoring efforts, ensuring that while the code undergoes structural modifications, its intended functionality remains unchanged as long as the tests pass.
 
@@ -216,7 +251,7 @@ The tool currently lacks unit tests to ensure the logic implemented within the c
 \label{sec-microservices}
 The microservices are used to create large and complex applications, as the model shown in \Cref{fig-architecture}, each application must be simple and independent. When services are connected and working together, they become a system. As discussed in \textcite{microservices-comuni}, the application is fault-tolerant and more controllable than a monolithic architecture.
 
-There are many architectures, such as synchronous RMT and asynchronous ones. The synchronous services wait for the response before ending the process; they usually use a direct connection over Representational State Transfer (REST), Remote Procedure Call (RCP), etc. \cite{microservices-comuni}. To implement a retry on synchronous services, the caller service must handle the failure without terminating the connection.
+There are many architectures, such as synchronous RMT 1.0 and asynchronous ones. The synchronous services wait for the response before ending the process; they usually use a direct connection over Representational State Transfer (REST), Remote Procedure Call (RCP), etc. \cite{microservices-comuni}. To implement a retry on synchronous services, the caller service must handle the failure without terminating the connection.
 
 Asynchronous services do not wait for a response; the communication is non-block, so the service does not wait for the answer to end the process; it can be achieved with queues as communication means. Some queue services are RabbitMQ, Apache Kafka, and Simple Service Queue (SQS), among others \cite{KARABEYAKSAKALLI2021111014}. Queue services have resilience-oriented characteristics, including the ability to persist unconsumed messages, thus ensuring that requests are not lost even if a service experiences downtime \cite{Cebeci2020DesignOA}.
 
@@ -230,7 +265,7 @@ This chapter reported on the importance of refactoring, described the methods ba
 
 Refactoring is essential to keep the source code free from smells and to a quality standard. The main focus of refactoring is maintainability and reusability by maintaining the code as first designed and avoiding inserting new smells.
 
-The importance of using a software refactoring tool was addressed to get the most out of refactoring without harming the work already done, highlighting that the RMT tool is the focus of this research.
-The RMT tool integrates several methods for detecting and inserting design patterns in a single environment so that the application developer can apply them to their source code without using several refactoring tools.
+The importance of using a software refactoring tool was addressed to get the most out of refactoring without harming the work already done, highlighting that the RMT 1.0 tool is the focus of this research.
+The RMT 1.0 tool integrates several methods for detecting and inserting design patterns in a single environment. The application developer can apply them to their source code without using several refactoring tools.
 
-There are many types of software architecture, but we discuss the abilities of the async and sync applications, bringing both upsides and downsides. This work used snowballing to ensure that no other tool, such as RMT, was used, and the results are presented in the next chapter.
+There are many types of software architecture, but we discuss the abilities of the async and sync applications, bringing both upsides and downsides. This work used snowballing to ensure that no other tool, such as RMT 1.0, was used, and the results are presented in the next chapter.

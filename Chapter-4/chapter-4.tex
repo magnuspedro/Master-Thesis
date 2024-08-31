@@ -1,7 +1,7 @@
-\chapter{Methodology used to refactor and improve RMT tool}%
+\chapter{Methodology used to refactor and improve RMT 1.0}%
 \label{methodology}
 
-This chapter explores the methodology for refactoring and improving the RMT tool. It delves into various techniques and best practices for improving and optimizing the tool's performance and maintainability. The discussion covers a range of refactoring strategies.
+This chapter explores the methodology for refactoring and improving the RMT 1.0 tool. It delves into various techniques and best practices for improving and optimizing the tool's performance and maintainability. The discussion covers a range of refactoring strategies.
 
 The methodology is delineated into five sequentially interconnected phases as depicted in \Cref{fig-overview-methodology}. Each phase systematically uses the insights and understanding obtained from the previous stage to optimize its efficacy. 
 
@@ -15,7 +15,7 @@ The methodology is delineated into five sequentially interconnected phases as de
 \FloatBarrier
 
 
-Each phase of the methodology is described in the clauses of this chapter. The \cref{sec-arch-cloud} explores the methodology through cloud technologies. The \cref{sec-archtectural-analysis}, \ref{sub-intermediary-packages}, \ref{sub-detection-packages}, and \ref{sub-metrics-packages} explain the analytic processes used to formulate strategic modifications to the codebase and delineate the functionalities of each package within the services. The \cref{sec-creating-tests}, \ref{detection-design-tests}, and \ref{metrics-design-tests} elaborate on the comprehensive testing procedures for each service, detailing the criteria for selecting tested classes. The \cref{sec-enhancing}, \ref{sub-restruct-intermediary}, \ref{sub-restruct-detection}, and \ref{sec-restruct-metrics} detail the extensive phases of refactoring and restructuring RMT services. The \cref{sec-test-rmt} outlines the systematic methodology implemented to evaluate the tool.
+Each phase of the methodology is described in the clauses of this chapter. The \cref{sec-arch-cloud} explores the methodology through cloud technologies. The \cref{sec-archtectural-analysis}, \ref{sub-intermediary-packages}, \ref{sub-detection-packages}, and \ref{sub-metrics-packages} explain the analytic processes used to formulate strategic modifications to the codebase and delineate the functionalities of each package within the services. The \cref{sec-creating-tests}, \ref{detection-design-tests}, and \ref{metrics-design-tests} elaborate on the comprehensive testing procedures for each service, detailing the criteria for selecting tested classes. The \cref{sec-enhancing}, \ref{sub-restruct-intermediary}, \ref{sub-restruct-detection}, and \ref{sec-restruct-metrics} detail the extensive phases of refactoring and restructuring RMT 1.0 services. The \cref{sec-test-rmt} outlines the systematic methodology implemented to evaluate the tool.
 
 As all services have been renamed, the corresponding nomenclature equivalences are described in \Cref{tab-services-map}. The explanations for the renaming are provided in the subsequent chapters.
 
@@ -79,7 +79,7 @@ The package \texttt{datastore} is configured with identical database parameters 
 
 Package \texttt{ repository.project} has logic to manipulate the database where projects are saved and retrieved for unrefactored and refactored projects. The database configuration, such as the address and ports, is imported from the \texttt{datastore} package.
 
-The package \texttt{methos.dataExtractoins} includes preconfigured interfaces for implementing various code extraction methods. The Abstract Syntax Tree is implemented as the extraction method for the refactoring processes within the RMT. Following the code transformation into an Abstract Syntax Tree (AST), the service accesses the files within the \texttt{domain.mehtos} to perform its designated function.
+The package \texttt{methos.dataExtractoins} includes preconfigured interfaces for implementing various code extraction methods. The Abstract Syntax Tree is implemented as the extraction method for the refactoring processes within the RMT 1.0. Following the code transformation into an Abstract Syntax Tree (AST), the service accesses the files within the \texttt{domain.mehtos} to perform its designated function.
 
 The package \texttt{managers.pulse} includes the configuration for the service registry, sending requests every minute to ensure its functionality to the intermediary service, and can receive requests. Information, such as the address and port sent from the service, is retrieved from the package \texttt{domain.identity}.
 
@@ -114,14 +114,14 @@ The classes with logic and calculations for generating metrics are in the \textt
 
 Consistent with previous services, the \texttt{ws.boundaries} packages serve as the access point for service functionalities. They coordinate computations by interfacing with the database to retrieve project data and invoke methods within the \texttt{processor.qualityAttributes} packages, thereby generating metrics and quality attributes.
  
-\section{Creating Unit Tests}
+\section{Creating Unit Tests With jUnit5}
 \label{sec-creating-tests}
 
-Upon comprehending the tool's functionalities, the subsequent step involves verifying the presence of tests. This is essential to commence the refactoring process, as explained by Fowler:
+Upon comprehending the tool's functionalities, the subsequent step involves verifying the presence of unit tests on tool source code. This is essential to commence the refactoring process, as explained by Fowler:
 
 \Citation[english]{\cite[9]{fowler2018refactoring}}{Whenever I do refactoring, the first step is always the same. I need to ensure I have a solid set of tests for that section of code. The tests are essential because even though I will follow refactorings structured to avoid most of the opportunities for introducing bugs, I’m still human and still make mistakes}.
 
-The RMT lacked any form of testing; therefore, according to \textcite{fowler2018refactoring} philosophy, the tool was subjected to unit tests to verify consistent behavior after refactoring. 
+The RMT 1.0 lacked any form of documented test and unit testing on it`s source code; therefore, according to \textcite{fowler2018refactoring} philosophy, the tool was subjected to the creation of unit tests stored on it source code with the jUnit5 framework \cite{junit}. This process it to ensure and verify consistent behavior after refactoring. 
 
 The tests focused on the business logic of the detection service and the quality attribute computations within the metrics service. Testing was bypassed for the intermediary service due to its redevelopment.
 
@@ -144,7 +144,7 @@ After refactoring, the parsing behavior must remain consistent, given that the A
 \end{figure}
 \FloatBarrier
 
-The initial phase of the RMT refactoring process, 'data extraction,' involves parsing Java files into an Abstract Syntax Tree (AST), a task performed by the \texttt{AbstractSyntaxTree} class. The class testing methodology consists of the accuracy of the parsing process, the generation of an AST object, or the identification of errors as the library \cite{javaparser} executes the process. Therefore, the reliability of this library is assumed, necessitating only the validation of the output. This is achieved by converting a code sample into a string and confirming the equivalence between the AST output, also as a string, and the original input. Error conditions are tested by deliberately invoking the library with incorrect Java code and asserting the results.
+The initial phase of the RMT 1.0 refactoring process, 'data extraction,' involves parsing Java files into an Abstract Syntax Tree (AST), a task performed by the \texttt{AbstractSyntaxTree} class. The class testing methodology consists of the accuracy of the parsing process, the generation of an AST object, or the identification of errors as the library \cite{javaparser} executes the process. Therefore, the reliability of this library is assumed, necessitating only the validation of the output. This is achieved by converting a code sample into a string and confirming the equivalence between the AST output, also as a string, and the original input. Error conditions are tested by deliberately invoking the library with incorrect Java code and asserting the results.
 
 The \texttt{AbstractSyntaxTreeFork} class orchestrates the refactoring implemented methods that use the Abstract Syntax Tree (AST) as the parsing mechanism. The refactoring process is divided into two primary stages: invoking methods to identify candidate elements and executing methods to refactor the identified candidate classes. Additionally, the class has logic for database manipulation; this aspect was not subjected to testing due to the substitution of all database communication mechanisms and the database itself, thereby preventing the necessity to preserve any pre-existing behavior. For testing the class, the refactoring techniques had to be mocked (creating an object that simulates the original object's behavior) and assuring the behavior when the methods return an error or success.
 
@@ -198,16 +198,16 @@ Most classes within the Metrics services require extensive rewrites to integrate
 
 The critical aspect of testing metrics and quality attributes for refactoring lies in maintaining consistent calculations for metrics and quality attributes. This ensures that the test's integrity remains intact, notwithstanding any alterations in the library that may modify the metric computation method.
 
-Performing an in-depth analysis for each class. The \texttt{Metric} class extracts metrics from the \textcite{ck} library, incorporating these metrics for each class within a project. The test must ensure the continuity of the metric calculations for each class using identical metrics derived from the CK library. The \texttt{Proportion} class encompasses two calculation methodologies: the \texttt{direct} method, entailing the division of the refactored value by the original, and the \texttt{inverted} method, which involves the division of the original value by the refactored; testing must ensure that these calculations yield consistent results after refactoring. The \texttt{QualityAttribute} class served as the foundational model to calculate the quality attributes used in RMT. This was achieved by integrating the results of specific metrics with proportion calculations; the testing process must confirm that identical metric values consistently yield the same quality attribute values, even after subsequent refactoring.
+Performing an in-depth analysis for each class. The \texttt{Metric} class extracts metrics from the \textcite{ck} library, incorporating these metrics for each class within a project. The test must ensure the continuity of the metric calculations for each class using identical metrics derived from the CK library. The \texttt{Proportion} class encompasses two calculation methodologies: the \texttt{direct} method, entailing the division of the refactored value by the original, and the \texttt{inverted} method, which involves the division of the original value by the refactored; testing must ensure that these calculations yield consistent results after refactoring. The \texttt{QualityAttribute} class served as the foundational model to calculate the quality attributes used in RMT 1.0. This was achieved by integrating the results of specific metrics with proportion calculations; the testing process must confirm that identical metric values consistently yield the same quality attribute values, even after subsequent refactoring.
 
 \section{Enhancing Software: Refactoring and Restructuring Techniques}
 \label{sec-enhancing}
 
-After creating tests, the tool can be refactored and restructured. The first step in refactoring the RMT was to update the Java version to 21 since the current version was 8, released in 2014; the new version brings new features to the language and is faster \cite{java21}. 
+The tool can be refactored and restructured after creating the unit tests with JUnit. The first step in refactoring the RMT 1.0 was to update the Java version to 21 since the current version was 8, released in 2014; the new version brings new features to the language and is faster \cite{java21}. 
 
 Despite the advantages of upgrading the Java JDK, one of the fundamental tenets of the refactoring initiative was to transition the framework to Spring Boot. Consequently, since the latest version of Spring Boot is exclusively compatible with Java 17 and higher. All dependencies were also updated to the latest version.
 
-IntelliJ, developed by JetBrains, was the integrated development environment (IDE) for refactoring the tool \cite{intellij}. IntelliJ has an "inspection" functionality that proactively recommends refactorings of the current code, with the primary objective of enhancing it \cite{intellij-inspection}. In the RMT code, suggestions were made to make the code more readable, such as changing an expression from a negated to a regular expression, as exemplified in \Cref{alg-intellij}. The IntelliJ automation subjected the metrics and detection services to a comprehensive refactoring process.
+IntelliJ, developed by JetBrains, was the integrated development environment (IDE) for refactoring the tool \cite{intellij}. IntelliJ has an "inspection" functionality that proactively recommends refactorings of the current code, with the primary objective of enhancing it \cite{intellij-inspection}. In the RMT 1.0 code, suggestions were made to make the code more readable, such as changing an expression from a negated to a regular expression, as exemplified in \Cref{alg-intellij}. The IntelliJ automation subjected the metrics and detection services to a comprehensive refactoring process.
 
 \begin{algorithm}[!htbp]
 \caption{Exemple of a code refactoring by IntelliJ}%
@@ -237,7 +237,7 @@ The sequence for restructuring the tool begins with the complete rewrite of the 
 
 As previously mentioned, the intermediary service underwent a comprehensive restructuring due to the obsolescence of most of its functionalities according to the new design. 
 
-The remaining essential features were also rewritten but updated to integrate current technologies. The rewrite addresses some limitations of the RMT by focusing on keeping the service simple implementation and the asynchronous management of the tool. The intermediary service is assigned to receive a project via HTTP, save the project information in the event database, the project file on an object storage tool, send the project ID to the detection service, and close the requests successfully. The tool also offers an endpoint to consult the refactoring status, as the process is asynchronous.
+The remaining essential features were also rewritten but updated to integrate current technologies. The rewrite addresses some limitations of the RMT 1.0 by focusing on keeping the service simple implementation and the asynchronous management of the tool. The intermediary service is assigned to receive a project via HTTP, save the project information in the event database, the project file on an object storage tool, send the project ID to the detection service, and close the requests successfully. The tool also offers an endpoint to consult the refactoring status, as the process is asynchronous.
 
 Those modifications attempt to solve the service freezing issue and remove many responsibilities from it. The freezing is avoided because the service is ready to receive a new request after sending a message to the detection service without waiting for the service process to respond. Concerning responsibilities, the service does not have a load balancer or a service registry functionality, which helps to save machine resources.
 
@@ -270,7 +270,7 @@ Following the other two services, the name was also changed from metrics service
 %Removi a CK que estava no codigo, atualizei e importer via package manager
 %adicionei novos padrões
 
-\section{Tests in RMT 2.0}
+\section{Experimental study of RMT 2.0}
 \label{sec-test-rmt}
 
 Despite the presence of unit tests following the refactoring process, the tool has undergone system-level testing. A Dockerfile was generated for each service to establish the integration test environment, which allows containerization. To facilitate the local execution of AWS services, Localstack \cite{localstack} enables SQS and S3 services, with Redis provisioned in a separate container. The deployment of all these containers is orchestrated using a docker-compose file. 
@@ -279,8 +279,8 @@ The evaluation of the tools was systematically organized into three sequential p
 
 \section{Cloasing Remarks}
 
-This chapter presented the methodology used to improve and refactor the RMT tool. 
-The methodology outlined is sketched through the diagram described \Cref{fig-summarized-methodology}. It is partitioned into six distinct color segments to enhance the elucidation of the process, which starts with improving the RMT and follows a path to every step in the methodology until the tool is refactored and ready to be tested.
+This chapter presented the methodology used to improve and refactor the RMT 1.0 tool. 
+The methodology outlined is sketched through the diagram described \Cref{fig-summarized-methodology}. It is partitioned into six distinct color segments to enhance the elucidation of the process, which starts with improving the RMT 1.0 and follows a path to every step in the methodology until the tool is refactored and ready to be tested.
 
 \begin{figure}[ht!]
 \SetCaptionWidth{\textwidth}
@@ -292,7 +292,7 @@ The methodology outlined is sketched through the diagram described \Cref{fig-sum
 \end{figure}
 \FloatBarrier
 
-The diagram presents a comprehensive methodology for refactoring the RMT, with each node color representing distinct phases and processes within the improvement strategy. The structured approach ensures a systematic enhancement of the tool's architecture and functionality.
+The diagram presents a comprehensive methodology for refactoring the RMT 1.0, with each node color representing distinct phases and processes within the improvement strategy. The structured approach ensures a systematic enhancement of the tool's architecture and functionality.
 
 The green nodes represent the initial analysis phase, which focuses on examining the code and structure of the Intermediary, Detection, and Metrics services. This phase was important to understanding the existing architecture and identifying areas that need improvement. The analysis forms the foundation for subsequent restructuring and refactoring efforts.
 
@@ -300,6 +300,6 @@ The pink nodes are associated with the restructuring of the architecture, the de
 
 Representing the service refactoring processes, the yellow nodes cover updating code dependencies, applying automated refactoring tools within the Integrated Development Environments (IDEs), and optimizing the application code. This phase aims to improve the code's maintainability, readability, and performance. 
 
-The purple nodes designate the testing phase for the implemented changes. This phase validates the correctness and effectiveness of the restructured and refactored code. Using the test cases in each article ensures that the changes did not modify the initial behavior. 
+The purple nodes designate the testing phase for the implemented changes. This phase validates the correctness and effectiveness of the restructured and refactored code. Using the test cases in each class ensures that the changes did not modify the initial behavior. 
 
 The orange nodes focus on correcting identified issues and highlighting the processes involved in addressing any problems discovered during testing. This phase involved iterative debugging, refining code, and retesting to confirm that all identified issues have been resolved.
