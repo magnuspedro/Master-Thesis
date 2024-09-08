@@ -1,11 +1,11 @@
 \chapter{Conclusion}%
 \label{conclusion}
 
-This work presented how the process for creating RMT 2.0 was conducted. RMT 2.0 guaranteed superior performance, scalability, and reliability through its  cloud-native architecture. The transition from conventional HTTP requests to asynchronous communication via message queues refines interactions, ensuring more robust communication. Furthermore, storage migration to Amazon S3 and Redis provides a more scalable and reliable solution, facilitating refactored project distributions.
+This work presented how the process for creating RMT 2.0 was conducted. RMT 2.0 guaranteed superior performance, scalability, and reliability through its cloud-native architecture. The transition from conventional HTTP requests to asynchronous communication via message queues refines interactions, ensuring more robust communication. Furthermore, storage migration to Amazon S3 and Redis provides a more scalable and reliable solution, facilitating refactored project distributions.
 
 The Spring framework and the restructured package architecture simplified the codebase and made the tool more manageable and maintainable. This architectural refinement reduced complexity and sped up development, allowing developers to focus on coding rather than intricate configurations. A new browser-based interface enhances the user experience, making project evaluation and refactoring easier to access. As part of the framework upgrade, the transition from Java 8 to Java 21 has enhanced thread management flexibility. The introduction of virtual threads, which are lightweight and efficient, significantly mitigates the complexity involved in development, maintenance, and debugging.
 
-The tool was covered with 327 unit tests, both to facilitate the overall process of this work and to increase the reliability of the tool. The Detection and Refactoring Service has a unit test coverage exceeding 89\%, while the Metrics Service demonstrates coverage exceeding 87\%. The Project Sync BFF presents a coverage metric that exceeds 75\%. The integration tests were performed with the same projects to evaluate the tool's first version.
+The tool was covered with 327 unit tests, both to facilitate the overall process of this work and to increase the reliability of the tool. The Detection and Refactoring Service has a unit test coverage of executed lines exceeding 89\%, while the Metrics Service demonstrates coverage of executed lines exceeding 87\%. The Project Sync BFF presents coverage of executed line metrics that exceed 75\%. The integration tests were performed with the same projects to evaluate the tool's first version.
 
 The initial testing of RMT 2.0 addressed and solved issues along the services. In contrast, further testing with redesigned and real-world projects confirmed the tool's effectiveness in identifying refactoring candidates and measuring the resultant with software metrics. Comparative analyses demonstrated that RMT 2.0 significantly outperforms the first version. These improvements resulted in a notable 63.64\% increase in overall execution time, making the tool more practical and efficient for developers.
 
@@ -21,3 +21,5 @@ As the approach created has various extension points, the following suggestions 
   \item Segregation of method detection and refactoring processes into individual threads to enable parallel execution.
   \item Develop an enhanced visualization methodology for refactoring candidates within the same class and an improved mechanism for integrating various refactorings in one class to mitigate potential conflicts.
 \end{itemize}
+
+The developers can create plugins for any IDE to use RMT 2.0 as it has endpoints not only communicated by the browser interface, allowingit comunicatting with everything. The tool can refactor an old or new code base to search for pattern insertions helping developers apply design patterns.
