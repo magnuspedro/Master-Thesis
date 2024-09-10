@@ -126,11 +126,11 @@ Calculations for the quality attributes are done using the metrics service; they
 \caption{Quality Attributes and Metrics Used On RMT 1.0}
 \label{fig-quality-attributes}
 \includegraphics[width=\textwidth]{Chapter-2/Figures/QualittyAttributes.png}
-\SourceOrNote{\textcite{beluzzo2018abordagem}, adapted}
+\SourceOrNote{\textcite{beluzzo2018abordagem}}
 \end{figure}
 \FloatBarrier
 
-The evaluation of quality attribute (EQA) is given by the arithmetic mean of the percentage change of each metric that it is composed of. For example, reusability is associated with the depth of inheritance tree (PAH) and project size in lines of code (TPLC), which is necessary to determine the percentage of change in these two metrics. The calculation is given using the \Cref{eq-first-formula}.
+The evaluation of quality attribute (EQA) is given by the arithmetic mean of the percentage change of each metric composed. For example, reusability is associated with the depth of inheritance tree (PAH) and project size in lines of code (TPLC), which is necessary to determine the percentage of change in these two metrics. The calculation is given using the \Cref{eq-first-formula}.
 
 \begin{equation}%
 \label{eq-first-formula}
@@ -235,7 +235,9 @@ The metrics in the tool are expressed in percentages where the positive value sh
 
 \subsubsection{RMT 1.0 Limitations}
 \label{subsub-limitation}
-When using the RMT 1.0, some limitations were noticed. The first limitation was the long time required to execute a project refactoring, which involved drilling down on the tool code to find the reason for the slowness. One section had strange behavior (but expected by the author): starting a refactoring system, extracting a zip file, and parsing every file to memory to verify if it could be a refactoring candidate. The problem is that the parsing process is repeated for each file and is repeated even more when the candidate is refactored. Following the same idea, when the candidate is refactored, each refactoring step is saved on the filesystem, once again accessed, and parsed to retrieve the changes. The disk (filesystem) has expensive access and takes time; a better option is to handle all the access directly on the memory.
+When using the RMT 1.0, some limitations were noticed. To find such limitations, the tool was executed on a Macbook Air M1 with 8GB of RAM, using the Wildfly \cite{wildfly} server with Java 8. The projects used to evaluate the tool's limitation are listed on \Cref{tab-projects-classes}; all the projects were executed looking for replicating the tests done by \textcite{beluzzo2018abordagem}. The limitations were gathered by analyzing the execution of each project, focusing on the metrics and the result of the refactoring, validate its correctness.
+
+The first limitation was the long time required to execute a project refactoring, which involved drilling down on the tool code to find the reason for the slowness. One section had strange behavior (but expected by the author): starting a refactoring system, extracting a zip file, and parsing every file to memory to verify if it could be a refactoring candidate. The problem is that the parsing process is repeated for each file and is repeated even more when the candidate is refactored. Following the same idea, when the candidate is refactored, each refactoring step is saved on the filesystem, once again accessed, and parsed to retrieve the changes. The disk (filesystem) has expensive access and takes time; a better option is to handle all the access directly on the memory.
 
 The blocking request issue manifests when many users concurrently access the tool, thereby saturating the available connections. Any new users will increase latency and may induce users to receive an error from the server as they have to wait until other processes are over to open space for a new connection. This problem mainly occurs because of the synchronous architecture on RMT 1.0 based on an API manager (intermediary service) communicating with the other services via HTTP requests, holding the service thread until the call ends. This behavior could cause problems in other functionalities, such as the load balancer, service registry, and service discovery, which occurs because the service has no more threads to execute any code. It may crash or freeze. Since Java 8 is limited by the system threads, scaling vertically (upgrading the CPU) is the only way to support more clients. The downside of HTTP communication is that latency increases with the number of concurrent clients \cite{Cebeci2020DesignOA}. 
 
