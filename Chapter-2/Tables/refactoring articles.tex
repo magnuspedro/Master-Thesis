@@ -1,42 +1,16 @@
-\begin{longtable}{e{}@{},{}@{}p{3cm}p{8cm}cc@{}}
-%% Cabeçalho da primeira página
+
+\begin{tabframed}[!htbp]
 \caption{Articles with design patterns methods}
-\label{tab-articles}                                              \\[\belowcaptionskip]
-\multicolumn{5}{@{}r@{}}{\textbf{(continue)}}                 \\[\belowcaptionskip]
+\label{tab-articles}
+\begin{tabularx}{\textwidth}{|e{}@{},{}@{}|p{3cm}|p{8cm}|c|c@{}|}
+%% Cabeçalho da primeira página
 \toprule%
-\multicolumn{1}{@{}c}{\textbf{Key}}             &
-\multicolumn{1}{c}{\textbf{Author}}             &
-\multicolumn{1}{c}{\textbf{Title}}              &
-\multicolumn{1}{c}{\textbf{Year}}               &
-\multicolumn{1}{c@{}}{\textbf{Has Tool}}        \\
+\multicolumn{1}{|@{}c|}{\textbf{Key}}             &
+\multicolumn{1}{c|}{\textbf{Author}}             &
+\multicolumn{1}{c|}{\textbf{Title}}              &
+\multicolumn{1}{c|}{\textbf{Year}}               &
+\multicolumn{1}{c@{}|}{\textbf{Has Tool}}        \\
 \midrule%
-\endfirsthead%
-%% Cabeçalho das páginas (exceto primeira e última)
-\caption[]{Articles with design patterns methods}             \\[\belowcaptionskip]
-\multicolumn{5}{@{}r@{}}{\textbf{(continuation)}}             \\[\belowcaptionskip]
-\toprule%
-\multicolumn{1}{@{}c}{\textbf{Key}}             &
-\multicolumn{1}{c}{\textbf{Author}}             &
-\multicolumn{1}{c}{\textbf{Title}}              &
-\multicolumn{1}{c}{\textbf{Year}}               &
-\multicolumn{1}{c@{}}{\textbf{Has Tool}}        \\
-\midrule%
-\endhead%
-%% Cabeçalho da última página
-\caption[]{Articles with design patterns methods}             \\[\belowcaptionskip]
-\multicolumn{5}{@{}r@{}}{\textbf{(conclusion)}}               \\[\belowcaptionskip]
-\toprule%
-\multicolumn{1}{@{}c}{\textbf{Key}}             &
-\multicolumn{1}{c}{\textbf{Author}}             &
-\multicolumn{1}{c}{\textbf{Title}}              &
-\multicolumn{1}{c}{\textbf{Year}}               &
-\multicolumn{1}{c@{}}{\textbf{Has Tool}}        \\
-\midrule%
-\endlasthead%
-%% Rodapé da última página
-\bottomrule%
-\LTSourceOrNote{adapted from \textcite{beluzzo2018abordagem}}           \\
-\endlastfoot% 
 A1  & \citeauthor*{GAITANI201533}            & Automated refactoring to the Null Object design pattern                                                             & 2015 & Yes      \\
 A2  & \citeauthor*{CHRISTOPOULOU20121201}    & Automated refactoring to the Strategy design pattern                                                                & 2012 & Yes      \\
 A3  & \citeauthor*{zafeiris2017automated}           & Automated refactoring of super-class method invocations to the Template Method design pattern                       & 2017 & Yes      \\
@@ -57,6 +31,9 @@ A17 & \citeauthor*{kerievsky2005refactoring} & Refactoring to Patterns          
 A18 & \citeauthor*{kim7332467}               & Scripting parametric refactorings in java to retrofit design patterns                                               & 2015 & No       \\
 A19 & \citeauthor*{kim2014scripting}         & Scripting Refactorings in Java to Introduce Design Patterns                                                         & 2014 & Yes      \\
 A20 & \citeauthor*{juillerat4362900}         & Toward an implementation of the ”Form Template Method” Refactoring                                                  & 2007 & Yes      \\
-A21 & \citeauthor*{ajouli6619484}            & Transformations between composite and visitor implementations in Java                                               & 2013 & Yes     
-\end{longtable}
+A21 & \citeauthor*{ajouli6619484}            & Transformations between composite and visitor implementations in Java                                               & 2013 & Yes     \\
+\bottomrule%
+\end{tabularx}
+\SourceOrNote{adapted from \textcite{beluzzo2018abordagem}}
+\end{tabframed}
 \FloatBarrier

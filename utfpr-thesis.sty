@@ -205,7 +205,7 @@
 \RequirePackage[content = {\faFileImage}, position = {center}]{draftfigure}
 \RequirePackage{eso-pic}
 \RequirePackage{graphicx}
-\RequirePackage{longtable}
+\RequirePackage{longtable,ltcaption}
 \RequirePackage[%
   style        = abnt\ifbool{@ABNTCitNRB}{-numeric}{},%
   natbib       = true,%
@@ -1037,6 +1037,7 @@
 \newrobustcmd*{\Degree}[1][]{\Unit{\ifbool{mmode}{\text{\textdegree}}{\textdegree}\ifblank{#1}{}{#1}}}
 
 %% Objetos flutuantes: figuras, tabelas, etc.
+\renewcommand\LTcaptype{tabframed}
 \newbool{LTMoreThanOnePage}
 \Crefname{flowchart}{Fluxograma}{Fluxogramas}
 \Crefname{photograph}{Fotografia}{Fotografias}
@@ -1683,7 +1684,9 @@
     \end{minipage}%
     \par%
     \begin{Center}%
+    \selectlanguage{brazilian}
     \bfseries\MakeTextUppercase{\TheTitle}%
+    \selectlanguage{english}
     \end{Center}%
     \end{center}%
     \vskip\baselineskip%

@@ -1,39 +1,13 @@
-\begin{longtable}{e{}@{},{}@{}p{9cm}cp{3cm}@{}}
-%% Cabeçalho da primeira página
+\begin{tabframed}
 \caption{Select papers from database search}
-\label{tab-reviews}                                              \\[\belowcaptionskip]
-\multicolumn{4}{@{}r@{}}{\textbf{(continue)}}                 \\[\belowcaptionskip]
+\label{tab-reviews}
+\begin{tabularx}{\textwidth}{|e{}@{},{}@{}|p{9cm}|c|p{3cm}@{}|}
 \toprule%
-\multicolumn{1}{@{}c}{\textbf{Key}}        &
-\multicolumn{1}{c}{\textbf{Tile}}    &
-\multicolumn{1}{c}{\textbf{Citation  Nº}}  &
-\multicolumn{1}{c@{}}{\textbf{Ref}}        \\
-\midrule%
-\endfirsthead%
-%% Cabeçalho das páginas (exceto primeira e última)
-\caption[]{Select papers from database search}                \\[\belowcaptionskip]
-\multicolumn{4}{@{}r@{}}{\textbf{(continuation)}}             \\[\belowcaptionskip]
-\toprule%
-\multicolumn{1}{@{}c}{\textbf{Key}}        &
-\multicolumn{1}{c}{\textbf{Tile}}    &
-\multicolumn{1}{c}{\textbf{Citation  Nº}}  &
-\multicolumn{1}{c@{}}{\textbf{Ref}}        \\
-\midrule%
-\endhead%
-%% Cabeçalho da última página
-\caption[]{Select papers from database search}                \\[\belowcaptionskip]
-\multicolumn{4}{@{}r@{}}{\textbf{(conclusion)}}               \\[\belowcaptionskip]
-\toprule%
-\multicolumn{1}{@{}c}{\textbf{Key}}        &
-\multicolumn{1}{c}{\textbf{Tile}}    &
-\multicolumn{1}{c}{\textbf{Citation  Nº}}  &
-\multicolumn{1}{c@{}}{\textbf{Ref}}        \\
-\midrule%
-\endlasthead%
-%% Rodapé da última página
-\bottomrule%
-\LTSourceOrNote{Own authorship (2023)}           \\
-\endlastfoot% 
+\multicolumn{1}{|@{}c|}{\textbf{Key}}        &
+\multicolumn{1}{c|}{\textbf{Tile}}    &
+\multicolumn{1}{c|}{\textbf{Citation  Nº}}  &
+\multicolumn{1}{c@{}|}{\textbf{Ref}}        \\
+\midrule% 
 S1  & 30 Years of Software Refactoring Research:A Systematic Literature Review                           & 13          & \citeauthor*{Abid2020}                               \\
 S2  & A Literature Review on Code Smells and Refactoring                                                 & 17          & \citeauthor*{Ruben2010}                              \\
 S3  & A Systematic Literature Review on Software Refactoring                                             & 0           & \citeauthor*{Elhazzat2020}                           \\
@@ -48,6 +22,9 @@ S11 & Code Smells and Refactoring: A Tertiary Systematic Review of Challenges an
 S12 & Multi-Objective Optimization Techniques for Software Refactoring: A Systematic Literature Review   & 1           & \citeauthor*{Rafique2019}                            \\
 S13 & On preserving the behavior in software refactoring: A systematic mapping study                     & 15          & \citeauthor*{AlOmar2021}                             \\
 S14 & Trends, opportunities and challenges of software refactoring: A systematic literature review       & 42          & \citeauthor*{Abebe2014a}                              \\
-S15 & Why , How , and When Refactorings are ( NOT ) Applied : A Systematic Literature Review             & 0           & \citeauthor*{Buriakovskyi2018}                                
-\end{longtable}
+S15 & Why , How , and When Refactorings are ( NOT ) Applied : A Systematic Literature Review             & 0           & \citeauthor*{Buriakovskyi2018}                                \\
+\bottomrule%
+\end{tabularx}
+\SourceOrNote{Own authorship (2023)}           
+\end{tabframed}
 \FloatBarrier

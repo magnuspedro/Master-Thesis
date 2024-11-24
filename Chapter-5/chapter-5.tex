@@ -203,22 +203,22 @@ The \Cref{fig-time-chart} shows the execution times for the fifteen projects. In
 
 Through an analysis of execution durations, it became apparent that the projects exhibiting extended execution times comprised more classes as in \Cref{fig-time-by-size} and were refactored for the template method. Specifically, projects p3, p5, p6, p9, p10, p12, p14, p15, and p16, which incorporated the Template Method refactoring, demonstrated a significant discrepancy in execution time when contrasting both tool versions. This discrepancy arises due to performance-focused optimizations implemented within the method code and the overall tool.
 
-\begin{figure}[ht!]
+\begin{graph}[ht!]
 \caption{Execution time difference between RMT version}
 \label{fig-time-chart}
 \includegraphics[width =\textwidth]{Chapter-5/Figures/time-diff.png}
 \SourceOrNote{Own authorship (2024)}
-\end{figure}
+\end{graph}
 \FloatBarrier
 
 The RMT 2.0 exhibited a substantial decrease in execution time by 63.64\%. This reduction was particularly found in the projects p5, p6, p9, p10, p14, p15 and p16, with over 80\% reductions recorded in projects p5, p6, p9, p10 and p15. In particular, excluding p5, all these projects have more than 100 classes. The larger difference between projects is in p9 and p10, which have 458 and 1100 classes, respectively. 
 
-\begin{figure}[ht!]
+\begin{graph}[ht!]
 \caption{Execution time difference by project size between RMT version}
 \label{fig-time-by-size}
 \includegraphics[width =\textwidth]{Chapter-5/Figures/time-per-project-size.png}
 \SourceOrNote{Own authorship (2024)}
-\end{figure}
+\end{graph}
 \FloatBarrier
 
 The projects p1, p4, p7, p13, p14, and p17 were exclusively refactored using the strategy pattern. These projects exhibit the shortest overall execution time and the slightest variance in execution duration, indicating that the strategy refactoring approach is more optimized for both tool versions. 
