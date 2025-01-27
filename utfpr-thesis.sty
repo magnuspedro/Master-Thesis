@@ -1685,9 +1685,7 @@
     \end{minipage}%
     \par%
     \begin{Center}%
-    \selectlanguage{brazilian}
     \bfseries\MakeTextUppercase{\TheTitle}%
-    \selectlanguage{english}
     \end{Center}%
     \end{center}%
     \vskip\baselineskip%
@@ -2505,7 +2503,7 @@
 \newcommand*{\refref}{\HyperLink{ref}{\refname}}
 \newcommand*{\etal}{\textit{et al.}}%% ABNT NBR 10520:2023
 %% Removendo Uppercase
-% \renewcommand*{\mkbibnamefamily}[1]{#1}%% ABNT NBR 10520:2023
+\renewcommand*{\mkbibnamefamily}[1]{#1}%% ABNT NBR 10520:2023
 
 %% Glossário
 \newcommand*{\gly@err}[2]{%
