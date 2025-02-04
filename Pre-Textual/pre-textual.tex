@@ -46,37 +46,37 @@
 %% Contém os elementos essenciais à aprovação do trabalho (sem as assinaturas).
 %%%% Opção 1: gerada por meio do pacote utfpr-thesis.
 %%%% Ambiente {ApprovalPage*}: insere a titulação após o nome do membro.
-\begin{ApprovalPage}%% Argumentos (4):
+%\begin{ApprovalPage}%% Argumentos (4):
 % [brazilian]%% Idioma original ou primário (brazilian ou english)
-{Month Day, Year}%{August 14, \YearNum}%% Data de aprovação (dia, mês por extenso e ano)
-{14/08/\YearNum}%% Data de aprovação (forma abreviada; mestrado e doutorado)
-{\linewidth}%% Largura de linha de assinatura (graduação e especialização)
+%{Month Day, Year}%{August 14, \YearNum}%% Data de aprovação (dia, mês por extenso e ano)
+%{14/08/\YearNum}%% Data de aprovação (forma abreviada; mestrado e doutorado)
+%{\linewidth}%% Largura de linha de assinatura (graduação e especialização)
 %%%%%% Descrição do trabalho (padrão; alterar se necessário)
-\DocumentTypeName\ presented as requirement to obtain the title of \StudentsTitlesList\ em \CourseName\ da \ifbool{MakeAcr}{\intldescr{UTFPR} (\intl{UTFPR})}{\UTFPRName\ (UTFPR)}.
+%\DocumentTypeName\ presented as requirement to obtain the title of \StudentsTitlesList\ em \CourseName\ da \ifbool{MakeAcr}{\intldescr{UTFPR} (\intl{UTFPR})}{\UTFPRName\ (UTFPR)}.
 %%%%%% Membro(s) da banca (de 3 a 6): {Número}; {Dados}
-\Member{1}{%
-  Gender      = {Female},%% Ou {Female}
-  Title       = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
-  Fullname    = {Simone Nasser Matos (Advisor)},%% Conforme o Currículo Lattes
-  Institution = {\UTFPRName},%% Nome completo e por extenso
-}
-\Member{2}{%
-  Gender      = {Female},%% Ou {Male}
-  Title       = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
-  Fullname    = {Leticia Mara Peres},%% Conforme o Currículo Lattes
-  Institution = {Federal University of Paraná},%% Nome completo e por extenso
-}
-\Member{3}{%
-  Gender      = {Female},%% Ou {Male}
-  Title       = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
-  Fullname    = {Simone do Rocio Senger de Souza},%% Conforme o Currículo Lattes
-  Institution = {University of São Paulo},%% Nome completo e por extenso
-}
-\end{ApprovalPage}
+% \Member{1}{%
+%   Gender      = {Female},%% Ou {Female}
+%   Title       = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
+%   Fullname    = {Simone Nasser Matos (Advisor)},%% Conforme o Currículo Lattes
+%   Institution = {\UTFPRName},%% Nome completo e por extenso
+% }
+% \Member{2}{%
+%   Gender      = {Female},%% Ou {Male}
+%   Title       = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
+%   Fullname    = {Leticia Mara Peres},%% Conforme o Currículo Lattes
+%   Institution = {Federal University of Paraná},%% Nome completo e por extenso
+% }
+% \Member{3}{%
+%   Gender      = {Female},%% Ou {Male}
+%   Title       = {\ProfCall\ \PhDCall},%% {\<T>Call}; <T>: Prof/PhD/DSc/MSc/Eng
+%   Fullname    = {Simone do Rocio Senger de Souza},%% Conforme o Currículo Lattes
+%   Institution = {University of São Paulo},%% Nome completo e por extenso
+% }
+% \end{ApprovalPage}
 %%%% Opção 2: gerada a partir do Sistema Acadêmico ou da secretaria.
 %%%% [Arg-1]: local (pasta) do PDF (./Pre-Textual/Extras/ por padrão).
 %%%% {Arg-2}: nome do PDF (modelos em ./Pre-Textual/Extras/).
-% \ApprovalPagePDF{doc-approval-page.pdf}
+\ApprovalPagePDF{doc-approval-page.pdf}
 
 %% Dedicatória (elemento opcional; editar o {Arquivo} para alterar)
 % \input{./Pre-Textual/Optionals/dedication}
